@@ -1,13 +1,11 @@
 ---
-const githubURL = "https://github.com/"
-const youtubeURL = "https://www.youtube.com/"
-const linkedinURL = "https://www.linkedin.com/"
-const codepenURL = "https://codepen.io/"
+const githubURL = "https://github.com/RobinHil"
+const linkedinURL = "https://www.linkedin.com/in/robin-hilaire-6722b7291"
 ---
 
 <div class="social-links my-4">
   <div
-    class="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-5 gap-y-3 gap-3 justify-center w-full"
+    class="grid grid-cols-3 md:grid-cols-8 lg:grid-cols-3 gap-y-3 gap-3 justify-center w-full"
   >
     <a
       href={githubURL}
@@ -28,43 +26,6 @@ const codepenURL = "https://codepen.io/"
       >
       <span class="sr-only">Github link</span>
     </a>
-
-    <a
-      href={youtubeURL}
-      class="el flex items-center justify-center aspect-square shadow-xl dark:shadow-thick hover:bg-zinc-800 bg-primary-950 dark:ring-white/10 ring-primary/5 dark:bg-tertiary hover:ring-primary/5 dark:hover:ring-white/20 duration-300 group transition-all h-12 w-12"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-mail h-6 w-6 group-hover:scale-125 duration-300 text-primary dark:text-white group-hover text-primary:dark:text-white/50"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"
-        ></path>
-      </svg>
-      <span class="sr-only">YouTube link</span>
-    </a>
-    <a
-      href="#contact"
-      class="el flex items-center justify-center aspect-square shadow-xl dark:shadow-thick hover:bg-zinc-800 bg-primary-950 dark:ring-white/10 ring-primary/5 dark:bg-tertiary hover:ring-primary/5 dark:hover:ring-white/20 duration-300 group transition-all h-12 w-12"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-mail h-6 w-6 group-hover:scale-125 duration-300 text-primary dark:text-white group-hover text-primary:dark:text-white/50"
-        viewBox="0 0 24 24"
-        stroke-width="0.8"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-          d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"
-        ></path><path d="M3 7l9 6l9 -6"></path></svg
-      >
-      <span class="sr-only">Email link</span>
-    </a>
-
     <a
       href={linkedinURL}
       class="el flex items-center justify-center aspect-square shadow-xl dark:shadow-thick hover:bg-zinc-800 bg-primary-950 dark:ring-white/10 ring-primary/5 dark:bg-tertiary hover:ring-primary/5 dark:hover:ring-white/20 duration-300 group transition-all h-12 w-12"
@@ -86,32 +47,23 @@ const codepenURL = "https://codepen.io/"
       <span class="sr-only">Linkedin link</span>
     </a>
     <a
-      href={codepenURL}
+      href="#contact"
       class="el flex items-center justify-center aspect-square shadow-xl dark:shadow-thick hover:bg-zinc-800 bg-primary-950 dark:ring-white/10 ring-primary/5 dark:bg-tertiary hover:ring-primary/5 dark:hover:ring-white/20 duration-300 group transition-all h-12 w-12"
     >
-      <!-- codepen icon svg -->
       <svg
-        class="icon icon-tabler h-6 w-6 group-hover:scale-125 duration-300 text-primary dark:text-white group-hover text-primary:dark:text-white/50 icon-tabler-brand-codepen"
         xmlns="http://www.w3.org/2000/svg"
-        width="1em"
-        height="1em"
+        class="icon icon-tabler icon-tabler-mail h-6 w-6 group-hover:scale-125 duration-300 text-primary dark:text-white group-hover text-primary:dark:text-white/50"
         viewBox="0 0 24 24"
-        stroke-width="2"
+        stroke-width="0.8"
         stroke="currentColor"
         fill="none"
         stroke-linecap="round"
         stroke-linejoin="round"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"
+        ></path><path d="M3 7l9 6l9 -6"></path></svg
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M3 15l9 6l9 -6l-9 -6l-9 6"></path>
-        <path d="M3 9l9 6l9 -6l-9 -6l-9 6"></path>
-        <line x1="3" y1="9" x2="3" y2="15"></line>
-        <line x1="21" y1="9" x2="21" y2="15"></line>
-        <line x1="12" y1="3" x2="12" y2="9"></line>
-        <line x1="12" y1="15" x2="12" y2="21"></line>
-      </svg>
-
-      <span class="sr-only">CodePen Link</span>
+      <span class="sr-only">Email link</span>
     </a>
   </div>
 </div>
