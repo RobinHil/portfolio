@@ -1,0 +1,188 @@
+---
+const experiences = [
+  {
+    period: "octobre 2024 - juillet 2025",
+    company: "Aix-Marseille Université",
+    location: "Arles, 13200",
+    title: "Alternant - Service Technique",
+    description: "Développement et mise en place d'une solution d'IA conversationnelle pour améliorer l'expérience d'apprentissage des étudiants.",
+    technologies: ["Docker", "Ollama", "LocalAI", "Langchain", "Python", "RAG"],
+    tasks: [
+      {
+        title: "Infrastructure IA",
+        details: "Mise en place Docker de Ollama et LocalAI pour héberger des modèles de langage sur serveur dédié"
+      },
+      {
+        title: "Base de Connaissances",
+        details: "Utilisation de bases de données vectorielles et intégration avec Langchain pour les requêtes aux modèles IA"
+      },
+      {
+        title: "Développement RAG",
+        details: "Création d'une solution de Retrieval Augmented Generation permettant d'enrichir les connaissances du LLM avec les cours universitaires"
+      }
+    ],
+    current: true,
+    highlight: "Intelligence Artificielle & NLP"
+  },
+  {
+    period: "avril - juin 2024",
+    company: "Opale Informatique",
+    location: "Paris, 75012",
+    title: "Stagiaire - Service Technique / Médical",
+    description: "Conception et implémentation d'une infrastructure sécurisée pour l'archivage d'imagerie médicale.",
+    technologies: ["Docker", "PACS", "OpenID Connect", "Linux", "Networking"],
+    tasks: [
+      {
+        title: "Infrastructure PACS",
+        details: "Mise en place et maintenance physique et logicielle d'un serveur d'archivage d'imagerie médicale (PACS)"
+      },
+      {
+        title: "Conteneurisation",
+        details: "Déploiement des services annexes (SSO, logs) via Docker pour une meilleure modularité et sécurité"
+      },
+      {
+        title: "R&D Architecture",
+        details: "Recherche et développement sur l'architecture pour optimiser l'intégration de nouvelles solutions"
+      },
+      {
+        title: "Sécurisation",
+        details: "Implémentation d'un système SSO robuste utilisant OpenID Connect"
+      }
+    ],
+    highlight: "Infrastructure & Sécurité"
+  },
+  {
+    period: "août 2023",
+    company: "Mairie de Sorgues",
+    location: "Sorgues, 84700",
+    title: "Vacataire à la Cuisine Centrale",
+    description: "Travail saisonnier au sein du service de restauration municipale.",
+    technologies: [],
+    tasks: [
+      {
+        title: "Service Municipal",
+        details: "Contribution au fonctionnement du service de restauration collective"
+      }
+    ],
+    highlight: "Expérience Municipale"
+  },
+  {
+    period: "août 2022",
+    company: "Mairie de Sorgues",
+    location: "Sorgues, 84700",
+    title: "Vacataire au Service Technique",
+    description: "Travail saisonnier au sein du service technique.",
+    technologies: [],
+    tasks: [
+      {
+        title: "Service Municipal",
+        details: "Contribution à la maintenance des infrastructures municipales et espaces verts"
+      },
+      {
+        title: "Événementiel",
+        details: "Participation à la mise en place de structures pour les événements de la ville"
+      },
+    ],
+    highlight: "Expérience Municipale"
+  }
+];
+---
+
+<div class="space-y-8 mb-16">
+  <h2 class="text-3xl mt-6 font-medium lg:text-4xl tracking-tight text-primary dark:text-white">
+    Expériences Professionnelles
+  </h2>
+
+  <div class="relative">
+    <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-600 via-purple-600 to-transparent"></div>
+    
+    <div class="space-y-12 relative">
+      {experiences.map((exp, index) => (
+        <div class="relative pl-16 group">
+          {/* Timeline dot */}
+          <div class="absolute left-0 top-1 w-16 h-16 flex items-center justify-center">
+            <div class="w-4 h-4 rounded-full bg-zinc-900 border-2 border-purple-600 group-hover:border-blue-600 transition-colors duration-300"></div>
+          </div>
+          
+          <div class="relative">
+            {/* Main card */}
+            <div class={`p-8 bg-zinc-900 border-2 ${exp.current ? 'border-emerald-600/20' : 'border-zinc-800'} group-hover:border-zinc-700 transition-colors duration-300`}>
+              {/* Header */}
+              <div class="flex flex-col gap-4 mb-6">
+                <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
+                <div>
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <h3 class="text-2xl font-bold text-white">{exp.company}</h3>
+                      <div class="flex flex-wrap gap-2">
+                        {exp.highlight && (
+                          <span class="px-3 py-1 text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-fit">
+                            {exp.highlight}
+                          </span>
+                        )}
+                        {exp.current && (
+                          <span class="px-3 py-1 text-sm font-medium text-emerald-200 bg-emerald-900/30 border border-emerald-600/30 rounded-full w-fit inline-flex items-center gap-1.5">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            En cours
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <p class="text-lg text-purple-400 font-medium mt-2">{exp.title}</p>
+                  </div>
+                  <div class="flex flex-col items-start md:items-end shrink-0">
+                    <span class="text-md font-medium text-blue-400">{exp.period}</span>
+                    {exp.location && (
+                      <span class="text-sm text-gray-500 flex items-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        {exp.location}
+                      </span>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Description */}
+                <p class="text-gray-400 text-lg">{exp.description}</p>
+                
+                {/* Technologies */}
+                {exp.technologies.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {exp.technologies.map(tech => (
+                      <span class="px-3 py-1 text-sm font-medium text-white bg-zinc-800 rounded-full border border-zinc-700">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
+              {/* Tasks */}
+              {exp.tasks.length > 0 && (
+                <div class="space-y-6">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {exp.tasks.map(task => (
+                      <div class="p-4 bg-zinc-800/50 border border-zinc-700/50 rounded-lg">
+                        <h4 class="text-lg font-semibold text-purple-400 mb-2">{task.title}</h4>
+                        <p class="text-gray-400">{task.details}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Removed highlight tag as it's now in the header */}
+            </div>
+            
+            {/* Hover effect background */}
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transform translate-x-1 translate-y-1 -z-10 transition-all duration-300"/>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
