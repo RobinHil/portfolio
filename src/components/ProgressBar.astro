@@ -1,0 +1,180 @@
+---
+// Liste des sections à suivre
+const sections = [
+  { id: "contents", label: "Intro" },
+  { id: "aboutme", label: "À propos" },
+  { id: "education", label: "Parcours" },
+  { id: "experience", label: "Expérience" }
+];
+---
+
+<div class="progress-nav">
+  <div class="progress-bar">
+    <div class="progress-indicator"></div>
+  </div>
+  <div class="progress-markers">
+    {sections.map((section, index) => (
+      <div class="marker-container" data-section={section.id}>
+        <div class="marker"></div>
+        <span class="marker-label">{section.label}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .progress-nav {
+    position: fixed;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    z-index: 50;
+  }
+
+  .progress-bar {
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+  }
+
+  .progress-indicator {
+    position: absolute;
+    width: 100%;
+    background: linear-gradient(to bottom, rgb(37, 99, 235), rgb(147, 51, 234));
+    top: 0;
+    transform-origin: top;
+    transition: transform 0.2s ease;
+  }
+
+  .progress-markers {
+    position: absolute;
+    left: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .marker-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .marker-container.active {
+    opacity: 1;
+  }
+
+  .marker {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    transform: translateX(-3px);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .marker-container.active .marker {
+    transform: translateX(-3px) scale(1.5);
+    background: rgb(147, 51, 234);
+  }
+
+  .marker-label {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-1rem);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .marker-container:hover .marker-label,
+  .marker-container.active .marker-label {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 1024px) {
+    .progress-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+const progressIndicator = document.querySelector('.progress-indicator') as HTMLElement;
+const markerContainers = document.querySelectorAll<HTMLElement>('.marker-container');
+const sections = [...markerContainers].map(container => ({
+  id: container.dataset.section,
+  element: document.getElementById(container.dataset.section),
+  marker: container
+}));
+
+function updateProgress() {
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight - windowHeight;
+  const scrolled = window.scrollY;
+  
+  // Update progress bar height
+  const progress = (scrolled / documentHeight) * 100;
+  progressIndicator.style.transform = `scaleY(${progress}%)`;
+  
+  // Update active section
+  const currentScroll = window.scrollY + windowHeight * 0.5;
+  
+  let activeSection = sections[0];
+  for (const section of sections) {
+    if (!section.element) continue;
+    if (section.element.offsetTop <= currentScroll) {
+      activeSection = section;
+    }
+  }
+  
+  // Update active markers
+  markerContainers.forEach((container: Element) => {
+    if (container instanceof HTMLElement) {
+      container.classList.toggle('active', 
+        container.dataset.section === activeSection.id
+      );
+    }
+  });
+}
+
+// Initial update
+updateProgress();
+
+// Smooth scroll function
+function scrollToSection(sectionId: string) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
+// Add click handlers to markers
+markerContainers.forEach((container: Element) => {
+  if (container instanceof HTMLElement) {
+    container.addEventListener('click', () => {
+      const sectionId = container.dataset.section;
+      if (sectionId) {
+        scrollToSection(sectionId);
+      }
+    });
+  }
+});
+
+// Update on scroll
+window.addEventListener('scroll', updateProgress);
+window.addEventListener('resize', updateProgress);
+</script>

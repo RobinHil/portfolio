@@ -1,0 +1,72 @@
+---
+import { Image } from 'astro:assets';
+import easter_egg from '../assets/manana.webp';
+---
+
+<div id="easter-egg" class="fixed -bottom-full right-8 w-96 h-72 z-50 transition-all duration-1000 ease-in-out">
+  <Image
+    src={easter_egg}
+    alt="Easter egg animation"
+  />
+</div>
+
+<style>
+  #easter-egg.active {
+    animation: easterEggAnimation 6s ease-in-out forwards;
+  }
+
+  @keyframes easterEggAnimation {
+    0% {
+      bottom: -100%;
+      transform: rotate(0deg);
+    }
+    20% {
+      bottom: 5%;
+      transform: rotate(360deg);
+    }
+    40% {
+      bottom: 5%;
+      transform: rotate(360deg) scale(1.2);
+    }
+    60% {
+      bottom: 5%;
+      transform: rotate(360deg) scale(1);
+    }
+    80% {
+      bottom: 5%;
+      transform: rotate(720deg);
+    }
+    100% {
+      bottom: -100%;
+      transform: rotate(720deg);
+    }
+  }
+</style>
+
+<script>
+  declare global {
+    interface Window {
+      triggerEasterEgg: () => void;
+    }
+  }
+
+  let isAnimating = false;
+
+  function triggerEasterEgg() {
+    if (isAnimating) return;
+    
+    const easterEgg = document.getElementById('easter-egg');
+    if (!easterEgg) return;
+
+    isAnimating = true;
+    easterEgg.classList.add('active');
+
+    setTimeout(() => {
+      easterEgg.classList.remove('active');
+      isAnimating = false;
+    }, 6000);
+  }
+
+  // Expose the function globally
+  window.triggerEasterEgg = triggerEasterEgg;
+</script>

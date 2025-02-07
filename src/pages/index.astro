@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+import ProgressBar from "../components/ProgressBar.astro";
 import Card from "../components/Card.astro";
 import Heading from "../components/Heading.astro";
 import CustomImageScroll from "../components/CustomImageScroll.astro";
@@ -17,6 +18,7 @@ import Python from "../components/Python.astro";
 ---
 
 <Layout title="Web Developer Portfolio">
+  <ProgressBar />
   <div id="contents">
     <main class="container">
       <div class="mb-16">
@@ -36,9 +38,15 @@ import Python from "../components/Python.astro";
           > !
         </p>
       </div>
-      <AboutMe />
-      <Education />
-      <ExperiencePro />
+      <div id="aboutme">
+        <AboutMe />
+      </div>
+      <div id="education">
+        <Education />
+      </div>
+      <div id="experience">
+        <ExperiencePro />
+      </div>
       <div class="mb-16">
         <h2
           class="text-3xl mt-6 font-medium lg:text-4xl tracking-tight text-primary dark:text-white"
