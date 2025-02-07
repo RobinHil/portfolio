@@ -55,9 +55,12 @@ const futureEducation = {
           <span class="inline-flex items-center rounded-md bg-purple-400/10 px-2 py-1 text-sm font-medium text-purple-400 ring-1 ring-inset ring-purple-400/30 mt-2">
             {futureEducation.period}
           </span>
-          <span class="ml-2 inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-sm font-medium text-gray-400 ring-1 ring-inset ring-gray-400/30">
+          <button 
+            id="easter-egg-trigger"
+            class="ml-2 inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-sm font-medium text-gray-400 ring-1 ring-inset ring-gray-400/30 hover:cursor-text"
+          >
             Projet futur
-          </span>
+          </button>
         </div>
       </div>
       <p class="text-zinc-400 text-justify">{futureEducation.description}</p>
@@ -94,12 +97,9 @@ const futureEducation = {
             {education.period}
           </span>
           {education.current && (
-            <button 
-              id="easter-egg-trigger"
-              class="ml-2 inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-sm font-medium text-green-400 ring-1 ring-inset ring-green-400/30"
-            >
+            <span class="ml-2 inline-flex items-center rounded-md bg-green-400/10 px-2 py-1 text-sm font-medium text-green-400 ring-1 ring-inset ring-green-400/30">
               En cours
-            </button>
+            </span>
           )}
           <p class="text-zinc-400 text-justify">{education.description}</p>
         </div>
