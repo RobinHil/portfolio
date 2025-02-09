@@ -95,9 +95,16 @@ const skills = {
     <h3 class="text-2xl font-medium text-white text-center">Langages</h3>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-8">
       {skills.languages.map((skill) => (
-        <div class="flex flex-col items-center group">
+        <div 
+          class="flex flex-col items-center group"
+          id={`${skill.name.toLowerCase()}-skill`}
+        >
           <div class="w-12 h-12 mb-3 flex items-center justify-center">
-            <img src={skill.logo} alt={skill.name} class="w-full h-full object-contain transform transition-transform duration-200 group-hover:scale-125" />
+            <img 
+              src={skill.logo} 
+              alt={skill.name} 
+              class="w-full h-full object-contain transform transition-all duration-300 group-hover:scale-125" 
+            />
           </div>
           <span class="text-sm text-gray-400 group-hover:text-white transition-colors duration-300">
             {skill.name}
@@ -112,9 +119,16 @@ const skills = {
     <h3 class="text-2xl font-medium text-white text-center">Frameworks</h3>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-8">
       {skills.frameworks.map((skill) => (
-        <div class="flex flex-col items-center group">
+        <div 
+          class="flex flex-col items-center group"
+          id={`${skill.name.toLowerCase()}-skill`}
+        >
           <div class="w-12 h-12 mb-3 flex items-center justify-center">
-            <img src={skill.logo} alt={skill.name} class="w-full h-full object-contain transform transition-transform duration-200 group-hover:scale-125" />
+            <img 
+              src={skill.logo} 
+              alt={skill.name} 
+              class="w-full h-full object-contain transform transition-all duration-300 group-hover:scale-125" 
+            />
           </div>
           <span class="text-sm text-gray-400 group-hover:text-white transition-colors duration-300">
             {skill.name}
@@ -129,7 +143,10 @@ const skills = {
     <h3 class="text-2xl font-medium text-white text-center">Technologies</h3>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-8">
       {skills.technologies.map((skill) => (
-        <div class="flex flex-col items-center group">
+        <div 
+          class="flex flex-col items-center group"
+          id={`${skill.name.toLowerCase()}-skill`}
+        >
           <div class="w-12 h-12 mb-3 flex items-center justify-center">
             <img src={skill.logo} alt={skill.name} class="w-full h-full object-contain transform transition-transform duration-200 group-hover:scale-125" />
           </div>
@@ -146,7 +163,10 @@ const skills = {
     <h3 class="text-2xl font-medium text-white text-center">Outils</h3>
     <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-8">
       {skills.tools.map((skill) => (
-        <div class="flex flex-col items-center group">
+        <div 
+          class="flex flex-col items-center group"
+          id={`${skill.name.toLowerCase()}-skill`}
+        >
           <div class="w-12 h-12 mb-3 flex items-center justify-center">
             <img src={skill.logo} alt={skill.name} class="w-full h-full object-contain transform transition-transform duration-200 group-hover:scale-125" />
           </div>
@@ -164,3 +184,5 @@ const skills = {
     font-family: "IndustryBlack", sans-serif !important;
   }
 </style>
+
+<script></script>

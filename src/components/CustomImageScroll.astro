@@ -1,139 +1,472 @@
 ---
 import { Image } from "astro:assets";
 
-import thumb from "../assets/python2.png";
+import javascript_logo from "../assets/logos/javascript.svg";
+import typescript_logo from "../assets/logos/typescript.svg";
+import python_logo from "../assets/logos/python.svg";
+import java_logo from "../assets/logos/java.svg";
+import php_logo from "../assets/logos/php.svg";
+import c_logo from "../assets/logos/c.svg";
+import cpp_logo from "../assets/logos/cpp.svg";
+import html_logo from "../assets/logos/html.svg";
+import css_logo from "../assets/logos/css.svg";
+import sql_logo from "../assets/logos/sql.svg";
+import bash_logo from "../assets/logos/bash.svg";
+import react_logo from "../assets/logos/react.svg";
+import angular_logo from "../assets/logos/angular.svg";
+import ionic_logo from "../assets/logos/ionic.svg";
+import laravel_logo from "../assets/logos/laravel.svg";
+import qt_logo from "../assets/logos/qt.svg";
+import tailwind_logo from "../assets/logos/tailwind.svg";
+import bootstrap_logo from "../assets/logos/bootstrap.svg";
+import langchain_logo from "../assets/logos/langchain.svg";
+import express_logo from "../assets/logos/express.svg";
+import fastapi_logo from "../assets/logos/fastapi.svg";
+import astro_logo from "../assets/logos/astrojs.svg";
+import threejs_logo from "../assets/logos/threejs.svg";
+import mariadb_logo from "../assets/logos/mariadb.svg";
+import mysql_logo from "../assets/logos/mysql.svg";
+import postgresql_logo from "../assets/logos/postgresql.svg";
+import mongodb_logo from "../assets/logos/mongodb.svg";
+import sqlite_logo from "../assets/logos/sqlite.svg";
+import chroma_logo from "../assets/logos/chromadb.svg";
+import npm_logo from "../assets/logos/npm.svg";
+import nodejs_logo from "../assets/logos/nodejs.svg";
+import vite_logo from "../assets/logos/vitejs.svg";
+import webpack_logo from "../assets/logos/webpack.svg";
+import cicd_logo from "../assets/logos/cicd.svg";
+import dcm4che_logo from "../assets/logos/dcm4che.svg";
+import markdown_logo from "../assets/logos/markdown.svg";
+import latex_logo from "../assets/logos/latex.svg";
+import maven_logo from "../assets/logos/maven.svg";
+import ollama_logo from "../assets/logos/ollama.svg";
+import opengl_logo from "../assets/logos/opengl.svg";
+import ssh_logo from "../assets/logos/ssh.svg";
+import git_logo from "../assets/logos/git.svg";
+import github_logo from "../assets/logos/github.svg";
+import gitlab_logo from "../assets/logos/gitlab.svg";
+import docker_logo from "../assets/logos/docker.svg";
+import linux_logo from "../assets/logos/linux.svg";
+import fedora_logo from "../assets/logos/fedora.svg";
+import rocky_logo from "../assets/logos/rocky.svg";
+import debian_logo from "../assets/logos/debian.svg";
+import ubuntu_logo from "../assets/logos/ubuntu.svg";
+import windows_logo from "../assets/logos/windows.svg";
+import macos_logo from "../assets/logos/macos.svg";
+import nginx_logo from "../assets/logos/nginx.svg";
+import apache_logo from "../assets/logos/apache.svg";
+import caddy_logo from "../assets/logos/caddy.svg";
+import vscode_logo from "../assets/logos/vscode.svg";
+import cursor_logo from "../assets/logos/cursor.svg";
+import intellij_logo from "../assets/logos/intellij.svg";
+import netbeans_logo from "../assets/logos/netbeans.svg";
+import spyder_logo from "../assets/logos/spyder.svg";
+import keycloak_logo from "../assets/logos/keycloak.svg";
+import bruno_logo from "../assets/logos/bruno.svg";
+import jira_logo from "../assets/logos/jira.svg";
+import trello_logo from "../assets/logos/trello.svg";
+import nextcloud_logo from "../assets/logos/nextcloud.svg";
+import office_logo from "../assets/logos/office.svg";
+import portainer_logo from "../assets/logos/portainer.svg";
 
 const cards = [
-  {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+{
+    title: "JavaScript",
+    imagealt: "JavaScript logo",
+    image: javascript_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "TypeScript", 
+    imagealt: "TypeScript logo",
+    image: typescript_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "Python",
+    imagealt: "Python logo", 
+    image: python_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "Java",
+    imagealt: "Java logo",
+    image: java_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "PHP",
+    imagealt: "PHP logo",
+    image: php_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "C",
+    imagealt: "C logo",
+    image: c_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "C++",
+    imagealt: "C++ logo",
+    image: cpp_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "HTML",
+    imagealt: "HTML logo",
+    image: html_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "CSS",
+    imagealt: "CSS logo",
+    image: css_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "SQL",
+    imagealt: "SQL logo",
+    image: sql_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "Bash",
+    imagealt: "Bash logo",
+    image: bash_logo
   },
   {
-    title: "13 Python Scripts I Use",
-    imagealt: "13 Python Scripts I Use thumbnail",
-    image: thumb,
-    href: "https://www.youtube.com/watch?v=R2KZsakOS8c",
+    title: "React",
+    imagealt: "React logo",
+    image: react_logo
   },
+  {
+    title: "Angular",
+    imagealt: "Angular logo",
+    image: angular_logo
+  },
+  {
+    title: "Ionic",
+    imagealt: "Ionic logo",
+    image: ionic_logo
+  },
+  {
+    title: "Laravel",
+    imagealt: "Laravel logo",
+    image: laravel_logo
+  },
+  {
+    title: "Qt",
+    imagealt: "Qt logo",
+    image: qt_logo
+  },
+  {
+    title: "TailwindCSS",
+    imagealt: "TailwindCSS logo",
+    image: tailwind_logo
+  },
+  {
+    title: "Bootstrap",
+    imagealt: "Bootstrap logo",
+    image: bootstrap_logo
+  },
+  {
+    title: "LangChain",
+    imagealt: "LangChain logo",
+    image: langchain_logo
+  },
+  {
+    title: "Express",
+    imagealt: "Express logo",
+    image: express_logo
+  },
+  {
+    title: "FastAPI",
+    imagealt: "FastAPI logo",
+    image: fastapi_logo
+  },
+  {
+    title: "Astro",
+    imagealt: "Astro logo",
+    image: astro_logo
+  },
+  {
+    title: "Three.js",
+    imagealt: "Three.js logo",
+    image: threejs_logo
+  },
+  {
+    title: "MariaDB",
+    imagealt: "MariaDB logo",
+    image: mariadb_logo
+  },
+  {
+    title: "MySQL",
+    imagealt: "MySQL logo",
+    image: mysql_logo
+  },
+  {
+    title: "PostgreSQL",
+    imagealt: "PostgreSQL logo",
+    image: postgresql_logo
+  },
+  {
+    title: "MongoDB",
+    imagealt: "MongoDB logo",
+    image: mongodb_logo
+  },
+  {
+    title: "SQLite",
+    imagealt: "SQLite logo",
+    image: sqlite_logo
+  },
+  {
+    title: "Chroma",
+    imagealt: "Chroma logo",
+    image: chroma_logo
+  },
+  {
+    title: "NPM",
+    imagealt: "NPM logo",
+    image: npm_logo
+  },
+  {
+    title: "Node.js",
+    imagealt: "Node.js logo",
+    image: nodejs_logo
+  },
+  {
+    title: "Vite",
+    imagealt: "Vite logo",
+    image: vite_logo
+  },
+  {
+    title: "Webpack",
+    imagealt: "Webpack logo",
+    image: webpack_logo
+  },
+  {
+    title: "CI/CD",
+    imagealt: "CI/CD logo",
+    image: cicd_logo
+  },
+  {
+    title: "Dcm4che",
+    imagealt: "Dcm4che logo",
+    image: dcm4che_logo
+  },
+  {
+    title: "Markdown",
+    imagealt: "Markdown logo",
+    image: markdown_logo
+  },
+  {
+    title: "LaTeX",
+    imagealt: "LaTeX logo",
+    image: latex_logo
+  },
+  {
+    title: "Maven",
+    imagealt: "Maven logo",
+    image: maven_logo
+  },
+  {
+    title: "Ollama",
+    imagealt: "Ollama logo",
+    image: ollama_logo
+  },
+  {
+    title: "OpenGL",
+    imagealt: "OpenGL logo",
+    image: opengl_logo
+  },
+  {
+    title: "SSH",
+    imagealt: "SSH logo",
+    image: ssh_logo
+  },
+  {
+    title: "Git",
+    imagealt: "Git logo",
+    image: git_logo
+  },
+  {
+    title: "GitHub",
+    imagealt: "GitHub logo",
+    image: github_logo
+  },
+  {
+    title: "GitLab",
+    imagealt: "GitLab logo",
+    image: gitlab_logo
+  },
+  {
+    title: "Docker",
+    imagealt: "Docker logo",
+    image: docker_logo
+  },
+  {
+    title: "Linux",
+    imagealt: "Linux logo",
+    image: linux_logo
+  },
+  {
+    title: "Fedora",
+    imagealt: "Fedora logo",
+    image: fedora_logo
+  },
+  {
+    title: "Rocky",
+    imagealt: "Rocky logo",
+    image: rocky_logo
+  },
+  {
+    title: "Debian",
+    imagealt: "Debian logo",
+    image: debian_logo
+  },
+  {
+    title: "Ubuntu",
+    imagealt: "Ubuntu logo",
+    image: ubuntu_logo
+  },
+  {
+    title: "Windows",
+    imagealt: "Windows logo",
+    image: windows_logo
+  },
+  {
+    title: "MacOS",
+    imagealt: "MacOS logo",
+    image: macos_logo
+  },
+  {
+    title: "Nginx",
+    imagealt: "Nginx logo",
+    image: nginx_logo
+  },
+  {
+    title: "Apache",
+    imagealt: "Apache logo",
+    image: apache_logo
+  },
+  {
+    title: "Caddy",
+    imagealt: "Caddy logo",
+    image: caddy_logo
+  },
+  {
+    title: "VS Code",
+    imagealt: "VS Code logo",
+    image: vscode_logo
+  },
+  {
+    title: "Cursor",
+    imagealt: "Cursor logo",
+    image: cursor_logo
+  },
+  {
+    title: "IntelliJ",
+    imagealt: "IntelliJ logo",
+    image: intellij_logo
+  },
+  {
+    title: "NetBeans",
+    imagealt: "NetBeans logo",
+    image: netbeans_logo
+  },
+  {
+    title: "Spyder",
+    imagealt: "Spyder logo",
+    image: spyder_logo
+  },
+  {
+    title: "Keycloak",
+    imagealt: "Keycloak logo",
+    image: keycloak_logo
+  },
+  {
+    title: "Bruno",
+    imagealt: "Bruno logo",
+    image: bruno_logo
+  },
+  {
+    title: "Jira",
+    imagealt: "Jira logo",
+    image: jira_logo
+  },
+  {
+    title: "Trello",
+    imagealt: "Trello logo",
+    image: trello_logo
+  },
+  {
+    title: "Nextcloud",
+    imagealt: "Nextcloud logo",
+    image: nextcloud_logo
+  },
+  {
+    title: "Office",
+    imagealt: "Office logo",
+    image: office_logo
+  },
+  {
+    title: "Portainer",
+    imagealt: "Portainer logo",
+    image: portainer_logo
+  }
 ];
 ---
 
 <div class="flex my-4 items-center justify-center">
   <div class="relative w-full overflow-hidden">
-    <!-- For some reason the white vignette effect don't work in this sandbox but if you uncomment the following lines in VSCode, they should work -->
-
+    <!-- Les divs de gradient restent identiques -->
     <div class="block">
-      <div
-        class="pointer-events-none absolute -top-1 z-10 h-20 w-full bg-gradient-to-b from-zinc-950 to-transparent"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute -bottom-1 z-10 h-20 w-full bg-gradient-to-t from-zinc-950 to-transparent"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute -left-1 z-10 h-full w-20 bg-gradient-to-r from-zinc-950 to-transparent"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute -right-1 z-10 h-full w-20 bg-gradient-to-l from-zinc-950 to-transparent"
-      >
-      </div>
+      <div class="pointer-events-none absolute -top-1 z-10 h-20 w-full bg-gradient-to-b from-zinc-950 to-transparent"></div>
+      <div class="pointer-events-none absolute -bottom-1 z-10 h-20 w-full bg-gradient-to-t from-zinc-950 to-transparent"></div>
+      <div class="pointer-events-none absolute -left-1 z-10 h-full w-20 bg-gradient-to-r from-zinc-950 to-transparent"></div>
+      <div class="pointer-events-none absolute -right-1 z-10 h-full w-20 bg-gradient-to-l from-zinc-950 to-transparent"></div>
     </div>
 
-    <div
-      id="scroller"
-      class="mx-auto grid h-[450px] w-[300px] animate-skew-scroll grid-cols-1 gap-5 sm:w-[750px] sm:grid-cols-2"
-    >
-      <!-- These are all the same components - if you're using React, you can use a map to iterate through all of them -->
-      {
-        cards.map((card) => (
-          <a
-            target="_blank"
-            href={card.href}
-            class="cursor-pointer items-center bg-zinc-900 space-x-2 p-4 shadow-md transition-all hover:-translate-y-1 hover:translate-x-1 hover:scale-[1.025] hover:shadow-xl"
-          >
-            <div class="flex-shrink-0">
+    <div id="scroller" class="mx-auto grid h-[400px] w-[800px] animate-skew-scroll grid-cols-4 gap-4">
+      {cards.map((card) => (
+        <a
+          href="#skills"
+          class="cursor-pointer bg-zinc-900/80 p-3 shadow-md transition-all hover:-translate-y-1 hover:translate-x-1 hover:scale-[1.025] hover:shadow-xl"
+          data-skill-link
+        >
+          <div class="flex flex-col items-center space-y-2">
+            <div class="h-10 w-10 flex items-center justify-center">
               <Image
                 loading="eager"
                 src={card.image}
                 alt={card.imagealt}
-                class="mb-4 border  border-black"
+                class="w-full h-full object-contain"
                 densities={[0.5, 1, 3]}
               />
             </div>
-            <div class="flex flex-col">
-              <h3 class="font-semibold text-white">{card.title}</h3>
-            </div>
-          </a>
-        ))
-      }
+            <h3 class="text-xs font-medium text-gray-300 text-center">{card.title}</h3>
+          </div>
+        </a>
+      ))}
     </div>
   </div>
 </div>
+
 <style></style>
+
 <script>
-  //On screens lower than 640px, animation skew-scroll should translateY(-830%)
-  //On screens higher than 640px, animation skew-scroll should translateY(-430%)
+document.addEventListener('DOMContentLoaded', () => {
+  const skillLinks = document.querySelectorAll('[data-skill-link]');
+  
+  skillLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = (link as HTMLAnchorElement).getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href.slice(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+});
 </script>
