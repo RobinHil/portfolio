@@ -1,4 +1,4 @@
-!#/bin/sh
+#!/bin/bash
 
 docker compose -p portfolio up -d --build --force-recreate
 docker image prune -f

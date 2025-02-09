@@ -1,4 +1,4 @@
-!#/bin/sh
+#!/bin/bash
 
 docker compose -p portfolio down
 docker image prune -f
