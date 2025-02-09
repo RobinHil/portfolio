@@ -1,0 +1,101 @@
+---
+const softSkills = [
+  {
+    icon: "brain",
+    title: "Curiosité",
+    description: "Toujours en quête d'apprentissage et d'exploration de nouvelles technologies et méthodologies"
+  },
+  {
+    icon: "users",
+    title: "Travail d'Équipe",
+    description: "Capacité à collaborer efficacement et à partager mes connaissances avec les autres"
+  },
+  {
+    icon: "puzzle",
+    title: "Résolution de Problèmes",
+    description: "Approche analytique et créative pour surmonter les défis techniques"
+  },
+  {
+    icon: "target",
+    title: "Adaptabilité",
+    description: "Flexible face aux changements et capable d'apprendre rapidement dans de nouveaux contextes"
+  }
+];
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  {softSkills.map((skill) => (
+    <div class="relative group">
+      {/* Effet de brillance en arrière-plan */}
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"></div>
+      
+      {/* Card Content */}
+      <div class="relative bg-zinc-900 p-6 rounded-lg ring-1 ring-gray-900/5 leading-none flex flex-col h-full shadow-2xl">
+        <div class="flex items-center space-x-4 mb-4">
+          {/* Icône avec cercle lumineux */}
+          <div class="relative">
+            <div class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-25 group-hover:opacity-100 transition duration-500"></div>
+            <div class="relative flex items-center justify-center w-12 h-12 rounded-full bg-zinc-800 border border-purple-500/20 text-white group-hover:border-purple-500/50 transition duration-500">
+              {skill.icon === "brain" && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/>
+                  <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/>
+                </svg>
+              )}
+              {skill.icon === "users" && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              )}
+              {skill.icon === "puzzle" && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.968-.925a2.501 2.501 0 1 0-3.214 3.214c.446.166.855.497.925.968a.979.979 0 0 1-.276.837l-1.61 1.61a2.404 2.404 0 0 1-1.705.707 2.402 2.402 0 0 1-1.704-.706l-1.568-1.568a1.026 1.026 0 0 0-.877-.29c-.493.074-.84.504-1.02.968a2.5 2.5 0 1 1-3.237-3.237c.464-.18.894-.527.967-1.02a1.026 1.026 0 0 0-.289-.877l-1.568-1.568A2.402 2.402 0 0 1 4.001 12c0-.617.236-1.234.706-1.704L6.293 8.72a.98.98 0 0 1 .837-.276c.47.07.802.48.968.925a2.501 2.501 0 1 0 3.214-3.214c-.446-.166-.855-.497-.925-.968a.979.979 0 0 1 .276-.837l1.61-1.61a2.404 2.404 0 0 1 1.705-.707 2.402 2.402 0 0 1 1.704.706l1.568 1.568c.23.23.556.338.877.29.493-.074.84-.504 1.02-.968a2.5 2.5 0 1 1 3.237 3.237c-.464.18-.894.527-.967 1.02Z"/>
+                </svg>
+              )}
+              {skill.icon === "target" && (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              )}
+            </div>
+          </div>
+          
+          {/* Titre avec gradient */}
+          <h3 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+            {skill.title}
+          </h3>
+        </div>
+        
+        {/* Description */}
+        <p class="text-gray-400 text-sm leading-relaxed">
+          {skill.description}
+        </p>
+        
+        {/* Effet de bordure brillante */}
+        <div class="absolute inset-0 rounded-lg border border-white/10 group-hover:border-purple-500/50 transition duration-500"></div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  @keyframes tilt {
+    0%, 50%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(0.5deg);
+    }
+    75% {
+      transform: rotate(-0.5deg);
+    }
+  }
+  .animate-tilt {
+    animation: tilt 10s infinite linear;
+  }
+</style>
