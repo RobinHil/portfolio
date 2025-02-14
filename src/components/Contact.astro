@@ -79,6 +79,7 @@ var form = document.getElementById("my-form");
     })
       .then((response) => {
         if (response.ok) {
+          status.className = "text-green-500";
           status.innerHTML = "Merci pour votre message ! Je vous répondrai dès que possible";
           form.reset();
         } else {
@@ -88,13 +89,14 @@ var form = document.getElementById("my-form");
                 .map((error) => error["message"])
                 .join(", ");
             } else {
-              status.innerHTML =
-                "Oups ! Il y a eu un problème lors de l'envoi de votre formulaire";
+              status.className = "text-red-500";
+              status.innerHTML = "Oups ! Il y a eu un problème lors de l'envoi de votre formulaire";
             }
           });
         }
       })
       .catch((error) => {
+        status.className = "text-red-500";
         status.innerHTML = "Oups ! Il y a eu un problème lors de l'envoi de votre formulaire";
       });
   }
