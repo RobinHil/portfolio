@@ -1,11 +1,11 @@
 ---
 import Social from "./Social.astro";
-const formSpreeURL = "";
+const formSpreeURL = "https://formspree.io/f/xrbeanzv";
 ---
 
 <div class="my-8">
   <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-    <h2 class="font-bold text-3xl m-0 mb-2">Contact Me</h2>
+    <h2 class="font-bold text-3xl m-0 mb-2">Contact</h2>
     <form id="my-form"
       action={formSpreeURL}
       method="POST"
@@ -15,14 +15,15 @@ const formSpreeURL = "";
         <label
           for="email"
           class="block mb-2 text-sm font-medium text-gray-300"
-          >Your email</label
         >
+          Votre email
+        </label>
         <input
           type="email"
           name="email"
           id="email"
           class="shadow-sm text-sm   block w-full p-2.5 bg-zinc-900  dark:placeholder-gray-400 text-white  dark:shadow-sm-light"
-          placeholder="name@aol.com"
+          placeholder="email@exemple.com"
           required
         />
       </div>
@@ -30,19 +31,19 @@ const formSpreeURL = "";
         <label
           for="message"
           class="block mb-2 text-sm font-medium text-gray-300"
-          >Your message</label
+          >Votre message</label
         >
         <textarea
           name="message"
           id="message"
           rows="6"
           class="block p-2.5 w-full text-sm shadow-sm  border-gray-300 bg-zinc-900 dark:border-black dark:placeholder-gray-400 text-white"
-          placeholder="Leave a comment..."></textarea>
+          placeholder="Laisser un message..."></textarea>
       </div>
       <button id="my-form-button"
         type="submit"
         class="text-black bg-stone-100 hover:bg-stone-200 focus:ring-stone-300 font-medium text-sm px-5 py-2.5 mr-2 mb-2 dark:hover:bg-stone-200 dark:focus:ring-blue-600 industry focus:ring-4 focus:outline-none focus:ring-white-300"
-        >Send message</button
+        >Envoyer</button
       >
       <p id="my-form-status"></p>
     </form>
@@ -78,7 +79,7 @@ var form = document.getElementById("my-form");
     })
       .then((response) => {
         if (response.ok) {
-          status.innerHTML = "Thanks for your submission!";
+          status.innerHTML = "Merci pour votre message ! Je vous répondrai dès que possible";
           form.reset();
         } else {
           response.json().then((data) => {
@@ -88,13 +89,13 @@ var form = document.getElementById("my-form");
                 .join(", ");
             } else {
               status.innerHTML =
-                "Oops! There was a problem submitting your form";
+                "Oups ! Il y a eu un problème lors de l'envoi de votre formulaire";
             }
           });
         }
       })
       .catch((error) => {
-        status.innerHTML = "Oops! There was a problem submitting your form";
+        status.innerHTML = "Oups ! Il y a eu un problème lors de l'envoi de votre formulaire";
       });
   }
   form.addEventListener("submit", handleSubmit);
