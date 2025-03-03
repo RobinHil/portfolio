@@ -10,10 +10,10 @@ COPY . .
 
 RUN npm run build
 
-FROM caddy:2-alpine
+FROM httpd:2.4-alpine
 
-COPY --from=builder /app/dist /var/www/html
+COPY --from=builder ./app/dist /usr/local/apache2/htdocs/
 
 EXPOSE 80
 
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["httpd", "-D", "FOREGROUND"]
