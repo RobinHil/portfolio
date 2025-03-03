@@ -1,0 +1,546 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+import ProfileBar from "../components/ProfileBar.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/opengl-demo/1.webp",
+    alt: "Illumination de Phong avec grille",
+    title: "Illumination de Phong avec grille",
+    description: "Modèle d'éclairage de Phong avec la grille de position activée pour une meilleure visualisation de l'espace 3D."
+  },
+  {
+    imagePath: "/opengl-demo/2.webp",
+    alt: "Illumination de Phong sans grille",
+    title: "Illumination de Phong sans grille",
+    description: "Rendu avec le modèle d'éclairage de Phong sans la grille, mettant en valeur les nuances d'éclairage sur l'objet."
+  },
+  {
+    imagePath: "/opengl-demo/3.webp",
+    alt: "Aucun modèle d'illumination",
+    title: "Aucun modèle d'illumination",
+    description: "Affichage de l'objet sans modèle d'éclairage, utilisant simplement la couleur de base de l'objet."
+  },
+  {
+    imagePath: "/opengl-demo/4.webp",
+    alt: "Illumination de Blinn-Phong",
+    title: "Illumination de Blinn-Phong",
+    description: "Visualisation utilisant le modèle d'éclairage de Blinn-Phong, offrant une réflexion spéculaire plus réaliste et performante."
+  },
+  {
+    imagePath: "/opengl-demo/5.webp",
+    alt: "Illumination Gaussienne",
+    title: "Illumination Gaussienne",
+    description: "Rendu avec le modèle d'éclairage Gaussien, utilisant une distribution gaussienne pour les réflexions spéculaires."
+  },
+  {
+    imagePath: "/opengl-demo/6.webp",
+    alt: "Modification de la position de la lumière",
+    title: "Modification de la position de la lumière",
+    description: "Démonstration de l'impact du changement de position de la source lumineuse sur l'éclairage de l'objet."
+  },
+  {
+    imagePath: "/opengl-demo/7.webp",
+    alt: "Modification de la couleur de la lumière",
+    title: "Modification de la couleur de la lumière",
+    description: "Démonstration du changement de couleur de la source lumineuse, affectant l'apparence globale de la scène."
+  },
+  {
+    imagePath: "/opengl-demo/8.webp",
+    alt: "Affichage du maillage",
+    title: "Affichage du maillage fil de fer",
+    description: "Rendu en mode fil de fer (wireframe) permettant de visualiser la structure polygonale du modèle 3D."
+  },
+  {
+    imagePath: "/opengl-demo/9.webp",
+    alt: "Chargement d'un objet 3D différent",
+    title: "Chargement d'un objet 3D différent",
+    description: "Démonstration de la capacité du programme à charger et afficher différents modèles 3D au format OBJ."
+  },
+  {
+    imagePath: "/opengl-demo/10.webp",
+    alt: "Modèle 3D plus grand",
+    title: "Modèle 3D plus grand nécessitant un dézoom",
+    description: "Chargement d'un modèle 3D de plus grande taille nécessitant d'ajuster la caméra pour visualiser l'ensemble de l'objet."
+  },
+  {
+    imagePath: "/opengl-demo/11.webp",
+    alt: "Modification de la couleur de l'objet",
+    title: "Modification de la couleur de l'objet",
+    description: "Interface permettant de modifier la couleur de l'objet 3D en temps réel, montrant l'interaction avec les matériaux."
+  },
+  {
+    imagePath: "/opengl-demo/12.webp",
+    alt: "Affichage des normales",
+    title: "Affichage des normales",
+    description: "Visualisation des vecteurs normaux à la surface du modèle, essentiels pour les calculs d'éclairage."
+  },
+  {
+    imagePath: "/opengl-demo/13.webp",
+    alt: "Objectification de la source de lumière",
+    title: "Objectification de la source de lumière",
+    description: "Représentation visuelle de la source lumineuse sous forme d'un petit cube coloré pour mieux comprendre sa position dans l'espace."
+  }
+];
+---
+
+<Layout title="Démonstrateur OpenGL - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <ProfileBar />
+    <div class="my-4 sm:my-6 md:my-8"></div>
+
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Démonstrateur</span> <span class="text-gradient block sm:inline">OpenGL 3D</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Une application interactive permettant de visualiser des modèles 3D avec différents modes d'éclairage et options de rendu avancées.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="opengl-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/opengl-demo" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">C++</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">OpenGL</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">GLSL</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-pink-600/20 to-pink-600/10 rounded-full border border-pink-700/30">CMake</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          Ce démonstrateur OpenGL est une application interactive permettant de visualiser des modèles 3D avec différents modes d'éclairage et options de rendu. Développé dans le cadre de mon parcours universitaire, il m'a permis d'approfondir mes connaissances en programmation graphique et en mathématiques 3D.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Fonctionnalités principales</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Chargement et visualisation de modèles 3D au format OBJ</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Multiples modèles d'éclairage : Phong, Blinn-Phong, Gaussian</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Contrôles de caméra intuitifs (orbite, zoom, translation)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Interface graphique ImGui pour le contrôle des paramètres</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Affichage des normales et du maillage fil de fer</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Personnalisation de la position et de la couleur de la lumière</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Grille de référence pour une meilleure orientation dans l'espace</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Défis techniques</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Créer cette application a nécessité de surmonter plusieurs défis techniques, notamment l'implémentation correcte des différents modèles d'éclairage en GLSL et la gestion efficace des ressources graphiques.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 17.25a6.25 6.25 0 1 1 0-12.5 6.25 6.25 0 0 1 0 12.5z"/>
+                  <path d="M14.5 14.5 19 19"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Modèles d'illumination</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              L'implémentation des différents modèles d'éclairage (Phong, Blinn-Phong, Gaussian) a nécessité une compréhension approfondie des techniques de rendu 3D et de la programmation de shaders GLSL.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Chargement des modèles</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La prise en charge des fichiers OBJ a demandé la création d'un parseur robuste capable de gérer différentes variantes du format et de calculer les normales lorsqu'elles ne sont pas fournies.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="8"/>
+                  <path d="M12 2v4"/>
+                  <path d="M12 18v4"/>
+                  <path d="m4.93 4.93 2.83 2.83"/>
+                  <path d="m16.24 16.24 2.83 2.83"/>
+                  <path d="M2 12h4"/>
+                  <path d="M18 12h4"/>
+                  <path d="m4.93 19.07 2.83-2.83"/>
+                  <path d="m16.24 7.76 2.83-2.83"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Caméra orbitale</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La conception d'une caméra orbitale fluide et intuitive a impliqué des calculs complexes de transformation pour maintenir la caméra centrée sur l'objet tout en permettant rotation, zoom et déplacement.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M9 3v18"/>
+                  <path d="M3 9h6"/>
+                  <path d="M3 15h6"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Interface utilisateur</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              L'intégration d'ImGui pour créer une interface utilisateur réactive a ajouté une couche de complexité, mais a considérablement amélioré l'expérience utilisateur et les possibilités d'interaction.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Architecture du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le code est structuré autour d'une bibliothèque centrale GLEngine qui encapsule les fonctionnalités OpenGL et fournit une abstraction de haut niveau pour la gestion des ressources graphiques.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <div class="relative grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+            <!-- Colonne centrale: GLEngine Core -->
+            <div class="md:col-span-1 flex flex-col">
+              <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 mb-3 sm:mb-4 text-center">
+                <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Application</h4>
+                <p class="text-[10px] sm:text-xs text-zinc-400">Interface utilisateur, logique de l'application</p>
+              </div>
+              <div class="flex-grow flex items-center justify-center py-2 sm:py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M17 7l-5 5-5-5"/>
+                  <path d="M17 13l-5 5-5-5"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- GLEngine -->
+            <div class="md:col-span-1 flex justify-center">
+              <div class="w-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-3 sm:p-4 rounded-lg border border-purple-600/30 text-center shadow-lg shadow-purple-900/5">
+                <h4 class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 mb-2 text-sm sm:text-base">GLEngine</h4>
+                <ul class="text-[10px] sm:text-xs text-zinc-300 space-y-1.5 sm:space-y-2">
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Shader Manager</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Mesh Loader</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Camera System</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Primitives</li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Colonne droite: Autres composants -->
+            <div class="md:col-span-1 flex flex-col">
+              <div class="flex-grow flex items-center justify-center py-2 sm:py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M7 7l5-5 5 5"/>
+                  <path d="M7 13l5-5 5 5"/>
+                </svg>
+              </div>
+              <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 mt-3 sm:mt-4 text-center">
+                <h4 class="font-bold text-white mb-1 text-sm sm:text-base">OpenGL / GLFW</h4>
+                <p class="text-[10px] sm:text-xs text-zinc-400">API graphique et gestion des fenêtres</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Composants du projet -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 16V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12"/>
+                  <path d="M4 22h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2Z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Shader Manager</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Classe gérant la compilation, le chargement et l'utilisation des shaders GLSL. Offre des méthodes pour définir facilement les uniforms.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 3v4"/>
+                  <path d="m16.25 7.75-2.15 2.15"/>
+                  <path d="M21 12h-4"/>
+                  <path d="m16.25 16.25-2.15-2.15"/>
+                  <path d="M12 21v-4"/>
+                  <path d="m7.75 16.25 2.15-2.15"/>
+                  <path d="M3 12h4"/>
+                  <path d="m7.75 7.75 2.15 2.15"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Mesh Loader</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Responsable du chargement des modèles OBJ, de la configuration des Vertex Buffer Objects et du rendu des objets 3D.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Camera System</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Implémente une caméra orbitale avec des contrôles intuitifs pour explorer les modèles 3D sous différents angles et distances.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 3h7v7H3z"/>
+                  <path d="M14 3h7v7h-7z"/>
+                  <path d="M14 14h7v7h-7z"/>
+                  <path d="M3 14h7v7H3z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Primitives</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Utilitaires pour afficher une grille de référence et des objets primitifs comme les cubes utilisés pour représenter la source lumineuse.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Compétences développées -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Compétences développées</span>
+        </h2>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">C++ avancé</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Programmation orientée objet, templates, gestion mémoire</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Programmation graphique</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">OpenGL, rendu 3D, pipeline graphique</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-indigo-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-indigo-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="18" cy="18" r="3"></circle>
+                <circle cx="6" cy="6" r="3"></circle>
+                <path d="M13 6h3a2 2 0 0 1 2 2v7"></path>
+                <path d="M11 18H8a2 2 0 0 1-2-2V9"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Shaders GLSL</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Vertex & fragment shaders, modèles d'illumination</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-indigo-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Mathématiques 3D</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Algèbre linéaire, transformations, matrices</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-pink-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-pink-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-pink-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">CMake & compilation</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Gestion de projets, compilation multi-plateforme</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-pink-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">UI/UX</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Interface utilisateur avec ImGui, expérience interactive</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            Le démonstrateur OpenGL représente une étape importante dans mon parcours d'apprentissage en programmation graphique. Ce projet m'a permis d'acquérir une compréhension approfondie d'OpenGL et des techniques de rendu 3D, tout en développant des compétences pratiques en C++ et en architecture logicielle.
+          </p>
+          <p>
+            La conception modulaire de l'application, avec sa bibliothèque GLEngine, offre une base solide pour de futurs projets graphiques. Les différents modèles d'éclairage et options de rendu implémentés démontrent une maîtrise des concepts fondamentaux de l'infographie 3D.
+          </p>
+          <p>
+            Ces connaissances sont directement transférables à d'autres domaines comme le développement de jeux vidéo, la visualisation scientifique ou la réalité virtuelle, ouvrant la voie à de nombreuses applications passionnantes.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

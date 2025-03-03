@@ -113,7 +113,7 @@ const experiences = [
               <div class="flex flex-col gap-4 mb-6">
                 <div class="flex flex-col md:flex-row md:items-start justify-between gap-4">
                 <div>
-                    <div class="flex<ProExperience /> flex-col sm:flex-row sm:items-center gap-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3">
                       <h3 class="text-2xl font-bold text-white">{exp.company}</h3>
                       <div class="flex flex-wrap gap-2">
                         {exp.highlight && (
@@ -165,7 +165,7 @@ const experiences = [
               
               {/* Tasks */}
               {exp.tasks.length > 0 && (
-                <div class="space-y-6">
+                <div class="hidden md:block space-y-6">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {exp.tasks.map(task => (
                       <div class="p-4 bg-zinc-800/50 border border-zinc-700/50 rounded-lg">

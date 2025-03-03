@@ -1,65 +1,28 @@
 ---
-import Social from "./Social.astro";
-import Avatar from "../components/Avatar.astro";
 import CustomImageScroll from "../components/CustomImageScroll.astro";
+import ProfileBar from "./ProfileBar.astro";
 ---
 
-<div class="mb-16 pt-4">
-  <div class="grid">
-    <div class="heading-container">
-      <a href="/">
-        <span class="sr-only">Home</span>
-        <Avatar />
-      </a>
-      <div class="social-icons">
-        <Social />
-      </div>
-    </div>
-  </div>
-  <br/>
-  <p class="mt-4 text-lg text-zinc-500 dark:text-zinc-400 font-light lg:text-xl text-justify">
-    Administrateur Système & Développeur Full Stack passionné, actuellement en 3ème année de Bachelor Universitaire de Technologie (BUT) Informatique.
-    <br/><br/>
-    Mon parcours universitaire, couplé à mes expériences professionnelles, m'a permis de développer des compétences techniques solides basées sur la connaissance d'un large évantail de langages et de technologies.
-    <br/><br/>
-    <CustomImageScroll />
+<div>
+  <div class="mb-16 pt-4">
+    <ProfileBar />
     <br/>
-  </p>
-  <p class="mt-4 text-lg text-zinc-500 dark:text-zinc-400 font-light lg:text-xl text-justify">
-    <!-- Mon profil hybride combine une expertise technique solide en administration système avec des compétences approfondies en développement full stack, me permettant d'avoir une vision globale des projets informatiques, de l'infrastructure jusqu'au déploiement des applications.
-    <br/><br/> -->
-    Que ce soit pour échanger des conseils, explorer des opportunités de collaboration, ou encore partager un retour constructif sur mon travail, je suis ouvert aux échanges. N'hésitez pas à me 
-    <a
-      href="#contact"
-      class="underline text-gray-300">contacter</a
-    > !
-  </p>
+    <p class="mt-4 text-lg text-zinc-500 dark:text-zinc-400 font-light lg:text-xl text-justify">
+      Administrateur Système & Développeur Full Stack passionné, actuellement en 3ème année de Bachelor Universitaire de Technologie (BUT) Informatique.
+      <br/><br/>
+      Mon parcours universitaire, couplé à mes expériences professionnelles, m'a permis de développer des compétences techniques solides basées sur la connaissance d'un large évantail de langages et de technologies.
+      <br/><br/>
+      <CustomImageScroll />
+      <br/>
+    </p>
+    <p class="mt-4 text-lg text-zinc-500 dark:text-zinc-400 font-light lg:text-xl text-justify">
+      <!-- Mon profil hybride combine une expertise technique solide en administration système avec des compétences approfondies en développement full stack, me permettant d'avoir une vision globale des projets informatiques, de l'infrastructure jusqu'au déploiement des applications.
+      <br/><br/> -->
+      Que ce soit pour échanger des conseils, explorer des opportunités de collaboration, ou encore partager un retour constructif sur mon travail, je suis ouvert aux échanges. N'hésitez pas à me 
+      <a
+        href="#contact"
+        class="underline text-gray-300">contacter</a
+      > !
+    </p>
+  </div>
 </div>
-
-<style>
-  .heading-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1rem;
-  }
-  .social-icons {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  h1 {
-    font-family: "IndustryBlack", sans-serif !important;
-  }
-
-  @media (max-width: 768px) {
-    h1 {
-      margin-bottom: 0;
-    }
-    .heading-container {
-      grid-template-columns: 1fr;
-    }
-    .social-icons {
-      justify-content: left;
-    }
-  }
-</style>
