@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import von_koch from "../../assets/von-koch-flake.webp";
+---
+
+<Card
+  href="von-koch-flake"
+  title="Von Koch Flake"
+  body="Application interactive en Python pour visualiser et manipuler le flocon de Von Koch, une célèbre figure fractale mathématique."
+  tags="Python, Tkinter, Fractales, Mathématiques"
+>
+  <div class="max-w-full">
+    <Image
+      src={von_koch}
+      alt="Application Von Koch Flake"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

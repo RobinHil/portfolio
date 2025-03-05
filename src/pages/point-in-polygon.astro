@@ -1,0 +1,494 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/point-in-polygon/italy.webp",
+    alt: "Fichier SVG original de l'Italie",
+    title: "Carte de l'Italie - Input",
+    description: "Fichier SVG représentant le contour de l'Italie avec des points dont on souhaite déterminer s'ils sont à l'intérieur, à l'extérieur ou sur la frontière."
+  },
+  {
+    imagePath: "/point-in-polygon/italy.out.webp",
+    alt: "Résultat de l'analyse",
+    title: "Résultat de l'analyse - Output",
+    description: "Les points sont colorés selon leur position: vert (intérieur), rouge (extérieur) ou jaune (sur la frontière)."
+  }
+];
+---
+
+<Layout title="Point In Polygon - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Point</span> <span class="text-gradient block sm:inline">In Polygon</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Un algorithme de géométrie computationnelle pour déterminer si des points sont à l'intérieur, à l'extérieur ou sur la frontière d'un polygone.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="point-in-polygon-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/point-in-polygon" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">Python</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Géométrie Algorithmique</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">SVG</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-green-600/20 to-green-600/10 rounded-full border border-green-700/30">Ray Casting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          Ce projet implémente un algorithme permettant de déterminer si un point est situé à l'intérieur, à l'extérieur ou exactement sur la frontière d'un polygone. Cet algorithme a de nombreuses applications pratiques en géométrie computationnelle, cartographie, jeux vidéo et systèmes d'information géographique.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Fonctionnalités principales</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Traitement de fichiers SVG contenant un polygone et des points à analyser</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Classification des points en trois catégories : intérieur, extérieur et sur la frontière</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Visualisation des résultats sous forme de fichier SVG coloré</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Statistiques détaillées sur le nombre de points dans chaque catégorie</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Mesure de performance pour évaluer l'efficacité de l'algorithme</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Technique utilisée -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Algorithme du Ray Casting</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le projet utilise l'algorithme du "Ray Casting" (ou lancer de rayon), une technique fondamentale en géométrie computationnelle, pour déterminer si un point est à l'intérieur ou à l'extérieur d'un polygone.
+        </p>
+        
+        <!-- Diagramme d'algorithme stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 relative text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Comment fonctionne le Ray Casting</h3>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-5">
+            <!-- Étape 1 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">1</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Tracer un rayon</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Pour chaque point à analyser, on trace un rayon (ligne semi-infinie) partant de ce point dans une direction fixe (dans notre cas, horizontalement vers la droite).</p>
+              </div>
+            </div>
+            
+            <!-- Étape 2 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">2</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Compter les intersections</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">On compte le nombre de fois que ce rayon croise les arêtes du polygone. Cette opération est réalisée en calculant les orientations des triplets de points pour déterminer si les segments se croisent.</p>
+              </div>
+            </div>
+            
+            <!-- Étape 3 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">3</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Déterminer le résultat</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Si le rayon croise un nombre impair d'arêtes, le point est à l'intérieur du polygone. Si le nombre est pair, le point est à l'extérieur. Si le rayon passe exactement par une arête, le point est considéré comme étant sur la frontière.</p>
+              </div>
+            </div>
+            
+            <!-- Cas Spécial -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">!</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Gestion des cas particuliers</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">L'algorithme doit gérer spécifiquement les cas où le point se trouve exactement sur une arête ou un sommet du polygone. Cela est réalisé en comparant les coordonnées et en analysant l'orientation des points.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"/>
+                  <path d="M12 22.08V12"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Complexité algorithmique</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              L'algorithme du Ray Casting a une complexité temporelle de O(n) pour chaque point, où n est le nombre d'arêtes du polygone. Pour m points à analyser, la complexité totale est de O(m*n). Cette efficacité permet de traiter rapidement même des polygones complexes avec de nombreux points.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Amélioration de précision</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              L'implémentation inclut une méthode spécifique pour gérer les cas où un point se trouve exactement sur une arête du polygone. Cette distinction est essentielle pour de nombreuses applications pratiques où la classification précise de ces points limite est cruciale.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Implémentation technique -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Implémentation technique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le projet est structuré en plusieurs fonctions clés qui travaillent ensemble pour analyser et visualiser les résultats.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 9l3 3l3 -3"></path>
+                  <path d="M12 12l0 9"></path>
+                  <path d="M12 3c7.2 0 9 7.2 9 9s-1.8 9 -9 9s-9 -7.2 -9 -9s1.8 -9 9 -9z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Parsing SVG</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>parseSVG</code> utilise la bibliothèque minidom de Python pour extraire les coordonnées du polygone et des cercles à partir d'un fichier SVG. Elle convertit les données textuelles en structures de données utilisables par l'algorithme.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 12h5l2 2l7 -7l1 4l4 1"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Calcul d'orientation</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>orientation</code> calcule l'orientation de trois points dans un plan 2D. Ce calcul est fondamental pour déterminer si deux segments se croisent. L'orientation est positive pour un tournant dans le sens des aiguilles d'une montre, négative pour un tournant dans le sens inverse, et nulle pour des points colinéaires.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Détection d'intersection</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>crossing</code> détermine si deux segments se croisent en utilisant les orientations relatives des points. Elle gère également le cas spécial où le point est situé exactement sur une arête du polygone, retournant "border" dans cette situation.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="2" ry="2"></rect>
+                  <path d="M9 3v18"></path>
+                  <path d="M9 12h12"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Algorithme principal</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>circlesInPolygon</code> implémente l'algorithme du Ray Casting. Pour chaque cercle, elle trace un rayon horizontal vers la droite et compte les intersections avec les arêtes du polygone. La parité de ce nombre détermine si le point est à l'intérieur ou à l'extérieur du polygone.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Défis techniques</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          La mise en œuvre de cet algorithme a présenté plusieurs défis techniques intéressants qui ont nécessité des solutions créatives.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 6l6 6l-6 6"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Précision numérique</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> La détection précise des points exactement sur la frontière du polygone est sujette à des erreurs d'arrondi numérique.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation d'une approche basée sur le calcul d'orientation qui permet de détecter de manière fiable les cas où un point est exactement sur une arête, même en présence de petites imprécisions numériques.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 11l3 3l8 -8"></path>
+                  <path d="M21 12v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h10"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Cas particuliers de polygones</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Certaines configurations de polygones, comme les polygones avec des "trous" ou des polygones non-convexes, peuvent poser des problèmes à l'algorithme classique du Ray Casting.
+              <br/><br/>
+              <strong>Solution :</strong> L'implémentation actuelle fonctionne correctement pour les polygones simples. Pour les polygones avec des trous, une extension de l'algorithme serait nécessaire, en considérant les polygones intérieurs comme des frontières additionnelles.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 6v6h6"></path>
+                  <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Performance avec de grands ensembles</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Les performances peuvent se dégrader avec un très grand nombre de points ou un polygone très complexe en raison de la complexité O(m*n).
+              <br/><br/>
+              <strong>Solution :</strong> L'implémentation actuelle est optimisée pour minimiser les calculs redondants. Pour des cas extrêmes, des structures de données spatiales comme les quadtrees pourraient être utilisées pour accélérer davantage le processus.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 12l2 2l4 -4"></path>
+                  <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Gestion des fichiers SVG</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> L'extraction et la manipulation de données à partir de fichiers SVG peuvent être complexes en raison de la structure XML et des différentes conventions de formatage.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation de la bibliothèque minidom de Python pour un parsing robuste, avec un traitement spécifique pour extraire correctement les coordonnées des points et des polygones.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Résultats et Applications -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Résultats et Applications</span>
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6">
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 5v14"></path>
+                <path d="M5 12h14"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Cas de test "Italie"</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">362 points à l'intérieur, 598 points à l'extérieur, 40 points sur la frontière</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 8v4"></path>
+                <path d="M12 16h.01"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Performance</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Temps d'exécution d'environ 2 secondes pour l'analyse de 1000 points</p>
+          </div>
+        </div>
+        
+        <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Applications pratiques</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 6v12a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2z"></path>
+                <path d="M5 13h4"></path>
+                <path d="M9 13v6"></path>
+                <path d="M15 13h4"></path>
+                <path d="M15 13v6"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">SIG</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Systèmes d'Information Géographique pour l'analyse spatiale</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4.028 7.82a9 9 0 1 0 12.823 -3.4c-1.636 -1.02 -3.064 -1.02 -4.851 -.02c-1.933 1.085 -1.904 3.02 -.786 4.867c-.275 .71 -.588 1.318 -.464 2.233c.234 1.733 2.279 2.463 4.064 .566c1.191 -1.273 1.596 -1.645 2.186 -1.745"></path>
+                <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.36 2.296l-5.01 1.504"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Jeux vidéo</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Détection de collisions et zones d'intérêt dans les jeux</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-indigo-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-indigo-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="9"></circle>
+                <line x1="3.6" y1="9" x2="20.4" y2="9"></line>
+                <line x1="3.6" y1="15" x2="20.4" y2="15"></line>
+                <path d="M11.5 3a17 17 0 0 0 0 18"></path>
+                <path d="M12.5 3a17 17 0 0 1 0 18"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Cartographie</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Applications de cartographie et géolocalisation</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">06</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            Le projet "Point In Polygon" démontre l'application pratique de concepts fondamentaux de géométrie computationnelle pour résoudre un problème classique d'analyse spatiale. L'implémentation en Python offre un bon équilibre entre lisibilité du code et performances acceptables pour des cas d'utilisation typiques.
+          </p>
+          <p>
+            L'algorithme du Ray Casting, bien que conceptuellement simple, illustre parfaitement comment des techniques mathématiques élégantes peuvent être appliquées pour résoudre des problèmes complexes en informatique. La capacité à distinguer précisément entre des points intérieurs, extérieurs et sur la frontière rend cette implémentation particulièrement utile pour diverses applications pratiques.
+          </p>
+          <p>
+            Les résultats obtenus sur le cas de test de l'Italie montrent que l'algorithme fonctionne correctement et avec une bonne performance, même pour des formes géographiques complexes. Le code est structuré de manière modulaire, ce qui facilite sa compréhension, sa maintenance et son extension pour d'autres cas d'utilisation.
+          </p>
+          <p>
+            Ce projet pourrait être étendu de plusieurs façons, notamment par l'ajout de support pour les polygones avec des trous, l'optimisation pour des ensembles de données plus volumineux, ou l'intégration avec d'autres bibliothèques de traitement géospatial pour des applications plus avancées.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

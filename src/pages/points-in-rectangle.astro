@@ -1,0 +1,618 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/points-in-rectangle/50.svg",
+    alt: "SVG avec 50 points",
+    title: "Entrée: 50 points",
+    description: "SVG d'entrée avec 50 points bleus et rouges répartis aléatoirement."
+  },
+  {
+    imagePath: "/points-in-rectangle/50.out.svg",
+    alt: "SVG avec rectangle optimal pour 50 points",
+    title: "Sortie: Rectangle optimal pour 50 points",
+    description: "Rectangle de 100x100 trouvé avec la plus grande différence de points bleus et rouges."
+  },
+  {
+    imagePath: "/points-in-rectangle/100.svg",
+    alt: "SVG avec 100 points",
+    title: "Entrée: 100 points",
+    description: "SVG d'entrée avec 100 points bleus et rouges répartis aléatoirement."
+  },
+  {
+    imagePath: "/points-in-rectangle/100.out.svg",
+    alt: "SVG avec rectangle optimal pour 100 points",
+    title: "Sortie: Rectangle optimal pour 100 points",
+    description: "Rectangle de 100x100 trouvé avec la plus grande différence de points bleus et rouges."
+  },
+  {
+    imagePath: "/points-in-rectangle/300.svg",
+    alt: "SVG avec 300 points",
+    title: "Entrée: 300 points",
+    description: "SVG d'entrée avec 300 points bleus et rouges répartis aléatoirement."
+  },
+  {
+    imagePath: "/points-in-rectangle/300.out.svg",
+    alt: "SVG avec rectangle optimal pour 300 points",
+    title: "Sortie: Rectangle optimal pour 300 points",
+    description: "Rectangle de 100x100 trouvé avec la plus grande différence de points bleus et rouges."
+  },
+  {
+    imagePath: "/points-in-rectangle/1000.svg",
+    alt: "SVG avec 1000 points",
+    title: "Entrée: 1000 points",
+    description: "SVG d'entrée avec 1000 points bleus et rouges répartis aléatoirement."
+  },
+  {
+    imagePath: "/points-in-rectangle/1000.out.svg",
+    alt: "SVG avec rectangle optimal pour 1000 points",
+    title: "Sortie: Rectangle optimal pour 1000 points",
+    description: "Rectangle de 100x100 trouvé avec la plus grande différence de points bleus et rouges."
+  },
+  {
+    imagePath: "/points-in-rectangle/3000.svg",
+    alt: "SVG avec 3000 points",
+    title: "Entrée: 3000 points",
+    description: "SVG d'entrée avec 3000 points bleus et rouges répartis aléatoirement."
+  },
+  {
+    imagePath: "/points-in-rectangle/3000.out.svg",
+    alt: "SVG avec rectangle optimal pour 3000 points",
+    title: "Sortie: Rectangle optimal pour 3000 points",
+    description: "Rectangle de 100x100 trouvé avec la plus grande différence de points bleus et rouges."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard1.svg",
+    alt: "SVG avec distribution difficile 1",
+    title: "Entrée: Distribution difficile 1",
+    description: "SVG d'entrée avec une distribution de points complexe spécifiquement conçue pour tester les limites de l'algorithme."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard1.out.svg",
+    alt: "SVG avec rectangle optimal pour distribution difficile 1",
+    title: "Sortie: Rectangle optimal pour cas difficile 1",
+    description: "Solution trouvée pour le cas de test complexe avec distribution de points particulière."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard2.svg",
+    alt: "SVG avec distribution difficile 2",
+    title: "Entrée: Distribution difficile 2",
+    description: "SVG d'entrée avec une distribution de points complexe spécifiquement conçue pour tester les limites de l'algorithme."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard2.out.svg",
+    alt: "SVG avec rectangle optimal pour distribution difficile 2",
+    title: "Sortie: Rectangle optimal pour cas difficile 2",
+    description: "Solution trouvée pour le cas de test complexe avec distribution de points particulière."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard3.svg",
+    alt: "SVG avec distribution difficile 3",
+    title: "Entrée: Distribution difficile 3",
+    description: "SVG d'entrée avec une distribution de points complexe spécifiquement conçue pour tester les limites de l'algorithme."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard3.out.svg",
+    alt: "SVG avec rectangle optimal pour distribution difficile 3",
+    title: "Sortie: Rectangle optimal pour cas difficile 3",
+    description: "Solution trouvée pour le cas de test complexe avec distribution de points particulière."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard4.svg",
+    alt: "SVG avec distribution difficile 4",
+    title: "Entrée: Distribution difficile 4",
+    description: "SVG d'entrée avec une distribution de points complexe spécifiquement conçue pour tester les limites de l'algorithme."
+  },
+  {
+    imagePath: "/points-in-rectangle/hard4.out.svg",
+    alt: "SVG avec rectangle optimal pour distribution difficile 4",
+    title: "Sortie: Rectangle optimal pour cas difficile 4",
+    description: "Solution trouvée pour le cas de test complexe avec distribution de points particulière."
+  }
+];
+---
+
+<Layout title="Points in Rectangle - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Points in</span> <span class="text-gradient block sm:inline">Rectangle</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Algorithme d'optimisation en C++ pour trouver le rectangle 100×100 contenant la plus grande différence entre points bleus et rouges dans un SVG.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel pour montrer les exemples -->
+    <ProjectCarousel slides={slides} id="points-in-rectangle-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/points-in-rectangle" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">C++</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Optimisation</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">Analyse Algorithmique</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-green-600/20 to-green-600/10 rounded-full border border-green-700/30">TinyXML2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          "Points in Rectangle" est un projet algorithmique développé en C++ qui résout un problème d'optimisation combinatoire : trouver, dans un ensemble de points bleus et rouges représentés au format SVG, la position optimale d'un rectangle de taille fixe (100×100) qui maximise la différence entre le nombre de points bleus et le nombre de points rouges contenus à l'intérieur.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Objectifs du projet</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Développer un algorithme capable de traiter des fichiers SVG contenant des points colorés</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Calculer de manière exhaustive la position optimale du rectangle de taille fixe</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Créer une solution optimisée performante même avec des milliers de points</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Gérer de manière robuste la manipulation de fichiers SVG en entrée et sortie</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Visualiser les résultats directement dans le fichier SVG de sortie</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tester l'algorithme sur des jeux de données de taille et complexité variables</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Jeux de données testés</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">SVG avec 50 points (test basique)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">SVG avec 100 points (densité moyenne)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">SVG avec 300 points (grande densité)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">SVG avec 1000 points (très grande densité)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">SVG avec 3000 points (test de performance)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Cas spéciaux "hard1" à "hard4" (distributions particulières)</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Architecture technique -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Architecture technique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le projet est construit autour d'une architecture modulaire en C++, utilisant le standard C++20 pour tirer parti des fonctionnalités modernes du langage. L'implémentation repose sur plusieurs composants clés qui permettent la lecture, le traitement et l'écriture des fichiers SVG.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 relative text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Structure du projet</h3>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-6">
+            <!-- Flux du programme -->
+            <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Lecture des fichiers SVG</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Utilisation de TinyXML2 pour parser et extraire les coordonnées et couleurs des points</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Génération des résultats -->
+            <div class="bg-gradient-to-r from-indigo-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-blue-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Génération du SVG de sortie</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Création d'un nouveau SVG avec le rectangle optimal et affichage du score calculé</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Principales composantes -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"/>
+                  <path d="M12 22.08V12"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Structures de données</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Le projet définit trois structures clés : <code>Circle</code> pour représenter les points colorés, <code>SVG</code> pour stocker l'ensemble des données du fichier d'entrée, et <code>Rect</code> pour conserver les informations du rectangle optimal calculé.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Fonctions utilitaires</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Ensemble de fonctions ciblées comme <code>createDir</code> pour la gestion des dossiers, <code>readSVG</code> et <code>writeSVG</code> pour les opérations sur les fichiers, et <code>isInRect</code> pour déterminer si un point se trouve dans un rectangle donné.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Algorithme principal</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>findRectPos</code> constitue le cœur du projet. Elle implémente un algorithme de force brute qui évalue chaque position possible du rectangle dans l'espace de recherche pour identifier celle avec la différence optimale.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 22h-8a2 2 0 0 1-2-2V10c0-1.1.9-2 2-2h2V7c0-1.66 1.34-3 3-3h0a3 3 0 0 1 3 3v1h2c1.1 0 2 .9 2 2v10a2 2 0 0 1-2 2z" />
+                  <path d="M11 7h2" />
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">TinyXML2</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Bibliothèque externe légère et performante utilisée pour la manipulation des fichiers SVG. Elle permet de parser efficacement les données d'entrée et de générer proprement les fichiers de sortie avec le rectangle optimal.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Approche algorithmique -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Approche algorithmique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          L'approche algorithmique adoptée pour résoudre ce problème repose sur une méthode de recherche exhaustive, qui explore systématiquement l'ensemble des positions possibles pour le rectangle de 100×100.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-zinc-900/60 p-4 rounded-lg border border-zinc-800/70">
+            <h3 class="text-lg font-semibold text-gradient-blue mb-3">Algorithme de recherche</h3>
+            <ol class="space-y-2 text-sm text-zinc-400 list-decimal list-inside">
+              <li>Pour chaque coordonnée possible (x,y) dans l'espace de recherche :</li>
+              <li class="ml-4">Positionner un rectangle virtuel de 100×100 à cette position</li>
+              <li class="ml-4">Compter le nombre de points bleus et rouges à l'intérieur</li>
+              <li class="ml-4">Calculer la différence (bleus - rouges)</li>
+              <li class="ml-4">Si cette différence est supérieure au meilleur résultat trouvé jusqu'alors, mettre à jour la position optimale</li>
+              <li>Une fois toutes les positions évaluées, le rectangle avec la plus grande différence est identifié</li>
+            </ol>
+          </div>
+          
+          <div class="bg-zinc-900/60 p-4 rounded-lg border border-zinc-800/70">
+            <h3 class="text-lg font-semibold text-gradient-purple mb-3">Complexité algorithmique</h3>
+            <p class="text-sm text-zinc-400 mb-2">
+              <strong>Temporelle :</strong> O(W×H×N) où W et H sont les dimensions de l'espace et N le nombre de points.
+            </p>
+            <p class="text-sm text-zinc-400 mb-2">
+              <strong>Spatiale :</strong> O(N) pour stocker les coordonnées et couleurs des points.
+            </p>
+            <p class="text-sm text-zinc-400">
+              Pour un espace de 1000×1000 avec 3000 points, cela représente potentiellement jusqu'à 3 milliards d'opérations, d'où l'importance des optimisations implémentées.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-gradient-to-r from-purple-900/10 to-blue-900/10 p-4 rounded-lg border border-purple-800/20">
+          <h3 class="text-lg font-semibold text-gradient-indigo mb-3">Extraits de code clés</h3>
+          
+          <div class="mb-4">
+            <p class="text-sm text-zinc-300 mb-1">Fonction principale de recherche du rectangle optimal :</p>
+            <pre class="bg-zinc-950 p-3 rounded text-xs overflow-x-auto"><code class="language-cpp">Rect findRectPos(const SVG& svg)
+&lbrace;
+    Rect rect;
+
+    rect.difference = std::numeric_limits<int>::min();
+    int difference = 0;
+
+    for (int x=0; x&lt;=svg.width; x++)
+        for (int y=0; y&lt;=svg.height; y++) &lbrace;
+            difference = countPointsInRect(svg, x, y);
+            if (difference &gt;= rect.difference) &lbrace;
+                rect.x = x;
+                rect.y = y;
+                rect.difference = difference;
+            &rbrace;
+        &rbrace;
+
+    return rect;
+&rbrace;</code></pre>
+          </div>
+          
+          <div>
+            <p class="text-sm text-zinc-300 mb-1">Fonction de comptage des points dans un rectangle :</p>
+            <pre class="bg-zinc-950 p-3 rounded text-xs overflow-x-auto"><code class="language-cpp">int countPointsInRect(const SVG& svg, const int& rectX, const int& rectY)
+&lbrace;
+    int blue = 0, red = 0;
+    for (const Circle& c : svg.content)
+        if (isInRect(c.cx, c.cy, rectX, rectY)) &lbrace;
+            if (c.fill == "darkblue")
+                blue++;
+            else if (c.fill == "red")
+                red++;
+        &rbrace;
+    return blue-red;
+&rbrace;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Défis techniques et optimisations</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de ce projet a soulevé plusieurs défis techniques qui ont nécessité des solutions spécifiques et des optimisations.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                  <path d="M15 3h6v6"></path>
+                  <path d="M10 14L21 3"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Performance sur grands ensembles</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Gérer efficacement des ensembles de milliers de points tout en maintenant un temps d'exécution raisonnable.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation des fonctionnalités d'optimisation du compilateur avec le flag <code>-Ofast</code> et conception d'algorithmes efficaces minimisant les opérations redondantes.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Manipulation de fichiers SVG</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Parser et générer correctement des fichiers SVG tout en extrayant les données pertinentes.
+              <br/><br/>
+              <strong>Solution :</strong> Intégration de la bibliothèque TinyXML2, légère et efficace, avec des fonctions dédiées pour isoler les opérations de lecture/écriture XML.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Gestion des cas limites</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Traiter correctement les situations où le rectangle optimal se trouve partiellement en dehors de l'espace initial.
+              <br/><br/>
+              <strong>Solution :</strong> Implémentation d'une vérification des dimensions avec ajustement automatique de la taille du SVG de sortie pour garantir l'affichage complet du rectangle trouvé.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Traitement par lots</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Automatiser le traitement de multiples fichiers de test avec des caractéristiques variables.
+              <br/><br/>
+              <strong>Solution :</strong> Création d'un système de configuration par vecteur qui permet de spécifier les fichiers à traiter en entrée et de générer automatiquement les fichiers de sortie correspondants.
+            </p>
+          </div>
+        </div>
+        
+        <div class="mt-6 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Mesure des performances</h3>
+          <p class="text-zinc-400 text-xs sm:text-sm mb-4">Le programme intègre un système de mesure précise du temps d'exécution pour chaque fichier traité :</p>
+          
+          <pre class="bg-zinc-950 p-3 rounded text-xs overflow-x-auto"><code class="language-cpp">auto start = std::chrono::high_resolution_clock::now();
+Rect rect = findRectPos(svg);
+auto end = std::chrono::high_resolution_clock::now();
+
+std::chrono::duration&lt;double&gt; elapsed = end - start;
+std::cout &lt;&lt; "'" &lt;&lt; file &lt;&lt; ".svg' traité avec succès en " &lt;&lt; elapsed.count() &lt;&lt; " seconde(s)." &lt;&lt; std::endl;</code></pre>
+          
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+            <div class="bg-zinc-950 p-3 rounded">
+              <h4 class="text-sm font-medium text-white mb-1">50 points</h4>
+              <p class="text-xs text-green-400">~0.001 seconde</p>
+            </div>
+            <div class="bg-zinc-950 p-3 rounded">
+              <h4 class="text-sm font-medium text-white mb-1">300 points</h4>
+              <p class="text-xs text-green-400">~0.05 seconde</p>
+            </div>
+            <div class="bg-zinc-950 p-3 rounded">
+              <h4 class="text-sm font-medium text-white mb-1">1000 points</h4>
+              <p class="text-xs text-yellow-400">~0.3 seconde</p>
+            </div>
+            <div class="bg-zinc-950 p-3 rounded">
+              <h4 class="text-sm font-medium text-white mb-1">3000 points</h4>
+              <p class="text-xs text-yellow-400">~0.9 seconde</p>
+            </div>
+            <div class="bg-zinc-950 p-3 rounded">
+              <h4 class="text-sm font-medium text-white mb-1">Cas difficile</h4>
+              <p class="text-xs text-orange-400">~1.2 seconde</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            Le projet "Points in Rectangle" démontre l'application pratique des algorithmes d'optimisation et de traitement de données dans un contexte géométrique. Malgré sa nature de force brute, l'implémentation optimisée permet de traiter efficacement des ensembles de plusieurs milliers de points en quelques secondes.
+          </p>
+          <p>
+            L'utilisation des fonctionnalités modernes de C++20, combinée à une bibliothèque externe légère pour le traitement XML, illustre une approche pragmatique de la résolution de problèmes algorithmiques complexes. Le projet met également en évidence l'importance de la gestion robuste des entrées/sorties et des cas limites pour créer une solution complète et fiable.
+          </p>
+          <p>
+            Les performances observées sont satisfaisantes pour l'usage visé, avec des temps de traitement qui restent raisonnables même pour les jeux de données les plus volumineux. Les visualisations générées permettent de vérifier facilement la correction des résultats, ce qui est crucial pour valider l'approche algorithmique.
+          </p>
+          <p>
+            À l'avenir, des améliorations pourraient être envisagées, comme l'implémentation d'algorithmes plus sophistiqués qui éviteraient l'exploration exhaustive de l'espace de recherche, ou encore l'ajout de fonctionnalités permettant de paramétrer dynamiquement la taille du rectangle recherché. Ces évolutions permettraient d'étendre la portée et l'utilité de cet outil d'analyse géométrique.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+.text-gradient {
+  background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400%;
+  background-position: 0%;
+}
+
+.text-gradient-blue {
+  background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-indigo {
+  background-image: linear-gradient(135deg, #818cf8, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-pink {
+  background-image: linear-gradient(135deg, #ec4899, #db2777);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+</style>

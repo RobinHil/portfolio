@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="303" height="303">
+<circle cx="99" cy="110" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="120" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="130" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="140" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="150" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="160" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="170" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="180" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="99" cy="190" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="110" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="120" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="130" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="140" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="150" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="160" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="170" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="180" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="201" cy="190" fill="red" stroke="black" stroke-width="1" r="3"/>
+<circle cx="140" cy="140" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+<circle cx="140" cy="150" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+<circle cx="150" cy="140" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+<circle cx="150" cy="150" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+</svg>

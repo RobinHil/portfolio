@@ -1,0 +1,494 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/von-koch-flake/1.webp",
+    alt: "Interface principale de l'application Von Koch Flake",
+    title: "Visualisation fractale",
+    description: "Interface principale montrant un flocon de Von Koch à un niveau de récursion intermédiaire."
+  },
+  {
+    imagePath: "/von-koch-flake/2.webp",
+    alt: "Flocon de Von Koch niveau 0",
+    title: "Niveau de récursion 0",
+    description: "Le niveau de base, qui correspond à un simple triangle équilatéral avant toute transformation fractale."
+  },
+  {
+    imagePath: "/von-koch-flake/3.webp",
+    alt: "Flocon de Von Koch niveau 2",
+    title: "Niveau de récursion 2",
+    description: "On commence à distinguer la forme caractéristique du flocon avec ses pointes triangulaires."
+  },
+  {
+    imagePath: "/von-koch-flake/4.webp",
+    alt: "Flocon de Von Koch niveau 4",
+    title: "Niveau de récursion 4",
+    description: "À ce niveau, la complexité du flocon augmente significativement, révélant sa nature fractale."
+  },
+  {
+    imagePath: "/von-koch-flake/5.webp",
+    alt: "Flocon de Von Koch niveau 6",
+    title: "Niveau de récursion 6",
+    description: "Un niveau de détail élevé montrant la beauté mathématique de cette fractale qui présente un périmètre infini délimitant une aire finie."
+  }
+];
+---
+
+<Layout title="Von Koch Flake - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Von Koch</span> <span class="text-gradient block sm:inline">Flake</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Une application interactive en Python permettant de visualiser et manipuler le flocon de Von Koch, une célèbre figure fractale mathématique.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="von-koch-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/py-von-koch-flake" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">Python</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Tkinter</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">Fractales</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-pink-600/20 to-pink-600/10 rounded-full border border-pink-700/30">Mathématiques</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          Von Koch Flake est une application interactive développée en Python qui permet d'explorer le célèbre flocon de Von Koch, une figure fractale fascinante découverte par le mathématicien suédois Helge von Koch en 1904. Cette application combine les concepts mathématiques de la géométrie fractale avec une interface utilisateur intuitive, permettant aux utilisateurs d'observer et de manipuler cette structure mathématique complexe de manière interactive.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Fonctionnalités principales</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Visualisation du flocon de Von Koch avec niveau de récursion ajustable (0 à 7)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Zoom avant/arrière fluide via molette de souris ou boutons dédiés</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Navigation par glisser-déposer pour explorer la fractale</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Interface utilisateur intuitive avec informations contextuelles</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Contrôle du niveau de récursion via boutons dédiés</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Compatibilité multi-plateforme (Windows, macOS, Linux)</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Le flocon de Von Koch -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Le flocon de Von Koch : une merveille mathématique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le flocon de Von Koch est l'une des premières fractales à avoir été décrite mathématiquement. Cette figure géométrique présente une propriété remarquable : elle possède un périmètre infini tout en délimitant une aire finie, ce qui en fait un objet mathématique fascinant.
+        </p>
+        
+        <!-- Construction du flocon -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 relative text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Construction du flocon de Von Koch</h3>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-5">
+            <!-- Étape 1 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">1</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Le triangle initial</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">On commence avec un triangle équilatéral comme base. C'est le niveau 0 de la récursion.</p>
+              </div>
+            </div>
+            
+            <!-- Étape 2 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">2</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Transformation des segments</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Chaque segment est divisé en trois parties égales. La partie centrale est remplacée par deux segments formant un angle externe de 60°, créant ainsi une pointe triangulaire.</p>
+              </div>
+            </div>
+            
+            <!-- Étape 3 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">3</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Récursion</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Le processus est répété pour chaque nouveau segment créé. Chaque niveau de récursion multiplie le nombre de segments par 4, augmentant ainsi la complexité et le niveau de détail de la fractale.</p>
+              </div>
+            </div>
+            
+            <!-- Propriétés -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">4</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Propriétés mathématiques</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Avec chaque niveau de récursion, le périmètre du flocon augmente d'un facteur 4/3. En théorie, après un nombre infini d'itérations, le périmètre deviendrait infini, bien que l'aire reste inférieure à 8/5 de l'aire du triangle initial.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Applications -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                  <line x1="6" y1="1" x2="6" y2="4"></line>
+                  <line x1="10" y1="1" x2="10" y2="4"></line>
+                  <line x1="14" y1="1" x2="14" y2="4"></line>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Importance éducative</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Le flocon de Von Koch est un excellent outil pédagogique pour introduire les concepts de récursion, d'infini et de géométrie fractale. Sa visualisation interactive permet de comprendre intuitivement ces notions mathématiques complexes.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a10 10 0 1 0 10 10H12V2z"></path>
+                  <path d="M12 2a10 10 0 0 1 10 10V2H12z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Applications réelles</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Les principes derrière cette fractale trouvent des applications dans divers domaines scientifiques : modélisation de phénomènes naturels (côtes, montagnes, flocons de neige), conception d'antennes fractales, compression d'images et même en finance pour analyser les marchés.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture technique -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Architecture technique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          L'application a été conçue pour être à la fois performante et facilement compréhensible, avec une architecture qui sépare clairement les différentes responsabilités.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-6">
+            <!-- Interface utilisateur -->
+            <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Interface Utilisateur (Tkinter)</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Gestion de la fenêtre, des événements souris et des contrôles</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Logique de calcul -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-3 sm:p-4 rounded-lg border border-purple-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Moteur de Génération Fractale</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Algorithme récursif pour calculer les points du flocon à chaque niveau</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Gestion des événements -->
+            <div class="bg-gradient-to-r from-indigo-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-blue-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Gestion Dynamique</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Contrôle du zoom, déplacement et adaptation multi-plateforme</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Composants clés -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 15h-12a3 3 0 0 1 -3 -3v-6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3z"></path>
+                  <path d="M16 9h9"></path>
+                  <path d="M16 15h9"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Tkinter</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Bibliothèque graphique standard de Python utilisée pour créer l'interface utilisateur. Elle fournit les composants nécessaires pour la gestion des événements souris, l'affichage graphique et les éléments d'interface.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 12a10 10 0 1 0 20 0 10 10 0 1 0-20 0"></path>
+                  <path d="M5.2 15.4c0-3.4 4.6-4.8 6.8-4.8s6.8 1.4 6.8 4.8"></path>
+                  <path d="M9 9a3 3 0 1 0 6 0 3 3 0 1 0-6 0"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Algorithme récursif</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              La fonction <code>calculer_points_koch</code> est au cœur de l'application. Elle implémente l'algorithme récursif qui calcule les coordonnées des points du flocon en fonction du niveau de récursion spécifié.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a10 10 0 1 0 10 10A10 10.0 0.0 0 1 12 2zm0 18a8 8 0 1 1 8-8 8 8.0 0.0 0 1-8 8Z"></path>
+                  <path d="M12 8v8"></path>
+                  <path d="M8 12h8"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Navigation dynamique</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Système de navigation qui permet de zoomer et se déplacer dans la fractale. L'application détecte automatiquement le système d'exploitation pour adapter les contrôles (gestion différente des événements de la molette sous Windows, macOS et Linux).
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 3a2 2 0 0 0-2 2"></path>
+                  <path d="M19 3a2 2 0 0 1 2 2"></path>
+                  <path d="M21 19a2 2 0 0 1-2 2"></path>
+                  <path d="M5 21a2 2 0 0 1-2-2"></path>
+                  <path d="M9 3h1"></path>
+                  <path d="M9 21h1"></path>
+                  <path d="M14 3h1"></path>
+                  <path d="M14 21h1"></path>
+                  <path d="M3 9v1"></path>
+                  <path d="M21 9v1"></path>
+                  <path d="M3 14v1"></path>
+                  <path d="M21 14v1"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Canvas Tkinter</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Le widget Canvas de Tkinter est utilisé pour le rendu graphique du flocon. Il offre des performances optimisées pour le dessin vectoriel, permettant un affichage fluide même avec des niveaux de récursion élevés générant des milliers de points.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Défis techniques</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de cette application a présenté plusieurs défis techniques intéressants.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 11A8.1 8.1 0 0 0 4.5 9M4 22v-3h3M4 2v3h3M20 20a8.1 8.1 0 0 0 0-16.3"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Explosion exponentielle</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> La nature récursive de l'algorithme entraîne une explosion exponentielle du nombre de points à calculer et afficher. Chaque niveau multiplie le nombre de segments par 4.
+              <br/><br/>
+              <strong>Solution :</strong> Limitation intelligente du niveau maximal de récursion à 7, optimisation de l'algorithme récursif, et utilisation efficace des primitives de dessin de Tkinter pour maintenir des performances acceptables.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9 10a3 3 0 0 1 3 -3h.01a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3h-.01a3 3 0 0 1 -3 -3"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Compatibilité multi-plateforme</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Les événements souris, particulièrement le comportement de la molette, varient considérablement entre Windows, macOS et Linux.
+              <br/><br/>
+              <strong>Solution :</strong> Détection automatique du système d'exploitation à l'aide du module <code>platform</code> et implémentation de gestionnaires d'événements spécifiques à chaque plateforme pour garantir une expérience utilisateur cohérente.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 8v4l2 2"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Performance de rendu</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Le rendu de milliers de segments de ligne pour les niveaux de récursion élevés peut entraîner des ralentissements significatifs, surtout lors du zoom ou du déplacement.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation d'un polygone unique plutôt que de multiples lignes individuelles, ce qui améliore considérablement les performances de rendu en réduisant le nombre d'appels aux fonctions graphiques de Tkinter.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 17.5l-9.743 -5.482a8 8 0 1 1 0 -2.035l9.743 -5.483"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Précision mathématique</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> La construction géométrique du flocon nécessite une précision mathématique élevée, particulièrement pour les rotations et les divisions de segments.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation du module <code>math</code> de Python pour les calculs trigonométriques précis et mise en œuvre d'algorithmes robustes pour éviter l'accumulation d'erreurs d'arrondi, garantissant ainsi la justesse géométrique de la fractale.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            La création de cette application Von Koch Flake illustre parfaitement la rencontre entre les mathématiques théoriques et la programmation pratique. En transformant un concept mathématique abstrait en une expérience interactive, l'application rend accessible et tangible la beauté des fractales, tout en démontrant comment des principes récursifs simples peuvent générer des structures d'une complexité fascinante.
+          </p>
+          <p>
+            Sur le plan technique, ce projet a permis d'explorer les capacités graphiques de Python à travers Tkinter, de mettre en pratique des algorithmes récursifs efficaces, et de développer une interface utilisateur intuitive qui s'adapte à différentes plateformes. Les défis de performance liés à la nature exponentielle des fractales ont été surmontés grâce à des optimisations ciblées et une conception réfléchie.
+          </p>
+          <p>
+            Au-delà de son aspect éducatif, ce projet démontre comment la visualisation peut servir d'outil puissant pour comprendre des concepts mathématiques complexes. En permettant aux utilisateurs d'explorer interactivement le flocon de Von Koch, l'application offre une perspective unique sur les propriétés fascinantes des fractales et illustre comment des règles simples peuvent donner naissance à des structures d'une complexité infinie - un principe fondamental que l'on retrouve tant dans les mathématiques que dans la nature.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

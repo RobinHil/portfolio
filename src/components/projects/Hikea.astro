@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import hikea from "../../assets/hikea.webp";
+---
+
+<Card
+  href="hikea"
+  title="Hïkěà"
+  body="Application desktop Qt/C++ de gestion de catalogue de meubles et d'articles de décoration avec interface multilingue."
+  tags="C++, Qt, JSON, Base de données"
+>
+  <div class="max-w-full">
+    <Image
+      src={hikea}
+      alt="Application Hïkěà de gestion de catalogue"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

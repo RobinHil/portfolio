@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import point_in_polygon from "../../assets/point-in-polygon.webp";
+---
+
+<Card
+  href="point-in-polygon"
+  title="Point In Polygon"
+  body="Algorithme d'analyse géométrique permettant de déterminer si un point est à l'intérieur, à l'extérieur ou sur le bord d'un polygone."
+  tags="Python, Géométrie Algorithmique, SVG, Ray Casting"
+>
+  <div class="max-w-full">
+    <Image
+      src={point_in_polygon}
+      alt="Point In Polygon"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

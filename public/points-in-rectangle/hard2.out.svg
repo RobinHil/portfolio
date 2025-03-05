@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="303" height="303">
+    <circle cx="200" cy="110" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="120" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="130" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="140" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="150" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="160" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="170" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="180" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="200" cy="190" fill="red" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="140" cy="140" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="140" cy="150" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="150" cy="140" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+    <circle cx="150" cy="150" fill="darkblue" stroke="black" stroke-width="1" r="3"/>
+    <rect x="99" y="140" width="100" height="100" fill="none" stroke="darkgreen" stroke-width="1"/>
+    <text x="0" y="20">4</text>
+</svg>
