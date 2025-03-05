@@ -1,0 +1,475 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/algo-tri/all_plots.webp",
+    alt: "Comparaison de tous les algorithmes",
+    title: "Vue d'ensemble des performances",
+    description: "Comparaison des temps d'exécution (en ms) de tous les algorithmes de tri implémentés, montrant d'importantes différences de performance."
+  },
+  {
+    imagePath: "/algo-tri/fast_running_time.webp",
+    alt: "Algorithmes rapides",
+    title: "Algorithmes à temps d'exécution rapide",
+    description: "Détail des performances des algorithmes les plus rapides: std::stable_sort et tri rapide avec pivot aléatoire."
+  },
+  {
+    imagePath: "/algo-tri/slow_running_time.webp",
+    alt: "Algorithmes lents",
+    title: "Algorithmes à temps d'exécution lent",
+    description: "Analyse des performances des algorithmes les plus lents: tri à bulles, tri par insertion et tri rapide (cas défavorable)."
+  },
+  {
+    imagePath: "/algo-tri/stdSort.webp",
+    alt: "Performance du tri std::stable_sort",
+    title: "std::stable_sort",
+    description: "Analyse détaillée des performances du tri stable de la bibliothèque standard C++ avec différents jeux de données."
+  },
+  {
+    imagePath: "/algo-tri/bubble_sort.webp",
+    alt: "Performance du tri à bulles",
+    title: "Tri à bulles",
+    description: "Analyse détaillée des performances du tri à bulles avec différents jeux de données, montrant sa faible efficacité sur les grands ensembles."
+  },
+  {
+    imagePath: "/algo-tri/insertion_sort.webp",
+    alt: "Performance du tri par insertion",
+    title: "Tri par insertion",
+    description: "Analyse détaillée des performances du tri par insertion avec différents jeux de données, montrant sa sensibilité à l'ordre initial."
+  },
+  {
+    imagePath: "/algo-tri/quicksort.webp",
+    alt: "Performance du tri rapide",
+    title: "Tri rapide (Quicksort)",
+    description: "Analyse détaillée des performances du tri rapide avec pivot fixe, montrant à la fois ses forces et ses faiblesses selon le jeu de données."
+  },
+  {
+    imagePath: "/algo-tri/modified_quicksort.webp",
+    alt: "Performance du tri rapide modifié",
+    title: "Tri rapide modifié",
+    description: "Analyse détaillée des performances du tri rapide avec pivot aléatoire, montrant sa robustesse face à différents jeux de données."
+  }
+];
+---
+
+<Layout title="Analyse d'Algorithmes de Tri - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Analyse d'</span> <span class="text-gradient block sm:inline">Algorithmes de Tri</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Une étude comparative des performances de différents algorithmes de tri en C++ avec visualisation graphique des résultats.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="algo-tri-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/algo-tri" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">C++</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Algorithmes</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">Analyse de Performance</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-green-600/20 to-green-600/10 rounded-full border border-green-700/30">SageMath</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          Ce projet analyse et compare les performances de différents algorithmes de tri implémentés en C++. L'objectif est d'étudier leur efficacité en fonction de la taille et des caractéristiques des données à trier, puis de visualiser les résultats pour identifier clairement les forces et faiblesses de chaque approche.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Algorithmes implémentés</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">std::stable_sort (Bibliothèque standard C++)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tri à bulles (Bubble Sort)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tri par insertion (Insertion Sort)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tri rapide (Quicksort) avec pivot fixe</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tri rapide modifié avec pivot aléatoire</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Jeux de données testés</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Données entièrement aléatoires</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Données partiellement triées (première moitié ordonnée)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Données partiellement triées en ordre inverse (première moitié)</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Méthodologie -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Méthodologie</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Pour assurer une comparaison précise et équitable, j'ai mis en place une méthodologie rigoureuse d'analyse des performances.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Structure du code</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Chaque algorithme est implémenté dans un fichier séparé qui adhère à une interface commune définie dans <code>sort.hpp</code>. Cette approche modulaire permet de tester chaque algorithme individuellement tout en maintenant une méthodologie de test cohérente.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Tests de performance</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Les algorithmes sont testés avec des tailles de données croissantes, de 1 000 à 100 000 éléments. Pour chaque algorithme, le temps d'exécution est mesuré avec précision en millisecondes et un timeout de 10 minutes est imposé pour les cas trop lents.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Visualisation</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Un script SageMath génère automatiquement des graphiques comparatifs à partir des données collectées. Ces visualisations permettent d'identifier clairement les tendances de performance et de comparer les algorithmes sur différentes échelles.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Automatisation</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Un script shell (<code>build.sh</code>) automatise l'ensemble du processus de test : compilation des algorithmes, collecte des données de performance pour différentes tailles et types de données, et génération des graphiques de résultats.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Résultats et analyses -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:xs">03</span>
+          <span>Résultats et analyses</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          L'analyse des résultats met en évidence des différences significatives de performance entre les algorithmes, ainsi que des comportements spécifiques selon les jeux de données.
+        </p>
+        
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 relative text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Comparaison des performances</h3>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-5">
+            <!-- Comparaison générale -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">1</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Algorithmes rapides vs. lents</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">L'écart de performance est saisissant : pour trier 100 000 éléments, std::stable_sort prend environ 10 ms, tandis que le tri à bulles nécessite plus de 15 000 ms. Cette différence d'un facteur 1500 met en évidence l'importance du choix de l'algorithme pour les grandes quantités de données.</p>
+              </div>
+            </div>
+            
+            <!-- std::stable_sort -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">2</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">La supériorité de std::stable_sort</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">L'implémentation de la bibliothèque standard surpasse largement toutes les autres méthodes en termes de performance. Hautement optimisée, elle maintient un temps d'exécution quasi-linéarithmique (O(n log n)) indépendamment des caractéristiques du jeu de données, ce qui la rend très fiable.</p>
+              </div>
+            </div>
+            
+            <!-- Quicksort -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">3</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Comportement ambivalent du Quicksort</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Le tri rapide présente un comportement remarquablement dual : avec des données aléatoires, il est extrêmement efficace (environ 15 ms pour 100 000 éléments), mais devient catastrophiquement lent avec des données partiellement triées. Cette dégradation est due au mauvais choix de pivot qui entraîne une complexité quadratique (O(n²)).</p>
+              </div>
+            </div>
+            
+            <!-- Solution Quicksort modifié -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">4</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">L'efficacité du pivot aléatoire</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Le tri rapide modifié avec pivot aléatoire corrige efficacement le problème du cas défavorable, offrant des performances stables (environ 430 ms pour 100 000 éléments) indépendamment de l'ordre initial des données. Cette approche probabiliste sacrifie un peu de performance dans le meilleur des cas pour éviter les cas catastrophiques.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Algorithmes simples</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Les algorithmes de tri à bulles et par insertion, avec leur complexité quadratique (O(n²)), sont nettement inefficaces pour les grands jeux de données. Cependant, le tri par insertion montre une performance relativement meilleure avec des données partiellement triées, ce qui confirme son utilité dans certains contextes spécifiques.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Impact des données d'entrée</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              L'étude démontre clairement que les caractéristiques des données à trier influencent considérablement l'efficacité des algorithmes. Des données partiellement triées ou triées en sens inverse peuvent transformer un algorithme performant en un algorithme catastrophiquement lent, comme l'illustre le cas du quicksort avec pivot fixe.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Défis techniques</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de ce projet d'analyse a présenté plusieurs défis techniques intéressants.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"/>
+                  <path d="M12 22.08V12"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Architecture C++ modulaire</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Créer une architecture qui permet de tester différentes implémentations d'algorithmes de manière uniforme, sans duplication de code.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation d'un namespace commun et d'une interface unique définie dans un fichier d'en-tête (<code>sort.hpp</code>), permettant de changer facilement l'implémentation testée par une simple recompilation.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Mesures de performance fiables</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Obtenir des mesures de temps d'exécution précises et cohérentes malgré les variations inhérentes aux environnements d'exécution modernes.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation de la bibliothèque <code>chrono</code> de C++11 pour des mesures de haute précision, combinée avec des optimisations de compilation (<code>-Ofast</code>) pour éliminer les surcoûts artificiels.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 17l-5-5 5-5M19 17l-5-5 5-5"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Gestion des cas extrêmes</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Certains algorithmes (notamment le tri rapide classique) peuvent présenter des temps d'exécution extrêmement longs ou même causer des débordements de pile avec certains jeux de données.
+              <br/><br/>
+              <strong>Solution :</strong> Implémentation d'un mécanisme de timeout (10 minutes) dans le script de test pour éviter les blocages, et analyse minutieuse des cas de défaillance pour comprendre les limites inhérentes aux algorithmes.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10H3M21 6H3M21 14H3M21 18H3"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Visualisation des données</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Représenter visuellement les résultats de manière claire malgré les énormes différences d'échelle entre les algorithmes (facteur de 1 à 1500).
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation de SageMath pour la création de graphiques personnalisés, avec séparation des résultats en groupes d'algorithmes rapides et lents pour permettre une analyse détaillée à différentes échelles.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            Cette analyse comparative des algorithmes de tri démontre de manière convaincante que le choix d'un algorithme approprié peut avoir un impact spectaculaire sur les performances d'une application. Les différences de temps d'exécution observées - jusqu'à 1500 fois entre les approches les plus rapides et les plus lentes - soulignent l'importance de cette décision, particulièrement pour le traitement de grandes quantités de données.
+          </p>
+          <p>
+            L'étude met également en évidence un principe fondamental : il n'existe pas d'algorithme de tri universellement supérieur. Chaque approche possède ses forces et ses faiblesses spécifiques qui doivent être considérées en fonction du contexte d'utilisation et des caractéristiques des données. La simplicité conceptuelle du tri à bulles contraste avec sa faible efficacité, tandis que l'élégance mathématique du tri rapide classique est compromise par sa vulnérabilité aux cas pathologiques.
+          </p>
+          <p>
+            L'implémentation de la STL (<code>std::stable_sort</code>) représente un excellent équilibre entre performance et robustesse dans la majorité des situations. Elle illustre l'avantage des implémentations hybrides qui adaptent leur stratégie en fonction des caractéristiques des données, combinant les meilleurs aspects de différentes approches algorithmiques.
+          </p>
+          <p>
+            Ce projet a non seulement permis de confronter la théorie algorithmique à la réalité pratique, mais il a également servi de plateforme pour expérimenter avec différentes techniques d'optimisation et d'automatisation en C++. Les compétences développées - notamment en analyse de performance, visualisation de données et architecture logicielle modulaire - sont directement transférables à de nombreux domaines du développement informatique.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

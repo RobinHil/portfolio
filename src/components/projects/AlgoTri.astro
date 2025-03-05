@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import algo_tri from "../../assets/algo-tri.png";
+---
+
+<Card
+  href="algo-tri"
+  title="Analyse d'Algorithmes de Tri"
+  body="Analyse comparative des performances de différents algorithmes de tri en C++ avec visualisation graphique des résultats."
+  tags="C++, Algorithmes, Analyse de Performance, SageMath"
+>
+  <div class="max-w-full">
+    <Image
+      src={algo_tri}
+      alt="Analyse comparative d'algorithmes de tri"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>
