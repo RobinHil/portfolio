@@ -1,0 +1,605 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/react-slides/1.webp",
+    alt: "Interface principale de React Slides",
+    title: "Interface d'accueil",
+    description: "Vue principale de l'application montrant le mode présentation avec la barre de navigation et les contrôles."
+  },
+  {
+    imagePath: "/react-slides/2.webp",
+    alt: "Tailles des composants textuels",
+    title: "Composants de texte",
+    description: "Démonstration des différentes tailles de texte disponibles dans l'application."
+  },
+  {
+    imagePath: "/react-slides/3.webp",
+    alt: "Mise en forme des composants textuels",
+    title: "Composants de texte",
+    description: "Démonstration des différentes mises en forme de texte disponibles dans l'application."
+  },
+  {
+    imagePath: "/react-slides/4.webp",
+    alt: "Mise en forme des couleurs",
+    title: "Palette de couleurs",
+    description: "Présentation des différentes options de couleurs pour le texte et les arrière-plans."
+  },
+  {
+    imagePath: "/react-slides/5.webp",
+    alt: "Affichage d'images",
+    title: "Support d'images",
+    description: "Intégration d'images avec options de taille, alignement et légendes personnalisables."
+  },
+  {
+    imagePath: "/react-slides/6.webp",
+    alt: "Listes à puces et numérotées",
+    title: "Listes formatées",
+    description: "Création de listes à puces ou numérotées avec différentes options de style."
+  },
+  {
+    imagePath: "/react-slides/7.webp",
+    alt: "Tableaux de données",
+    title: "Tableaux interactifs",
+    description: "Présentation de données tabulaires avec formatage personnalisable."
+  },
+  {
+    imagePath: "/react-slides/8.webp",
+    alt: "Coloration syntaxique du code",
+    title: "Coloration syntaxique",
+    description: "Support pour l'affichage de code source avec mise en forme et coloration syntaxique."
+  },
+  {
+    imagePath: "/react-slides/9.webp",
+    alt: "Support Markdown",
+    title: "Rendu Markdown",
+    description: "Support complet de Markdown pour une création rapide de contenu formaté."
+  },
+  {
+    imagePath: "/react-slides/10.webp",
+    alt: "Mode mosaïque",
+    title: "Navigation en mosaïque",
+    description: "Fonctionnalité de navigation rapide entre les diapositives avec un aperçu en mosaïque."
+  }
+];
+---
+
+<Layout title="React Slides - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">React</span> <span class="text-gradient block sm:inline">Slides</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Une bibliothèque moderne de présentation basée sur React pour créer et afficher des diaporamas interactifs directement dans le navigateur.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="react-slides-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <div class="flex gap-2">
+          <!-- Lien GitHub avec effet hover -->
+          <a 
+            href="https://github.com/RobinHil/react-slides" 
+            target="_blank" 
+            class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>Voir sur GitHub</span>
+          </a>
+          
+          <!-- Lien vers la démo -->
+          <a 
+            href="https://react-slides.robinhi.fr" 
+            target="_blank" 
+            class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-green-600 hover:to-emerald-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-green-500/20 group text-xs sm:text-sm md:text-base"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Voir la démo</span>
+          </a>
+        </div>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">React</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Vite</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">TailwindCSS</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-cyan-600/20 to-cyan-600/10 rounded-full border border-cyan-700/30">Docker</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          React Slides est une application moderne de présentation développée avec React, Vite et TailwindCSS. Elle permet de créer et d'afficher des diaporamas interactifs directement dans un navigateur web, sans nécessiter de logiciels spécifiques comme PowerPoint ou Keynote. Ce projet personnel a été conçu pour offrir une alternative web aux outils traditionnels de présentation, tout en exploitant les possibilités offertes par les technologies web modernes.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Fonctionnalités principales</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Design moderne avec TailwindCSS</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Navigation intuitive par clavier et interface</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Mode plein écran pour les présentations</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Composants textuels avec options de formatage</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Support pour les images et médias</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Coloration syntaxique pour le code</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Support Markdown pour la création rapide de contenu</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Mise en page flexible (centré, deux colonnes)</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Support pour tableaux et listes</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Navigation en mosaïque entre diapositives</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Architecture technique -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Architecture technique</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          React Slides a été développé avec une architecture componentisée moderne, permettant une grande flexibilité et maintenabilité. L'application est structurée autour de composants réutilisables qui peuvent être assemblés pour créer des diapositives personnalisées.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-6">
+            <!-- App Component -->
+            <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">App Component</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Point d'entrée principal, gestion de l'état global et des contextes</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Interface Components -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 p-3 sm:p-4 rounded-lg border border-purple-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Interface Components</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Toolbar, SlideViewer, SlideLoader, Navigation, Mosaic</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Slide Components -->
+            <div class="bg-gradient-to-r from-indigo-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-blue-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Slide Components</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">Heading, Paragraph, Image, List, Table, Code, Markdown</p>
+            </div>
+            
+            <div class="flex justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline points="7 10 12 15 17 10"></polyline>
+              </svg>
+            </div>
+            
+            <!-- Layouts -->
+            <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 text-center">
+              <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Layout Components</h4>
+              <p class="text-[10px] sm:text-xs text-zinc-400">CenterLayout, TwoColumnLayout</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Principales technologies -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"/>
+                  <path d="M12 22.08V12"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">React 18</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Framework JavaScript utilisé pour construire l'interface utilisateur avec une approche componentisée, permettant une gestion efficace de l'état et des cycles de vie.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Vite</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Outil de build ultra-rapide qui offre un environnement de développement instantané avec rechargement à chaud, optimisant ainsi le flux de travail et la compilation.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                  <line x1="16" y1="8" x2="2" y2="22"></line>
+                  <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">TailwindCSS</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Framework CSS utilitaire qui permet de styliser l'application directement dans le HTML, offrant une grande flexibilité et cohérence dans le design.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                  <path d="M9 9h6v6H9z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">React Context API</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Utilisée pour la gestion globale de l'état de l'application, permettant de partager les données entre les composants sans avoir à passer explicitement les props.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Défis techniques et solutions</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de React Slides a nécessité de surmonter plusieurs défis techniques pour offrir une expérience utilisateur fluide et intuitive.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                  <line x1="6" y1="1" x2="6" y2="4"></line>
+                  <line x1="10" y1="1" x2="10" y2="4"></line>
+                  <line x1="14" y1="1" x2="14" y2="4"></line>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Gestion d'état complexe</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Gérer l'état global de l'application (navigation entre slides, mode plein écran, mosaïque) tout en maintenant une structure de code propre.
+              <br/><br/>
+              <strong>Solution :</strong> Implémentation de plusieurs contextes React avec useReducer pour les états complexes, permettant une séparation claire des préoccupations et une gestion d'état plus maintenable.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Interface utilisateur adaptative</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Créer une interface qui s'adapte à différentes tailles d'écran tout en maintenant une expérience utilisateur cohérente, notamment en mode présentation.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation des classes utilitaires de TailwindCSS pour créer un design responsive. Implémentation de composants qui s'adaptent intelligemment à l'espace disponible.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Rendu Markdown</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Intégrer un rendu Markdown performant et personnalisable qui s'adapte au style global de l'application et supporte des fonctionnalités avancées.
+              <br/><br/>
+              <strong>Solution :</strong> Utilisation de react-markdown avec des plugins supplémentaires (remark-gfm, rehype-raw) et personnalisation des composants de rendu pour maintenir une cohérence visuelle.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Déploiement et conteneurisation</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              <strong>Défi :</strong> Mettre en place un système de déploiement automatisé et containerisé qui facilite la mise en production et les mises à jour futures.
+              <br/><br/>
+              <strong>Solution :</strong> Configuration d'un environnement Docker avec Caddy comme serveur web, permettant un déploiement simple et sécurisé via des scripts shell automatisés.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fonctionnalités clés -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Composants de présentation</span>
+        </h2>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+                <path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Heading</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Titres formatés en différentes tailles</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Paragraph</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Blocs de texte formatables</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-indigo-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-indigo-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Image</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Images avec légendes</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-indigo-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Link</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Liens hypertextes</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-pink-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-pink-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-pink-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">List</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Listes à puces et numérotées</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-pink-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="3" y1="15" x2="21" y2="15"></line>
+                <line x1="9" y1="3" x2="9" y2="21"></line>
+                <line x1="15" y1="3" x2="15" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Table</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Tableaux formattables</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-green-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-green-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-green-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polyline points="16 18 22 12 16 6"></polyline>
+                <polyline points="8 6 2 12 8 18"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Code</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Blocs de code avec coloration</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-yellow-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-yellow-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-yellow-600/20 to-orange-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                <path d="M9 9l0 .01"></path>
+                <path d="M13 9l0 .01"></path>
+                <path d="M9 13l6 0"></path>
+                <path d="M9 17l6 0"></path>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Markdown</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Support Markdown avec plugins</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-cyan-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-cyan-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-cyan-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="7" height="9"></rect>
+                <rect x="14" y="3" width="7" height="5"></rect>
+                <rect x="14" y="12" width="7" height="9"></rect>
+                <rect x="3" y="16" width="7" height="5"></rect>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Layout</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Mise en page flexible</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            React Slides représente une approche moderne des outils de présentation, en tirant parti des technologies web pour offrir une expérience utilisateur fluide et flexible. Ce projet m'a permis d'approfondir mes connaissances en React et de mettre en pratique des concepts avancés comme les hooks personnalisés, la Context API et les reducers.
+          </p>
+          <p>
+            L'architecture componentisée utilisée dans ce projet offre une grande flexibilité et maintenabilité, permettant d'ajouter facilement de nouvelles fonctionnalités ou de modifier les existantes. L'utilisation de Docker facilite également le déploiement et la mise à jour de l'application.
+          </p>
+          <p>
+            Cette application démontre la puissance des technologies web modernes pour créer des outils interactifs qui peuvent remplacer des logiciels traditionnels, tout en offrant l'avantage d'être accessibles depuis n'importe quel navigateur web, sans installation préalable.
+          </p>
+          <p>
+            Les compétences développées lors de la réalisation de ce projet - notamment la gestion d'état complexe, la création d'interfaces utilisateur adaptatives, et la containerisation d'applications - sont directement applicables à d'autres types de projets web, ce qui en fait une expérience d'apprentissage particulièrement enrichissante.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>

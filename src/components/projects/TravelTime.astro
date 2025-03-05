@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import travel_time from "../../assets/travel-time.webp";
+---
+
+<Card
+  href="travel-time"
+  title="Travel Time"
+  body="Application Qt/C++ permettant de calculer et visualiser le temps de trajet entre différentes villes françaises."
+  tags="C++, Qt, Algorithmes, Floyd-Warshall"
+>
+  <div class="max-w-full">
+    <Image
+      src={travel_time}
+      alt="Application Travel Time"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

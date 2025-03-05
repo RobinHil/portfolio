@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import react_slides from "../../assets/react-slides.webp";
+---
+
+<Card
+  href="react-slides"
+  title="React Slides"
+  body="Application React permettant de créer et afficher des diaporamas interactifs directement dans le navigateur."
+  tags="React, Vite, TailwindCSS, Docker"
+>
+  <div class="max-w-full">
+    <Image
+      src={react_slides}
+      alt="Application React Slides"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>
