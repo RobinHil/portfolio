@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import opengl_demo from "../../assets/opengl-demo.webp";
+---
+
+<Card
+  href="opengl-demo"
+  title="Démonstrateur OpenGL"
+  body="Application de visualisation 3D intégrant différents modèles d'éclairage et de rendu OpenGL."
+  tags="C++, OpenGL, GLSL, ImGui, 3D"
+>
+  <div class="max-w-full">
+    <Image
+      src={opengl_demo}
+      alt="Démonstration du rendu 3D avec OpenGL"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

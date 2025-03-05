@@ -1,0 +1,22 @@
+---
+import Card from "../Card.astro";
+import { Image } from 'astro:assets';
+import petit_prince from "../../assets/le-petit-prince.png";
+---
+
+<Card
+  href="le-petit-prince"
+  title="Le Petit Prince"
+  body="Application mobile Ionic/Angular pour faciliter la communication entre les écoles maternelles et les parents d'élèves."
+  tags="Angular, Ionic, TypeScript, PWA"
+>
+  <div class="max-w-full">
+    <Image
+      src={petit_prince}
+      alt="Application mobile Le Petit Prince"
+      class="w-full h-auto object-cover border border-zinc-800"
+      width={600}
+      height={400}
+    />
+  </div>
+</Card>

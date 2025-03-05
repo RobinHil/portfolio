@@ -1,0 +1,568 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackButton from "../components/BackButton.astro";
+import ProjectCarousel from "../components/ProjectCarousel.astro";
+
+// Données pour le carrousel
+const slides = [
+  {
+    imagePath: "/le-petit-prince/1.png",
+    alt: "Page de connexion de l'application",
+    title: "Authentification sécurisée",
+    description: "Interface de connexion minimaliste avec fonctionnalité de mémorisation des identifiants pour une expérience utilisateur fluide."
+  },
+  {
+    imagePath: "/le-petit-prince/2.png",
+    alt: "Tutoriel intégré",
+    title: "Guide d'utilisation",
+    description: "Tutoriel explicatif permettant aux nouveaux utilisateurs de découvrir les fonctionnalités de l'application."
+  },
+  {
+    imagePath: "/le-petit-prince/3.png",
+    alt: "Page d'accueil avec articles favoris",
+    title: "Accueil personnalisé",
+    description: "Dashboard principal présentant les articles marqués comme favoris par l'utilisateur pour un accès rapide aux informations importantes."
+  },
+  {
+    imagePath: "/le-petit-prince/4.png",
+    alt: "Liste des articles",
+    title: "Flux d'actualités",
+    description: "Liste complète des articles avec système de recherche et possibilité de marquer des articles en favoris."
+  },
+  {
+    imagePath: "/le-petit-prince/5.png",
+    alt: "Galerie d'images",
+    title: "Galeries photos",
+    description: "Visualisation des albums photos publiés par l'école."
+  },
+  {
+    imagePath: "/le-petit-prince/6.png",
+    alt: "Album photo avec diaporama",
+    title: "Albums photos",
+    description: "Détails d'un album avec diaporama pour une meilleure immersion ainsi que les informations concernant l'album."
+  },
+  {
+    imagePath: "/le-petit-prince/7.png",
+    alt: "Calendrier des événements",
+    title: "Agenda interactif",
+    description: "Calendrier présentant les événements à venir organisés par l'école, avec informations détaillées sur chaque événement."
+  },
+  {
+    imagePath: "/le-petit-prince/8.png",
+    alt: "Informations de contact",
+    title: "Coordonnées de l'établissement",
+    description: "Page regroupant toutes les informations nécessaires pour contacter l'école (adresse, téléphone, email)."
+  }
+  
+];
+---
+
+<Layout title="Le Petit Prince - Robin HILAIRE">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 md:py-12 antialiased">
+    <div class="my-4 sm:my-6 md:my-8"></div>
+
+    <!-- En-tête avec effet de dégradé -->
+    <div class="relative mb-6 sm:mb-8 md:mb-10">
+      <div class="relative">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-white mb-2 sm:mb-3">
+          <span class="block sm:inline">Application</span> <span class="text-gradient block sm:inline">Le Petit Prince</span>
+        </h1>
+        <p class="text-zinc-400 text-xs sm:text-sm md:text-base max-w-2xl">
+          Une application mobile développée avec Ionic et Angular pour améliorer la communication entre les écoles maternelles et les parents d'élèves.
+        </p>
+      </div>
+    </div>
+
+    <!-- Utilisation du composant carrousel -->
+    <ProjectCarousel slides={slides} id="le-petit-prince-carousel" />
+    
+    <!-- Liens et badges -->
+    <div class="bg-zinc-900/60 border border-zinc-800/60 rounded-lg sm:rounded-xl p-3 sm:p-4 mb-8 sm:mb-10 md:mb-12 backdrop-blur-sm">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
+        <!-- Lien GitHub avec effet hover -->
+        <a 
+          href="https://github.com/RobinHil/le-petit-prince" 
+          target="_blank" 
+          class="w-full sm:w-auto flex items-center justify-center sm:justify-start gap-2 px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-zinc-800 to-zinc-900 hover:from-purple-600 hover:to-blue-600 text-white rounded-md sm:rounded-lg transition-all duration-300 shadow-md hover:shadow-purple-500/20 group text-xs sm:text-sm md:text-base"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover:scale-110 sm:w-5 sm:h-5 md:w-6 md:h-6">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          <span>Voir sur GitHub</span>
+        </a>
+        
+        <!-- Tags avec design amélioré -->
+        <div class="w-full sm:w-auto flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-0">
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-blue-600/20 to-blue-600/10 rounded-full border border-blue-700/30">Angular</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-purple-600/20 to-purple-600/10 rounded-full border border-purple-700/30">Ionic</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-indigo-600/20 to-indigo-600/10 rounded-full border border-indigo-700/30">TypeScript</span>
+          <span class="px-2 sm:px-3 py-1 text-xs font-medium text-white bg-gradient-to-r from-pink-600/20 to-pink-600/10 rounded-full border border-pink-700/30">PWA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu principal avec design amélioré -->
+    <div class="space-y-6 sm:space-y-8 md:space-y-12 text-white">
+      <!-- Présentation du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">01</span>
+          <span>Présentation du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify">
+          "Le Petit Prince" est une application mobile développée avec Ionic (Standalone), TypeScript et Angular, conçue pour faciliter la communication entre les écoles maternelles et les parents d'élèves. Cette plateforme intuitive permet aux établissements de partager facilement des informations importantes, des actualités et des événements avec les familles.
+        </p>
+        
+        <div class="mt-6 sm:mt-7 md:mt-8 bg-zinc-900/70 border border-zinc-800/70 rounded-lg p-3 sm:p-4 md:p-5">
+          <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Fonctionnalités principales</h3>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm md:text-base">
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Authentification sécurisée avec mémorisation de session</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Flux d'actualités avec système de recherche et favoris</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Galeries photos avec diaporama interactif</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Calendrier des événements à venir</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Coordonnées de contact de l'établissement</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Tutoriel intégré pour les nouveaux utilisateurs</span>
+            </li>
+            <li class="flex items-start gap-1.5 sm:gap-2">
+              <svg class="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-0.5 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span class="text-zinc-300">Progressive Web App (PWA) pour installation sur mobile</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Technologies utilisées -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">02</span>
+          <span>Technologies utilisées</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de cette application a nécessité l'utilisation de plusieurs technologies modernes pour offrir une expérience utilisateur optimale sur mobile tout en garantissant des performances élevées et une maintenance facilitée.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16.5 9.4l-9-5.19M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/>
+                  <path d="M3.27 6.96L12 12.01l8.73-5.05"/>
+                  <path d="M12 22.08V12"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Angular (Standalone Components)</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Utilisation des composants standalone d'Angular pour créer une architecture modulaire et légère, facilitant la maintenance et optimisant les performances. Cette approche moderne permet de réduire la taille du bundle final.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Ionic Framework</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Framework UI cross-platform permettant de développer une application native-like avec des composants optimisés pour les appareils mobiles. Ionic offre une expérience utilisateur fluide et responsive sur toutes les plateformes.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">TypeScript</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Langage fortement typé qui améliore la robustesse du code, facilite la détection d'erreurs en amont et permet une meilleure structuration des données de l'application, rendant le code plus maintenable.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                  <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                  <path d="M2 2l7.586 7.586"/>
+                  <circle cx="11" cy="11" r="2"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Progressive Web App</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Implémentation des Service Workers et du manifeste d'application pour permettre l'installation sur les appareils mobiles, offrir des fonctionnalités hors ligne et améliorer les performances de chargement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Défis techniques -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">03</span>
+          <span>Défis techniques</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          Le développement de cette application a présenté plusieurs défis techniques qu'il a fallu surmonter pour offrir une solution robuste et performante.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <h3 class="text-lg sm:text-xl font-bold mb-4 sm:mb-5 relative text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">Défis rencontrés et solutions apportées</h3>
+          
+          <div class="relative grid grid-cols-1 gap-4 sm:gap-5">
+            <!-- Défi 1 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">1</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Gestion de données asynchrones</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Un des défis majeurs a été la gestion des requêtes API asynchrones et la mise en cache des données pour une expérience offline. J'ai implémenté des stratégies de cache avec Service Workers et utilisé les Observables RxJS pour gérer efficacement les flux de données.</p>
+              </div>
+            </div>
+            
+            <!-- Défi 2 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">2</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Performances et taille de l'application</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">L'optimisation des performances était cruciale pour assurer une expérience fluide sur tous les appareils. J'ai utilisé les composants Standalone d'Angular pour réduire la taille du bundle et implémenté le lazy loading pour charger les modules à la demande, améliorant significativement les temps de chargement.</p>
+              </div>
+            </div>
+            
+            <!-- Défi 3 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">3</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Gestion du stockage local</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">La fonctionnalité de favoris et la mémorisation des sessions utilisateurs ont nécessité une gestion robuste du stockage local. J'ai créé un service de gestion de favoris et d'authentification utilisant le localStorage avec une gestion sécurisée des informations sensibles.</p>
+              </div>
+            </div>
+            
+            <!-- Défi 4 -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 flex gap-3">
+              <div class="flex-shrink-0 w-8 h-8 bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-400">4</div>
+              <div>
+                <h4 class="font-bold text-white text-sm sm:text-base">Expérience utilisateur cohérente</h4>
+                <p class="text-zinc-400 text-[10px] sm:text-xs mt-1">Créer une UX intuitive et accessible aux utilisateurs non-techniciens était essentiel. J'ai implémenté un tutoriel interactif pour guider les nouveaux utilisateurs et conçu une interface épurée avec des retours visuels et haptiques adaptés aux appareils mobiles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture du projet -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">04</span>
+          <span>Architecture du projet</span>
+        </h2>
+        <p class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify mb-4 sm:mb-5 md:mb-6">
+          L'application a été structurée selon une architecture modulaire orientée composants, suivant les meilleures pratiques d'Angular et d'Ionic pour garantir maintenabilité et évolutivité.
+        </p>
+        
+        <!-- Diagramme d'architecture stylisé -->
+        <div class="relative mb-6 sm:mb-7 md:mb-8 bg-zinc-950 p-4 sm:p-5 md:p-6 rounded-lg border border-zinc-800/70 overflow-hidden">
+          <div class="absolute -bottom-10 -right-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-purple-600/20 rounded-full blur-3xl"></div>
+          <div class="absolute -top-10 -left-10 w-32 sm:w-48 md:w-56 h-32 sm:h-48 md:h-56 bg-blue-600/20 rounded-full blur-3xl"></div>
+          
+          <div class="relative grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+            <!-- Présentation -->
+            <div class="md:col-span-1 flex flex-col">
+              <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 mb-3 sm:mb-4 text-center">
+                <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Presentation Layer</h4>
+                <p class="text-[10px] sm:text-xs text-zinc-400">Composants Angular, pages Ionic, UI/UX</p>
+              </div>
+              <div class="flex-grow flex items-center justify-center py-2 sm:py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M17 7l-5 5-5-5"/>
+                  <path d="M17 13l-5 5-5-5"/>
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Services -->
+            <div class="md:col-span-1 flex justify-center">
+              <div class="w-full bg-gradient-to-r from-purple-600/20 to-blue-600/20 p-3 sm:p-4 rounded-lg border border-purple-600/30 text-center shadow-lg shadow-purple-900/5">
+                <h4 class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400 mb-2 text-sm sm:text-base">Services Layer</h4>
+                <ul class="text-[10px] sm:text-xs text-zinc-300 space-y-1.5 sm:space-y-2">
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Credentials Service</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Favorites Service</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Toast Service</li>
+                  <li class="bg-zinc-900/50 py-1 px-2 rounded">Data Fetching</li>
+                </ul>
+              </div>
+            </div>
+            
+            <!-- Data -->
+            <div class="md:col-span-1 flex flex-col">
+              <div class="flex-grow flex items-center justify-center py-2 sm:py-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-zinc-600" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M7 7l5-5 5 5"/>
+                  <path d="M7 13l5-5 5 5"/>
+                </svg>
+              </div>
+              <div class="bg-gradient-to-r from-blue-900/30 to-purple-900/30 p-3 sm:p-4 rounded-lg border border-indigo-800/30 mt-3 sm:mt-4 text-center">
+                <h4 class="font-bold text-white mb-1 text-sm sm:text-base">Data Layer</h4>
+                <p class="text-[10px] sm:text-xs text-zinc-400">LocalStorage, API Calls, Service Workers</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Composants du projet -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-blue-600/30 transition-all duration-300 hover:shadow-md hover:shadow-purple-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-blue-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <path d="M9 3v18"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-blue">Layout et Navigation</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Système de navigation par onglets avec structure modulaire. Chaque section de l'application (Articles, Images, Accueil, Dates, Contacts) est chargée de manière paresseuse pour optimiser les performances.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-purple-600/30 transition-all duration-300 hover:shadow-md hover:shadow-blue-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-purple-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-purple">Authentification</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Gestion sécurisée des identifiants et des sessions utilisateurs avec possibilité de mémorisation des informations de connexion. Système modal pour assurer une connexion avant l'accès aux fonctionnalités.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-indigo-600/30 transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-indigo-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                  <line x1="6" y1="6" x2="6" y2="6"/>
+                  <line x1="6" y1="18" x2="6" y2="18"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-indigo">Gestion des Favoris</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Service dédié pour la gestion des articles favoris avec stockage local et synchronisation entre les différentes vues de l'application. Interface intuitive avec icônes d'étoiles pour ajouter/retirer des favoris.
+            </p>
+          </div>
+          
+          <div class="group bg-gradient-to-br from-zinc-900 to-zinc-950 p-3 sm:p-4 md:p-5 rounded-lg border border-zinc-800/50 hover:border-pink-600/30 transition-all duration-300 hover:shadow-md hover:shadow-pink-900/10">
+            <div class="mb-2 sm:mb-3 flex items-center">
+              <div class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full bg-pink-600/20 flex items-center justify-center mr-2 sm:mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-4 md:w-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4"/>
+                  <path d="M12 8h.01"/>
+                </svg>
+              </div>
+              <h3 class="text-base sm:text-lg font-semibold text-gradient-pink">Tutoriel Interactif</h3>
+            </div>
+            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+              Module de tutoriel avec diaporama interactif pour guider les nouveaux utilisateurs. Fonction "Ne plus afficher" avec stockage de préférence par utilisateur pour ne pas gêner l'expérience des utilisateurs réguliers.
+            </p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Compétences développées -->
+      <section class="bg-zinc-900/40 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-zinc-900/60 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 md:mb-6 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">05</span>
+          <span>Compétences développées</span>
+        </h2>
+        
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 md:gap-4">
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                <path d="M9 14l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Gestion d'état</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Architecture des services et observables RxJS</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                <path d="M12 8v8"/>
+                <path d="M8 12h8"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Composants Angular</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Architecture standalone et optimisation</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-indigo-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-indigo-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-indigo-600/20 to-blue-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 9a3 3 0 0 1 0-6h9a3 3 0 0 1 0 6H2z"/>
+                <path d="M13 15a3 3 0 0 1 0-6h9a3 3 0 0 1 0 6h-9z"/>
+                <path d="M2 21a3 3 0 0 1 0-6h9a3 3 0 0 1 0 6H2z"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Ui Mobile</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Ionic Framework et composants natifs</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-purple-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-purple-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-purple-600/20 to-indigo-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2v4"/>
+                <path d="M12 18v4"/>
+                <path d="M4.93 4.93l2.83 2.83"/>
+                <path d="M16.24 16.24l2.83 2.83"/>
+                <path d="M2 12h4"/>
+                <path d="M18 12h4"/>
+                <path d="M4.93 19.07l2.83-2.83"/>
+                <path d="M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">Optimisation</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Performance et bundle size</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-pink-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-pink-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-pink-600/20 to-purple-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">UX Design</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Expérience utilisateur et accessibilité</p>
+          </div>
+          
+          <div class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-lg border border-zinc-800 hover:border-blue-500/30 p-3 sm:p-4 flex flex-col items-center justify-center text-center transition-all duration-300 hover:shadow-md hover:shadow-blue-900/5 hover:-translate-y-1">
+            <div class="bg-gradient-to-br from-blue-600/20 to-pink-600/20 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl mb-2 sm:mb-3 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+              </svg>
+            </div>
+            <h3 class="text-white font-medium text-xs sm:text-sm mb-1">PWA</h3>
+            <p class="text-zinc-500 text-[10px] sm:text-xs">Service Workers et expérience offline</p>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Conclusion -->
+      <section class="bg-gradient-to-br from-purple-900/10 via-zinc-900/40 to-blue-900/10 border border-zinc-800/50 rounded-lg sm:rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-900/20 hover:via-zinc-900/50 hover:to-blue-900/20 hover:border-zinc-700/50 hover:shadow-md hover:shadow-purple-900/5">
+        <h2 class="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4 inline-flex items-center gap-2">
+          <span class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center text-white text-[10px] sm:text-xs">06</span>
+          <span>Conclusion</span>
+        </h2>
+        <div class="text-zinc-300 text-xs sm:text-sm md:text-base leading-relaxed text-justify space-y-3 sm:space-y-4">
+          <p>
+            Le développement de l'application "Le Petit Prince" a constitué une expérience enrichissante qui m'a permis d'approfondir mes compétences en développement mobile avec les technologies Angular et Ionic tout en relevant des défis techniques concrets.
+          </p>
+          <p>
+            Ce projet illustre parfaitement l'importance d'une architecture bien pensée et de bonnes pratiques de développement pour créer une application performante, maintenable et offrant une expérience utilisateur de qualité, même avec des contraintes techniques fortes comme la nécessité de fonctionnement hors ligne.
+          </p>
+          <p>
+            Les compétences acquises lors de ce développement - notamment en matière de gestion d'état, d'optimisation des performances et d'implémentation PWA - sont directement transférables à d'autres projets d'applications mobiles et web, et constituent un atout précieux dans un monde où l'expérience utilisateur mobile est devenue primordiale.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="flex justify-center mt-8 sm:mt-10 md:mt-12 mb-6 sm:mb-8">
+      <BackButton />
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .text-gradient {
+    background-image: linear-gradient(45deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  
+  .text-gradient-blue {
+    background-image: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-purple {
+    background-image: linear-gradient(135deg, #a855f7, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-indigo {
+    background-image: linear-gradient(135deg, #818cf8, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .text-gradient-pink {
+    background-image: linear-gradient(135deg, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+</style>
