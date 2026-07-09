@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// Compte admin unique (mot de passe hashé via nuxt-auth-utils)
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  // Tags de la stack technique, stockés en JSON (tableau de chaînes)
+  tags        String   @default("[]")
+  repoUrl     String
+  demoUrl     String?
+  imageUrl    String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Education {
+  id          Int     @id @default(autoincrement())
+  title       String
+  institution String
+  period      String
+  description String?
+  order       Int     @default(0)
+}
+
+model Experience {
+  id          Int    @id @default(autoincrement())
+  role        String
+  company     String
+  period      String
+  description String
+  order       Int    @default(0)
+}
+
+// type: "hard" | "soft" | "language" (pas d'enum en SQLite)
+// category: catégorie pour les hard skills (Système, Réseau, Sécurité, Dev…)
+// detail: niveau pour les langues (ex: "Natif", "C2")
+model Skill {
+  id       Int     @id @default(autoincrement())
+  name     String
+  type     String
+  category String?
+  icon     String  @default("")
+  detail   String?
+  order    Int     @default(0)
+}
+
+model Interest {
+  id    Int    @id @default(autoincrement())
+  label String
+  icon  String @default("")
+  order Int    @default(0)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// Singleton (id = 1) : identité + liens de contact, éditables depuis l'admin
+model Profile {
+  id       Int    @id @default(1)
+  fullName String
+  title    String
+  intro    String
+  email    String
+  linkedin String
+  github   String
+  location String @default("")
+}

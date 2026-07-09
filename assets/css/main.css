@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-term-bg text-term-text font-mono antialiased;
+  }
+
+  ::selection {
+    @apply bg-term-green text-term-bg;
+  }
+
+  /* Focus visible sur tous les éléments interactifs */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-term-green;
+  }
+}
+
+@layer components {
+  /* Lien style terminal */
+  .term-link {
+    @apply text-term-green underline decoration-term-green/40 underline-offset-4 hover:decoration-term-green transition;
+  }
+
+  /* Bouton principal */
+  .term-btn {
+    @apply inline-flex items-center gap-2 border border-term-green/60 bg-term-green/10 px-4 py-2.5 text-term-green
+      hover:bg-term-green/20 hover:border-term-green transition rounded-sm;
+  }
+
+  /* Champ de formulaire */
+  .term-input {
+    @apply w-full rounded-sm border border-term-border bg-term-panel px-3 py-2.5 text-term-text
+      placeholder:text-term-dim/60 focus:border-term-green/70 focus:outline-none;
+    /* ≥16px pour éviter le zoom automatique sur iOS */
+    font-size: 16px;
+  }
+
+  .term-label {
+    @apply mb-1.5 block text-sm text-term-dim;
+  }
+}
+
+/* Overlay CRT/scanlines - subtil, désactivé si l'utilisateur préfère moins d'animations */
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.14) 0px,
+      rgba(0, 0, 0, 0.14) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 10, 2, 0.35) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
