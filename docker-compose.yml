@@ -6,8 +6,9 @@ services:
       NODE_ENV: production
       NITRO_HOST: 0.0.0.0
       NITRO_PORT: "3000"
-      # Fichier SQLite persisté dans le volume ci-dessous
+      # Fichier SQLite et images uploadées persistés dans le volume ci-dessous
       DATABASE_URL: file:/data/portfolio.db
+      NUXT_UPLOADS_DIR: /data/uploads
       NUXT_SESSION_PASSWORD: ${NUXT_SESSION_PASSWORD:?Définissez NUXT_SESSION_PASSWORD dans .env (32 caractères minimum)}
       NUXT_ADMIN_EMAIL: ${NUXT_ADMIN_EMAIL:-admin@example.com}
       NUXT_ADMIN_PASSWORD: ${NUXT_ADMIN_PASSWORD:-ChangeMe!42}

@@ -11,7 +11,7 @@
         :key="project.id"
         class="term-card group relative flex flex-col overflow-hidden transition hover:border-term-green/60"
       >
-        <NuxtImg
+        <ProjectImage
           :src="project.imageUrl"
           :alt="UI.projects.screenshotAlt(project.title)"
           width="600"
@@ -43,7 +43,7 @@
           </ul>
 
           <div class="relative z-10 flex flex-wrap items-center gap-4 text-sm">
-            <a :href="project.repoUrl" target="_blank" rel="noopener" class="term-link inline-flex items-center gap-1.5">
+            <a v-if="project.repoUrl" :href="project.repoUrl" target="_blank" rel="noopener" class="term-link inline-flex items-center gap-1.5">
               <Github class="h-4 w-4" aria-hidden="true" />
               {{ UI.projects.repo }}
             </a>

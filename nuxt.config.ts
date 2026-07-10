@@ -85,6 +85,15 @@ export default defineNuxtConfig({
         rateLimiter: { tokensPerInterval: 3, interval: 60000, throwError: true },
       },
     },
+    '/api/uploads': {
+      security: {
+        // Upload d'images admin : autorise des corps multipart jusqu'à ~40 Mo
+        requestSizeLimiter: {
+          maxRequestSizeInBytes: 40_000_000,
+          maxUploadFileRequestInBytes: 40_000_000,
+        },
+      },
+    },
     '/admin/**': { robots: false },
   },
 

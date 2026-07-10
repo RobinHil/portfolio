@@ -22,9 +22,12 @@ model Project {
   description String
   // Tags de la stack technique, stockés en JSON (tableau de chaînes)
   tags        String   @default("[]")
-  repoUrl     String
+  repoUrl     String?
   demoUrl     String?
+  // Image de couverture : URL Unsplash ou chemin /uploads/… (upload admin)
   imageUrl    String
+  // Galerie : tableau JSON d'URLs/chemins, affichée en carrousel dans le détail
+  gallery     String   @default("[]")
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

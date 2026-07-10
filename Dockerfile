@@ -26,6 +26,9 @@ WORKDIR /app
 # Serveur Nuxt/Nitro autonome
 COPY --from=build /app/.output ./.output
 
+# Images de seed (importées dans le volume d'uploads au premier démarrage)
+COPY --from=build /app/seed ./seed
+
 # Prisma CLI (+ schéma et migrations) pour appliquer les migrations au démarrage.
 # Installation minimale dédiée : le serveur Nitro est autonome, seul le CLI manque.
 COPY --from=build /app/prisma ./prisma

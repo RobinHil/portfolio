@@ -1,7 +1,17 @@
+import { copyFile } from 'node:fs/promises'
+import { join } from 'node:path'
+import { ensureUploadsDir } from '../utils/uploads'
+
 /**
  * Au démarrage du serveur :
  *  - crée le compte admin s'il n'existe aucun utilisateur (depuis les variables d'env)
- *  - insère le contenu placeholder si la base est vide
+ *  - insère le contenu de démonstration si la base est vide
+ *
+ * ─── Personnaliser les images des projets de démo ───
+ * Déposez vos fichiers (jpg/png/webp/gif/avif) dans `seed/images/` puis référencez
+ * leur nom dans SEED_PROJECTS ci-dessous (champs `image` et `gallery`), AVANT le
+ * premier démarrage. Ils seront importés automatiquement dans le stockage d'uploads
+ * (même mécanique que l'upload admin). Une URL https (ex: Unsplash) est aussi acceptée.
  */
 export default defineNitroPlugin(async () => {
   const config = useRuntimeConfig()
@@ -156,52 +166,103 @@ async function seedContent() {
     ],
   })
 
-  await prisma.project.createMany({
-    data: [
-      {
-        title: 'Homelab supervisé et auto-hébergé',
-        description:
-          'Infrastructure personnelle complète sous Proxmox : services auto-hébergés (Nextcloud, Vaultwarden, Gitea) '
-          + 'derrière un reverse proxy, VLAN dédiés, sauvegardes chiffrées automatisées et supervision Zabbix/Grafana avec alerting.',
-        tags: JSON.stringify(['Proxmox', 'Docker', 'Ansible', 'Zabbix', 'Grafana', 'WireGuard']),
-        repoUrl: 'https://github.com/jdupont-placeholder/homelab',
-        demoUrl: null,
-        imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop',
-        order: 0,
-      },
-      {
-        title: 'NetProbe - scanner réseau en Python',
-        description:
-          'Outil en ligne de commande pour cartographier un réseau local : découverte d\'hôtes, scan de ports multi-threadé, '
-          + 'détection de services et export des résultats en JSON/HTML. Pensé pour les audits internes et les TP réseau.',
-        tags: JSON.stringify(['Python', 'Scapy', 'CLI', 'Réseau']),
-        repoUrl: 'https://github.com/jdupont-placeholder/netprobe',
-        demoUrl: null,
-        imageUrl: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=1200&auto=format&fit=crop',
-        order: 1,
-      },
-      {
-        title: 'SOC maison avec Wazuh',
-        description:
-          'Déploiement d\'un mini-SOC : agents Wazuh sur l\'ensemble du homelab, règles de détection personnalisées, '
-          + 'tableaux de bord Kibana et playbooks de réponse aux incidents documentés. Simulation d\'attaques pour valider la détection.',
-        tags: JSON.stringify(['Wazuh', 'Elastic', 'SIEM', 'Détection', 'Blue Team']),
-        repoUrl: 'https://github.com/jdupont-placeholder/soc-wazuh',
-        demoUrl: 'https://demo.example.com/soc',
-        imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1200&auto=format&fit=crop',
-        order: 2,
-      },
-      {
-        title: 'Hardening automatisé de serveurs Debian',
-        description:
-          'Collection de rôles Ansible appliquant les recommandations ANSSI/CIS sur des serveurs Debian : SSH, pare-feu nftables, '
-          + 'auditd, fail2ban, mises à jour automatiques. Rapport de conformité généré après chaque exécution.',
-        tags: JSON.stringify(['Ansible', 'Debian', 'ANSSI', 'nftables', 'Conformité']),
-        repoUrl: 'https://github.com/jdupont-placeholder/debian-hardening',
-        demoUrl: null,
-        imageUrl: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=1200&auto=format&fit=crop',
-        order: 3,
-      },
-    ],
-  })
+  const projectsData = []
+  for (const p of SEED_PROJECTS) {
+    projectsData.push({
+      title: p.title,
+      description: p.description,
+      tags: JSON.stringify(p.tags),
+      repoUrl: p.repoUrl,
+      demoUrl: p.demoUrl,
+      imageUrl: await resolveSeedImage(p.image) ?? '/images/og.png',
+      gallery: JSON.stringify(
+        (await Promise.all(p.gallery.map(resolveSeedImage))).filter((u): u is string => !!u),
+      ),
+      order: p.order,
+    })
+  }
+  await prisma.project.createMany({ data: projectsData })
+}
+
+/* ----------------------------------------------------------------
+ * Projets de démonstration.
+ * `image` / `gallery` : nom d'un fichier de `seed/images/` (recommandé)
+ * ou URL https complète. `repoUrl` / `demoUrl` : URL ou null.
+ * ---------------------------------------------------------------- */
+const SEED_PROJECTS = [
+  {
+    title: 'Homelab supervisé et auto-hébergé',
+    description:
+      'Infrastructure personnelle complète sous Proxmox : services auto-hébergés (Nextcloud, Vaultwarden, Gitea) '
+      + 'derrière un reverse proxy, VLAN dédiés, sauvegardes chiffrées automatisées et supervision Zabbix/Grafana avec alerting.',
+    tags: ['Proxmox', 'Docker', 'Ansible', 'Zabbix', 'Grafana', 'WireGuard'],
+    repoUrl: 'https://github.com/jdupont-placeholder/homelab',
+    demoUrl: null,
+    image: 'homelab.jpg',
+    gallery: ['homelab-rack.jpg', 'homelab-grafana.jpg'],
+    order: 0,
+  },
+  {
+    title: 'NetProbe - scanner réseau en Python',
+    description:
+      'Outil en ligne de commande pour cartographier un réseau local : découverte d\'hôtes, scan de ports multi-threadé, '
+      + 'détection de services et export des résultats en JSON/HTML. Pensé pour les audits internes et les TP réseau.',
+    tags: ['Python', 'Scapy', 'CLI', 'Réseau'],
+    repoUrl: 'https://github.com/jdupont-placeholder/netprobe',
+    demoUrl: null,
+    image: 'netprobe.jpg',
+    gallery: [],
+    order: 1,
+  },
+  {
+    title: 'SOC maison avec Wazuh',
+    description:
+      'Déploiement d\'un mini-SOC : agents Wazuh sur l\'ensemble du homelab, règles de détection personnalisées, '
+      + 'tableaux de bord Kibana et playbooks de réponse aux incidents documentés. Simulation d\'attaques pour valider la détection.',
+    tags: ['Wazuh', 'Elastic', 'SIEM', 'Détection', 'Blue Team'],
+    repoUrl: 'https://github.com/jdupont-placeholder/soc-wazuh',
+    demoUrl: 'https://demo.example.com/soc',
+    image: 'soc.jpg',
+    gallery: ['soc-dashboard.jpg', 'soc-alertes.jpg'],
+    order: 2,
+  },
+  {
+    title: 'Hardening automatisé de serveurs Debian',
+    description:
+      'Collection de rôles Ansible appliquant les recommandations ANSSI/CIS sur des serveurs Debian : SSH, pare-feu nftables, '
+      + 'auditd, fail2ban, mises à jour automatiques. Rapport de conformité généré après chaque exécution.',
+    tags: ['Ansible', 'Debian', 'ANSSI', 'nftables', 'Conformité'],
+    repoUrl: 'https://github.com/jdupont-placeholder/debian-hardening',
+    demoUrl: null,
+    image: 'hardening.jpg',
+    gallery: [],
+    order: 3,
+  },
+]
+
+/**
+ * Résout une référence d'image du seed :
+ *  - URL https → renvoyée telle quelle
+ *  - nom de fichier → copié depuis seed/images/ vers le stockage d'uploads,
+ *    renvoie le chemin public /uploads/seed-<nom> (null si le fichier manque)
+ */
+async function resolveSeedImage(ref: string): Promise<string | null> {
+  if (/^https:\/\//.test(ref)) return ref
+
+  const match = ref.toLowerCase().match(/^(.+)\.(jpg|jpeg|png|webp|gif|avif)$/)
+  if (!match) {
+    console.warn(`[seed] Image ignorée (extension non supportée) : ${ref}`)
+    return null
+  }
+  const base = match[1]!.replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const destName = `seed-${base}.${match[2]}`
+
+  try {
+    const dir = await ensureUploadsDir()
+    await copyFile(join(process.cwd(), 'seed/images', ref), join(dir, destName))
+    return `/uploads/${destName}`
+  } catch {
+    console.warn(`[seed] Image introuvable dans seed/images/ : ${ref}`)
+    return null
+  }
 }

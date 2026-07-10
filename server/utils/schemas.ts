@@ -14,16 +14,26 @@ export const loginSchema = z.object({
   password: z.string().min(1).max(200),
 })
 
+// URL optionnelle : chaîne vide / null / absent → null
+const optionalUrl = z
+  .union([z.string().trim().url().max(300), z.literal(''), z.null()])
+  .optional()
+  .transform(v => (v ? v : null))
+
+// Chemin d'image accepté : URL https (Unsplash…), fichier local /images/… ou upload /uploads/…
+const imagePath = z.string().trim().min(1).max(500).refine(
+  v => /^https:\/\//.test(v) || /^\/(images|uploads)\//.test(v),
+  { message: 'Image invalide : URL https ou chemin /uploads/… attendu' },
+)
+
 export const projectSchema = z.object({
   title: z.string().trim().min(1).max(200),
   description: z.string().trim().min(1).max(5000),
   tags: z.array(z.string().trim().min(1).max(50)).max(30).default([]),
-  repoUrl: z.string().trim().url().max(300),
-  demoUrl: z
-    .union([z.string().trim().url().max(300), z.literal(''), z.null()])
-    .optional()
-    .transform(v => (v ? v : null)),
-  imageUrl: z.string().trim().min(1).max(500),
+  repoUrl: optionalUrl,
+  demoUrl: optionalUrl,
+  imageUrl: imagePath,
+  gallery: z.array(imagePath).max(20).default([]),
   order: z.coerce.number().int().min(0).max(9999).default(0),
 })
 

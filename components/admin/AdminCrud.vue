@@ -35,6 +35,52 @@
         >
           <option v-for="opt in field.options" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
+
+        <!-- Image unique : URL (Unsplash…) ou upload direct -->
+        <div v-else-if="field.type === 'image'">
+          <div class="flex flex-col gap-2 sm:flex-row">
+            <input
+              :id="`field-${field.key}`"
+              v-model="form[field.key]"
+              type="text"
+              :required="field.required"
+              placeholder="https://images.unsplash.com/… ou /uploads/…"
+              class="adm-input flex-1"
+            >
+            <button type="button" class="adm-btn shrink-0 justify-center" :disabled="uploading" @click="pickFiles(field.key, false)">
+              <Upload class="h-4 w-4" aria-hidden="true" />
+              {{ uploading ? 'Envoi…' : 'Uploader une image' }}
+            </button>
+          </div>
+          <img
+            v-if="form[field.key]"
+            :src="form[field.key]"
+            alt="Aperçu de l'image sélectionnée"
+            class="mt-2 h-24 w-40 rounded-md border border-slate-200 object-cover dark:border-slate-600"
+          >
+        </div>
+
+        <!-- Galerie : upload multiple + réorganisation simple -->
+        <div v-else-if="field.type === 'gallery'">
+          <ul v-if="form[field.key]?.length" class="mb-3 flex flex-wrap gap-3">
+            <li v-for="(url, i) in form[field.key]" :key="`${url}-${i}`" class="relative">
+              <img :src="url" :alt="`Photo ${i + 1} de la galerie`" class="h-20 w-32 rounded-md border border-slate-200 object-cover dark:border-slate-600">
+              <button
+                type="button"
+                class="absolute -right-2 -top-2 rounded-full border border-slate-300 bg-white p-1 text-slate-600 shadow-sm hover:bg-red-50 hover:text-red-600 dark:border-slate-500 dark:bg-slate-700 dark:text-slate-200"
+                :aria-label="`Retirer la photo ${i + 1}`"
+                @click="form[field.key].splice(i, 1)"
+              >
+                <X class="h-3.5 w-3.5" aria-hidden="true" />
+              </button>
+            </li>
+          </ul>
+          <button type="button" class="adm-btn" :disabled="uploading" @click="pickFiles(field.key, true)">
+            <Upload class="h-4 w-4" aria-hidden="true" />
+            {{ uploading ? 'Envoi…' : 'Ajouter des photos' }}
+          </button>
+        </div>
+
         <input
           v-else
           :id="`field-${field.key}`"
@@ -46,6 +92,16 @@
         >
         <p v-if="field.hint" class="mt-1 text-xs text-slate-500 dark:text-slate-400">{{ field.hint }}</p>
       </div>
+
+      <!-- Sélecteur de fichiers partagé par les champs image/galerie -->
+      <input
+        ref="fileInput"
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif,image/avif"
+        class="hidden"
+        :multiple="filePickMultiple"
+        @change="onFilesPicked"
+      >
 
       <p v-if="error" class="text-sm text-red-600 dark:text-red-400" role="alert">{{ error }}</p>
 
@@ -91,12 +147,12 @@
 </template>
 
 <script setup lang="ts">
-import { Check, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+import { Check, Pencil, Plus, Trash2, Upload, X } from 'lucide-vue-next'
 
 export type CrudField = {
   key: string
   label: string
-  type: 'text' | 'textarea' | 'number' | 'select' | 'tags' | 'url' | 'email'
+  type: 'text' | 'textarea' | 'number' | 'select' | 'tags' | 'url' | 'email' | 'image' | 'gallery'
   required?: boolean
   options?: { value: string, label: string }[]
   placeholder?: string
@@ -130,11 +186,45 @@ function resetForm(item?: any) {
     const value = item?.[field.key]
     if (field.type === 'tags') {
       form[field.key] = Array.isArray(value) ? value.join(', ') : ''
+    } else if (field.type === 'gallery') {
+      form[field.key] = Array.isArray(value) ? [...value] : []
     } else if (field.type === 'number') {
       form[field.key] = value ?? 0
     } else {
       form[field.key] = value ?? (field.type === 'select' ? field.options?.[0]?.value ?? '' : '')
     }
+  }
+}
+
+/* --- Upload d'images (champs image/gallery) --- */
+
+const { upload, uploading } = useImageUpload()
+const fileInput = ref<HTMLInputElement>()
+const filePickTarget = ref('')
+const filePickMultiple = ref(false)
+
+function pickFiles(key: string, multiple: boolean) {
+  filePickTarget.value = key
+  filePickMultiple.value = multiple
+  // laisse le temps à :multiple de se propager avant d'ouvrir le sélecteur
+  nextTick(() => fileInput.value?.click())
+}
+
+async function onFilesPicked(e: Event) {
+  const input = e.target as HTMLInputElement
+  if (!input.files?.length) return
+  error.value = ''
+  try {
+    const urls = await upload(input.files)
+    if (filePickMultiple.value) {
+      form[filePickTarget.value] = [...(form[filePickTarget.value] ?? []), ...urls]
+    } else {
+      form[filePickTarget.value] = urls[0] ?? ''
+    }
+  } catch (err: any) {
+    error.value = err?.data?.statusMessage || 'Échec de l\'upload - vérifiez le format (jpg, png, webp, gif, avif) et la taille (max 8 Mo).'
+  } finally {
+    input.value = ''
   }
 }
 

@@ -6,7 +6,7 @@
       @click="focusInput"
     >
       <!-- Sortie du terminal : annoncée progressivement aux lecteurs d'écran -->
-      <div role="log" aria-live="polite" class="space-y-0.5 break-words text-[13px] sm:text-sm">
+      <div role="log" aria-live="polite" class="space-y-0.5 break-words text-[11px] leading-relaxed sm:text-sm">
         <div v-for="(line, i) in lines" :key="i" :class="lineClass(line)">
           <template v-if="line.kind === 'in'">
             <span class="whitespace-pre text-term-green">{{ prompt + ' ' }}</span>
@@ -24,9 +24,10 @@
 
       <!-- Ligne de saisie : curseur bloc positionné au point d'insertion, juste après le "$ ".
            Sur mobile l'input garde une taille calculée de 16px (sinon iOS zoome au focus) mais
-           est réduit visuellement à 13px via scale(0.8125) + compensation de largeur ; le
-           curseur en unité ch (13px) correspond alors exactement au texte affiché. -->
-      <form v-if="booted" class="mt-1 flex items-center text-[13px] sm:text-sm" @submit.prevent="submit">
+           est réduit visuellement à 11px via scale(0.6875) + compensation de largeur ; le
+           curseur en unité ch (11px) correspond alors exactement au texte affiché.
+           Pas d'outline de focus ni de tap highlight : le curseur bloc est l'indicateur. -->
+      <form v-if="booted" class="mt-1 flex items-center text-[11px] sm:text-sm" @submit.prevent="submit">
         <label for="terminal-input" class="sr-only">Ligne de commande du terminal interactif</label>
         <span class="shrink-0 whitespace-pre text-term-green">{{ prompt + ' ' }}</span>
         <span class="relative min-w-0 flex-1 overflow-hidden">
@@ -35,7 +36,7 @@
             ref="inputEl"
             v-model="input"
             type="text"
-            class="w-full border-none bg-transparent p-0 text-inherit text-term-text caret-transparent outline-none focus:ring-0 max-sm:w-[123.077%] max-sm:origin-left max-sm:scale-[0.8125] max-sm:text-[16px]"
+            class="w-full border-none bg-transparent p-0 text-inherit text-term-text caret-transparent outline-none [-webkit-tap-highlight-color:transparent] focus:outline-none focus:ring-0 focus-visible:outline-none max-sm:w-[145.455%] max-sm:origin-left max-sm:scale-[0.6875] max-sm:text-[16px]"
             autocomplete="off"
             autocapitalize="none"
             autocorrect="off"

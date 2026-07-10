@@ -10,18 +10,25 @@ export function getIdParam(event: H3Event): number {
   return id
 }
 
-// Les tags des projets sont stockés en JSON (colonne texte SQLite)
-export function serializeProject<T extends { tags: string[] }>(data: T) {
-  return { ...data, tags: JSON.stringify(data.tags) }
-}
-
-export function deserializeProject<T extends { tags: string }>(project: T) {
-  let tags: string[] = []
+function parseJsonStringArray(raw: string): string[] {
   try {
-    const parsed = JSON.parse(project.tags)
-    if (Array.isArray(parsed)) tags = parsed.filter(t => typeof t === 'string')
+    const parsed = JSON.parse(raw)
+    if (Array.isArray(parsed)) return parsed.filter(t => typeof t === 'string')
   } catch {
     // colonne corrompue → tableau vide
   }
-  return { ...project, tags }
+  return []
+}
+
+// Les tags et la galerie des projets sont stockés en JSON (colonnes texte SQLite)
+export function serializeProject<T extends { tags: string[], gallery: string[] }>(data: T) {
+  return { ...data, tags: JSON.stringify(data.tags), gallery: JSON.stringify(data.gallery) }
+}
+
+export function deserializeProject<T extends { tags: string, gallery: string }>(project: T) {
+  return {
+    ...project,
+    tags: parseJsonStringArray(project.tags),
+    gallery: parseJsonStringArray(project.gallery),
+  }
 }
