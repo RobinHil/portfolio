@@ -17,8 +17,9 @@
           </NuxtLink>
         </li>
         <li>
-          <a href="/api/cv" class="ml-2 rounded-sm border border-term-green/50 px-3 py-2 text-sm text-term-green transition hover:bg-term-green/15">
-            cv.pdf ↓
+          <a href="/api/cv" class="ml-2 inline-flex items-center gap-1.5 rounded-sm border border-term-green/50 px-3 py-2 text-sm text-term-green transition hover:bg-term-green/15">
+            <Download class="h-4 w-4" aria-hidden="true" />
+            cv.pdf
           </a>
         </li>
       </ul>
@@ -32,17 +33,13 @@
         :aria-label="menuOpen ? UI.nav.closeMenu : UI.nav.openMenu"
         @click="menuOpen = !menuOpen"
       >
-        <svg v-if="!menuOpen" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg v-else class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
-        </svg>
+        <X v-if="menuOpen" class="h-5 w-5" aria-hidden="true" />
+        <Menu v-else class="h-5 w-5" aria-hidden="true" />
       </button>
     </nav>
 
     <!-- Menu mobile -->
-    <div v-show="menuOpen" id="mobile-menu" class="border-t border-term-border md:hidden">
+    <div v-show="menuOpen" id="mobile-menu" class="border-t border-term-border bg-term-panel md:hidden">
       <ul class="space-y-1 px-4 py-3">
         <li v-for="link in links" :key="link.to">
           <NuxtLink
@@ -55,8 +52,9 @@
           </NuxtLink>
         </li>
         <li>
-          <a href="/api/cv" class="block rounded-sm border border-term-green/50 px-3 py-3 text-term-green" @click="menuOpen = false">
-            cv.pdf ↓ <span class="text-term-dim">- télécharger mon CV</span>
+          <a href="/api/cv" class="flex items-center gap-2 rounded-sm border border-term-green/50 px-3 py-3 text-term-green" @click="menuOpen = false">
+            <Download class="h-4 w-4" aria-hidden="true" />
+            cv.pdf <span class="text-term-dim">- télécharger mon CV</span>
           </a>
         </li>
       </ul>
@@ -65,6 +63,8 @@
 </template>
 
 <script setup lang="ts">
+import { Download, Menu, X } from 'lucide-vue-next'
+
 const menuOpen = ref(false)
 
 const links = [

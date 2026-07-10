@@ -35,10 +35,13 @@
           v-for="card in cards"
           :key="card.to"
           :to="card.to"
-          class="group rounded-md border border-term-border bg-term-panel p-5 transition hover:border-term-green/60 hover:bg-term-green/5"
+          class="term-card group p-5 transition hover:border-term-green/60 hover:bg-term-panel2"
         >
           <p class="mb-1 text-sm text-term-dim">$ cd {{ card.cmd }}</p>
-          <p class="font-bold text-term-green">{{ card.title }} <span aria-hidden="true" class="inline-block transition group-hover:translate-x-1">→</span></p>
+          <p class="flex items-center gap-1.5 font-bold text-term-green">
+            {{ card.title }}
+            <ArrowRight class="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
+          </p>
           <p class="mt-2 text-sm text-term-dim">{{ card.text }}</p>
         </NuxtLink>
       </div>
@@ -47,6 +50,8 @@
 </template>
 
 <script setup lang="ts">
+import { ArrowRight } from 'lucide-vue-next'
+
 const { data: about } = await useFetch('/api/about')
 
 usePageSeo({

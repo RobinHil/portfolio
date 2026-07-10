@@ -12,15 +12,21 @@
         <TermWindow v-if="profile" title="liens.txt">
           <ul class="space-y-4 text-sm">
             <li>
-              <p class="text-term-dim"># Email</p>
+              <p class="mb-1 flex items-center gap-2 text-term-dim">
+                <Mail class="h-4 w-4 text-term-green/70" aria-hidden="true" /># Email
+              </p>
               <a :href="`mailto:${profile.email}`" class="term-link break-all">{{ profile.email }}</a>
             </li>
             <li>
-              <p class="text-term-dim"># LinkedIn</p>
+              <p class="mb-1 flex items-center gap-2 text-term-dim">
+                <Linkedin class="h-4 w-4 text-term-green/70" aria-hidden="true" /># LinkedIn
+              </p>
               <a :href="profile.linkedin" target="_blank" rel="noopener" class="term-link break-all">{{ profile.linkedin }}</a>
             </li>
             <li>
-              <p class="text-term-dim"># GitHub</p>
+              <p class="mb-1 flex items-center gap-2 text-term-dim">
+                <Github class="h-4 w-4 text-term-green/70" aria-hidden="true" /># GitHub
+              </p>
               <a :href="profile.github" target="_blank" rel="noopener" class="term-link break-all">{{ profile.github }}</a>
             </li>
           </ul>
@@ -49,7 +55,7 @@
             <p v-else-if="status === 'error'" class="text-sm text-term-red" role="alert">{{ errorMessage }}</p>
 
             <button type="submit" class="term-btn w-full justify-center sm:w-auto" :disabled="status === 'sending'">
-              <span aria-hidden="true"></span>
+              <Send class="h-4 w-4" aria-hidden="true" />
               {{ status === 'sending' ? UI.contact.sending : UI.contact.send }}
             </button>
           </form>
@@ -60,6 +66,8 @@
 </template>
 
 <script setup lang="ts">
+import { Github, Linkedin, Mail, Send } from 'lucide-vue-next'
+
 const { data: profile } = await useFetch('/api/profile')
 
 usePageSeo({

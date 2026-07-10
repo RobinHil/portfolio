@@ -4,7 +4,7 @@
     entity-label="une compétence"
     endpoint="/api/skills"
     :fields="fields"
-    :item-title="s => `${s.icon ? s.icon + ' ' : ''}${s.name}`"
+    :item-title="s => s.name"
     :item-meta="s => metaFor(s)"
   />
 </template>
@@ -39,10 +39,9 @@ const fields: CrudField[] = [
     label: 'Catégorie',
     type: 'text',
     placeholder: 'ex: Système, Réseau, Sécurité, Dev & Outils',
-    hint: 'Uniquement pour les compétences techniques - les compétences de même catégorie sont regroupées.',
+    hint: 'Uniquement pour les compétences techniques - les compétences de même catégorie sont regroupées, avec une icône de catégorie automatique.',
     showIf: form => form.type === 'hard',
   },
-  { key: 'icon', label: 'Icône (emoji)', type: 'text', placeholder: 'ex: FR', hint: 'Un emoji illustratif, ou un drapeau pour les langues.' },
   {
     key: 'detail',
     label: 'Niveau',

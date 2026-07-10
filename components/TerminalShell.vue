@@ -6,11 +6,11 @@
       @click="focusInput"
     >
       <!-- Sortie du terminal : annoncée progressivement aux lecteurs d'écran -->
-      <div role="log" aria-live="polite" class="space-y-0.5 break-words text-[15px] sm:text-sm">
+      <div role="log" aria-live="polite" class="space-y-0.5 break-words text-[13px] sm:text-sm">
         <div v-for="(line, i) in lines" :key="i" :class="lineClass(line)">
           <template v-if="line.kind === 'in'">
-            <span class="text-term-green">{{ prompt }}</span>
-            <span class="text-term-text"> {{ line.text }}</span>
+            <span class="whitespace-pre text-term-green">{{ prompt + ' ' }}</span>
+            <span class="whitespace-pre-wrap text-term-text">{{ line.text }}</span>
           </template>
           <template v-else-if="line.kind === 'link'">
             <span class="text-term-dim">→ </span>
@@ -22,25 +22,40 @@
         </div>
       </div>
 
-      <!-- Ligne de saisie -->
-      <form v-if="booted" class="mt-1 flex items-center gap-2" @submit.prevent="submit">
+      <!-- Ligne de saisie : curseur bloc positionné au point d'insertion, juste après le "$ ".
+           Sur mobile l'input garde une taille calculée de 16px (sinon iOS zoome au focus) mais
+           est réduit visuellement à 13px via scale(0.8125) + compensation de largeur ; le
+           curseur en unité ch (13px) correspond alors exactement au texte affiché. -->
+      <form v-if="booted" class="mt-1 flex items-center text-[13px] sm:text-sm" @submit.prevent="submit">
         <label for="terminal-input" class="sr-only">Ligne de commande du terminal interactif</label>
-        <span class="shrink-0 text-[15px] text-term-green sm:text-sm">{{ prompt }}</span>
-        <input
-          id="terminal-input"
-          ref="inputEl"
-          v-model="input"
-          type="text"
-          class="min-w-0 flex-1 border-none bg-transparent p-0 text-term-text caret-term-green outline-none focus:ring-0"
-          style="font-size: 16px"
-          autocomplete="off"
-          autocapitalize="none"
-          autocorrect="off"
-          spellcheck="false"
-          enterkeyhint="send"
-          @keydown="onKeydown"
-        >
-        <span class="hidden h-4 w-2 animate-blink bg-term-green sm:inline-block" aria-hidden="true" />
+        <span class="shrink-0 whitespace-pre text-term-green">{{ prompt + ' ' }}</span>
+        <span class="relative min-w-0 flex-1 overflow-hidden">
+          <input
+            id="terminal-input"
+            ref="inputEl"
+            v-model="input"
+            type="text"
+            class="w-full border-none bg-transparent p-0 text-inherit text-term-text caret-transparent outline-none focus:ring-0 max-sm:w-[123.077%] max-sm:origin-left max-sm:scale-[0.8125] max-sm:text-[16px]"
+            autocomplete="off"
+            autocapitalize="none"
+            autocorrect="off"
+            spellcheck="false"
+            enterkeyhint="send"
+            @keydown="onKeydown"
+            @input="syncCursor"
+            @keyup="syncCursor"
+            @click="syncCursor"
+            @select="syncCursor"
+            @focus="focused = true; syncCursor()"
+            @blur="focused = false"
+          >
+          <span
+            aria-hidden="true"
+            class="pointer-events-none absolute top-1/2 h-[1.2em] w-[0.62em] -translate-y-1/2 bg-term-green"
+            :class="focused ? 'animate-blink' : 'opacity-40'"
+            :style="{ left: `${cursorPos}ch` }"
+          />
+        </span>
       </form>
       <button
         v-else
@@ -82,6 +97,18 @@ const history = ref<string[]>([])
 const historyIndex = ref(-1)
 const scroller = ref<HTMLElement>()
 const inputEl = ref<HTMLInputElement>()
+const focused = ref(false)
+// Position du curseur bloc, en nombre de caractères après le prompt (police monospace → unité ch)
+const cursorPos = ref(0)
+
+function syncCursor() {
+  nextTick(() => {
+    cursorPos.value = inputEl.value?.selectionStart ?? input.value.length
+  })
+}
+
+// Couvre les modifications programmatiques (historique ↑/↓, autocomplétion, reset après Entrée)
+watch(input, syncCursor)
 
 const prompt = 'visiteur@portfolio:~$'
 

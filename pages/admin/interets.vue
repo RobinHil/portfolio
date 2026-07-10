@@ -4,7 +4,7 @@
     entity-label="un centre d'intérêt"
     endpoint="/api/interests"
     :fields="fields"
-    :item-title="i => `${i.icon ? i.icon + ' ' : ''}${i.label}`"
+    :item-title="i => i.label"
   />
 </template>
 
@@ -16,7 +16,6 @@ useSeoMeta({ title: 'Centres d\'intérêt - Administration', robots: 'noindex' }
 
 const fields: CrudField[] = [
   { key: 'label', label: 'Libellé', type: 'text', required: true },
-  { key: 'icon', label: 'Icône (emoji)', type: 'text', placeholder: 'ex: ' },
   { key: 'order', label: 'Ordre d\'affichage', type: 'number' },
 ]
 </script>

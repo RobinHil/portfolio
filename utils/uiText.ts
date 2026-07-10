@@ -48,6 +48,7 @@ export const UI = {
     h1: 'Projets',
     repo: 'Code source',
     demo: 'Démo',
+    details: 'détails',
     stack: 'Stack technique',
     screenshotAlt: (title: string) => `Illustration du projet ${title}`,
   },

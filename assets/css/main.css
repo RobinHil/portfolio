@@ -9,6 +9,9 @@
 
   body {
     @apply bg-term-bg text-term-text font-mono antialiased;
+    /* Halo vert très discret en haut de page : donne de la profondeur au fond noir */
+    background-image: radial-gradient(1100px 600px at 50% -12%, #101c12 0%, #070b08 65%);
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -27,20 +30,19 @@
 }
 
 @layer components {
-  /* Lien style terminal */
+  /* --- Site public (thème terminal) --- */
+
   .term-link {
     @apply text-term-green underline decoration-term-green/40 underline-offset-4 hover:decoration-term-green transition;
   }
 
-  /* Bouton principal */
   .term-btn {
     @apply inline-flex items-center gap-2 border border-term-green/60 bg-term-green/10 px-4 py-2.5 text-term-green
       hover:bg-term-green/20 hover:border-term-green transition rounded-sm;
   }
 
-  /* Champ de formulaire */
   .term-input {
-    @apply w-full rounded-sm border border-term-border bg-term-panel px-3 py-2.5 text-term-text
+    @apply w-full rounded-sm border border-term-border bg-black/40 px-3 py-2.5 text-term-text
       placeholder:text-term-dim/60 focus:border-term-green/70 focus:outline-none;
     /* ≥16px pour éviter le zoom automatique sur iOS */
     font-size: 16px;
@@ -48,6 +50,42 @@
 
   .term-label {
     @apply mb-1.5 block text-sm text-term-dim;
+  }
+
+  /* Carte de contenu : panneau clair sur fond sombre */
+  .term-card {
+    @apply rounded-md border border-term-border bg-term-panel shadow-[0_6px_24px_rgba(0,0,0,0.45)];
+  }
+
+  /* --- Interface admin (clair/sombre selon prefers-color-scheme) --- */
+
+  .adm-card {
+    @apply rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-800;
+  }
+
+  .adm-input {
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900
+      focus:border-blue-500 focus:outline-none
+      dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100;
+  }
+
+  .adm-label {
+    @apply mb-1 block text-sm font-medium text-slate-700 dark:text-slate-300;
+  }
+
+  .adm-btn-primary {
+    @apply inline-flex items-center gap-1.5 rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white
+      hover:bg-blue-500 disabled:opacity-50;
+  }
+
+  .adm-btn {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-700
+      hover:bg-slate-50 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700;
+  }
+
+  .adm-btn-danger {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-red-200 px-3 py-1.5 text-sm text-red-600
+      hover:bg-red-50 dark:border-red-900 dark:text-red-400 dark:hover:bg-red-950;
   }
 }
 
@@ -60,20 +98,20 @@
   background:
     repeating-linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0.14) 0px,
-      rgba(0, 0, 0, 0.14) 1px,
+      rgba(0, 0, 0, 0.12) 0px,
+      rgba(0, 0, 0, 0.12) 1px,
       transparent 1px,
       transparent 3px
     );
   mix-blend-mode: multiply;
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
 .crt-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 60%, rgba(0, 10, 2, 0.35) 100%);
+  background: radial-gradient(ellipse at center, transparent 62%, rgba(0, 10, 2, 0.32) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,18 +2,19 @@
   <div>
     <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
       <h1 class="text-xl font-bold">{{ title }}</h1>
-      <button v-if="!formOpen" type="button" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500" @click="openCreate">
-        + Ajouter
+      <button v-if="!formOpen" type="button" class="adm-btn-primary" @click="openCreate">
+        <Plus class="h-4 w-4" aria-hidden="true" />
+        Ajouter
       </button>
     </div>
 
     <!-- Formulaire création / édition -->
-    <form v-if="formOpen" class="mb-8 space-y-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm" @submit.prevent="save">
+    <form v-if="formOpen" class="adm-card mb-8 space-y-4 p-5" @submit.prevent="save">
       <h2 class="font-semibold">{{ editingId ? `Modifier ${entityLabel}` : `Ajouter ${entityLabel}` }}</h2>
 
       <div v-for="field in visibleFields" :key="field.key">
-        <label :for="`field-${field.key}`" class="mb-1 block text-sm font-medium text-slate-700">
-          {{ field.label }}<span v-if="field.required" class="text-red-600"> *</span>
+        <label :for="`field-${field.key}`" class="adm-label">
+          {{ field.label }}<span v-if="field.required" class="text-red-600 dark:text-red-400"> *</span>
         </label>
 
         <textarea
@@ -23,14 +24,14 @@
           rows="4"
           :required="field.required"
           :placeholder="field.placeholder"
-          class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          class="adm-input"
         />
         <select
           v-else-if="field.type === 'select'"
           :id="`field-${field.key}`"
           v-model="form[field.key]"
           :required="field.required"
-          class="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          class="adm-input"
         >
           <option v-for="opt in field.options" :key="opt.value" :value="opt.value">{{ opt.label }}</option>
         </select>
@@ -41,43 +42,46 @@
           :type="field.type === 'number' ? 'number' : field.type === 'url' ? 'url' : 'text'"
           :required="field.required"
           :placeholder="field.placeholder"
-          class="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+          class="adm-input"
         >
-        <p v-if="field.hint" class="mt-1 text-xs text-slate-500">{{ field.hint }}</p>
+        <p v-if="field.hint" class="mt-1 text-xs text-slate-500 dark:text-slate-400">{{ field.hint }}</p>
       </div>
 
-      <p v-if="error" class="text-sm text-red-600" role="alert">{{ error }}</p>
+      <p v-if="error" class="text-sm text-red-600 dark:text-red-400" role="alert">{{ error }}</p>
 
       <div class="flex gap-3">
-        <button type="submit" :disabled="saving" class="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-50">
+        <button type="submit" :disabled="saving" class="adm-btn-primary">
+          <Check class="h-4 w-4" aria-hidden="true" />
           {{ saving ? 'Enregistrement…' : 'Enregistrer' }}
         </button>
-        <button type="button" class="rounded-md border border-slate-300 px-4 py-2 text-sm hover:bg-slate-50" @click="closeForm">
+        <button type="button" class="adm-btn" @click="closeForm">
           Annuler
         </button>
       </div>
     </form>
 
     <!-- Liste -->
-    <p v-if="pending" class="text-sm text-slate-500">Chargement…</p>
-    <p v-else-if="items.length === 0" class="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+    <p v-if="pending" class="text-sm text-slate-500 dark:text-slate-400">Chargement…</p>
+    <p v-else-if="items.length === 0" class="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-400">
       Aucun élément pour le moment.
     </p>
     <ul v-else class="space-y-3">
       <li
         v-for="item in items"
         :key="item.id"
-        class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
+        class="adm-card flex flex-wrap items-center justify-between gap-3 p-4"
       >
         <div class="min-w-0">
           <p class="font-medium">{{ itemTitle(item) }}</p>
-          <p v-if="itemMeta" class="truncate text-sm text-slate-500">{{ itemMeta(item) }}</p>
+          <p v-if="itemMeta" class="truncate text-sm text-slate-500 dark:text-slate-400">{{ itemMeta(item) }}</p>
         </div>
         <div class="flex shrink-0 gap-2">
-          <button type="button" class="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50" @click="openEdit(item)">
+          <button type="button" class="adm-btn" @click="openEdit(item)">
+            <Pencil class="h-4 w-4" aria-hidden="true" />
             Modifier
           </button>
-          <button type="button" class="rounded-md border border-red-200 px-3 py-1.5 text-sm text-red-600 hover:bg-red-50" @click="remove(item)">
+          <button type="button" class="adm-btn-danger" @click="remove(item)">
+            <Trash2 class="h-4 w-4" aria-hidden="true" />
             Supprimer
           </button>
         </div>
@@ -87,6 +91,8 @@
 </template>
 
 <script setup lang="ts">
+import { Check, Pencil, Plus, Trash2 } from 'lucide-vue-next'
+
 export type CrudField = {
   key: string
   label: string

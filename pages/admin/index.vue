@@ -7,16 +7,19 @@
         v-for="stat in stats"
         :key="stat.to"
         :to="stat.to"
-        class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition hover:border-blue-300"
+        class="adm-card p-5 transition hover:border-blue-300 dark:hover:border-blue-600"
       >
-        <p class="text-3xl font-bold text-blue-600">{{ stat.count }}</p>
-        <p class="mt-1 text-sm text-slate-600">{{ stat.label }}</p>
+        <p class="text-3xl font-bold text-blue-600 dark:text-blue-400">{{ stat.count }}</p>
+        <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">{{ stat.label }}</p>
       </NuxtLink>
     </div>
 
-    <div class="mt-8 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
-      <h2 class="mb-2 font-semibold">Rappels</h2>
-      <ul class="list-inside list-disc space-y-1 text-sm text-slate-600">
+    <div class="adm-card mt-8 p-5">
+      <h2 class="mb-2 flex items-center gap-2 font-semibold">
+        <Info class="h-4 w-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+        Rappels
+      </h2>
+      <ul class="list-inside list-disc space-y-1 text-sm text-slate-600 dark:text-slate-300">
         <li>Les sections des pages sont fixes ; tout leur contenu s'édite ici.</li>
         <li>Le CV PDF est généré automatiquement à partir des données « Profil », « Formation », « Expérience » et « Compétences ».</li>
         <li>Les messages reçus via le formulaire de contact ne déclenchent pas d'email : pensez à consulter la page « Messages ».</li>
@@ -26,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+import { Info } from 'lucide-vue-next'
+
 definePageMeta({ layout: 'admin', middleware: 'admin' })
 useSeoMeta({ title: 'Tableau de bord - Administration', robots: 'noindex' })
 

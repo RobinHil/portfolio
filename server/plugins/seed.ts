@@ -113,46 +113,46 @@ async function seedContent() {
   await prisma.skill.createMany({
     data: [
       // Hard skills - Système
-      { name: 'Linux (Debian, RHEL)', type: 'hard', category: 'Système', icon: '', order: 0 },
-      { name: 'Windows Server / AD', type: 'hard', category: 'Système', icon: '', order: 1 },
-      { name: 'Bash / scripting', type: 'hard', category: 'Système', icon: '', order: 2 },
-      { name: 'Ansible', type: 'hard', category: 'Système', icon: '', order: 3 },
-      { name: 'Proxmox / KVM', type: 'hard', category: 'Système', icon: '', order: 4 },
+      { name: 'Linux (Debian, RHEL)', type: 'hard', category: 'Système', order: 0 },
+      { name: 'Windows Server / AD', type: 'hard', category: 'Système', order: 1 },
+      { name: 'Bash / scripting', type: 'hard', category: 'Système', order: 2 },
+      { name: 'Ansible', type: 'hard', category: 'Système', order: 3 },
+      { name: 'Proxmox / KVM', type: 'hard', category: 'Système', order: 4 },
       // Hard skills - Réseau
-      { name: 'TCP/IP, VLAN, routage', type: 'hard', category: 'Réseau', icon: '', order: 0 },
-      { name: 'pfSense / OPNsense', type: 'hard', category: 'Réseau', icon: '', order: 1 },
-      { name: 'VPN (WireGuard, OpenVPN)', type: 'hard', category: 'Réseau', icon: '', order: 2 },
-      { name: 'DNS / DHCP / PKI', type: 'hard', category: 'Réseau', icon: '', order: 3 },
+      { name: 'TCP/IP, VLAN, routage', type: 'hard', category: 'Réseau', order: 0 },
+      { name: 'pfSense / OPNsense', type: 'hard', category: 'Réseau', order: 1 },
+      { name: 'VPN (WireGuard, OpenVPN)', type: 'hard', category: 'Réseau', order: 2 },
+      { name: 'DNS / DHCP / PKI', type: 'hard', category: 'Réseau', order: 3 },
       // Hard skills - Sécurité
-      { name: 'SIEM (Wazuh, Elastic)', type: 'hard', category: 'Sécurité', icon: '', order: 0 },
-      { name: 'Analyse réseau (Wireshark, Nmap)', type: 'hard', category: 'Sécurité', icon: '', order: 1 },
-      { name: 'Pentest (Burp, Metasploit)', type: 'hard', category: 'Sécurité', icon: '', order: 2 },
-      { name: 'Durcissement (CIS, ANSSI)', type: 'hard', category: 'Sécurité', icon: '', order: 3 },
+      { name: 'SIEM (Wazuh, Elastic)', type: 'hard', category: 'Sécurité', order: 0 },
+      { name: 'Analyse réseau (Wireshark, Nmap)', type: 'hard', category: 'Sécurité', order: 1 },
+      { name: 'Pentest (Burp, Metasploit)', type: 'hard', category: 'Sécurité', order: 2 },
+      { name: 'Durcissement (CIS, ANSSI)', type: 'hard', category: 'Sécurité', order: 3 },
       // Hard skills - Dev & Outils
-      { name: 'Python', type: 'hard', category: 'Dev & Outils', icon: '', order: 0 },
-      { name: 'Docker / Compose', type: 'hard', category: 'Dev & Outils', icon: '', order: 1 },
-      { name: 'Git / CI-CD', type: 'hard', category: 'Dev & Outils', icon: '', order: 2 },
-      { name: 'Supervision (Zabbix, Grafana)', type: 'hard', category: 'Dev & Outils', icon: '', order: 3 },
+      { name: 'Python', type: 'hard', category: 'Dev & Outils', order: 0 },
+      { name: 'Docker / Compose', type: 'hard', category: 'Dev & Outils', order: 1 },
+      { name: 'Git / CI-CD', type: 'hard', category: 'Dev & Outils', order: 2 },
+      { name: 'Supervision (Zabbix, Grafana)', type: 'hard', category: 'Dev & Outils', order: 3 },
       // Soft skills
-      { name: 'Rigueur et sens du détail', type: 'soft', icon: '', order: 0 },
-      { name: 'Esprit d\'analyse', type: 'soft', icon: '', order: 1 },
-      { name: 'Communication et vulgarisation', type: 'soft', icon: '', order: 2 },
-      { name: 'Travail en équipe', type: 'soft', icon: '', order: 3 },
-      { name: 'Sang-froid en gestion d\'incident', type: 'soft', icon: '', order: 4 },
+      { name: 'Rigueur et sens du détail', type: 'soft', order: 0 },
+      { name: 'Esprit d\'analyse', type: 'soft', order: 1 },
+      { name: 'Communication et vulgarisation', type: 'soft', order: 2 },
+      { name: 'Travail en équipe', type: 'soft', order: 3 },
+      { name: 'Sang-froid en gestion d\'incident', type: 'soft', order: 4 },
       // Langues
-      { name: 'Français', type: 'language', icon: 'FR', detail: 'Natif', order: 0 },
-      { name: 'Anglais', type: 'language', icon: 'GB', detail: 'C1 - courant technique', order: 1 },
-      { name: 'Espagnol', type: 'language', icon: 'ES', detail: 'B1', order: 2 },
+      { name: 'Français', type: 'language', detail: 'Natif', order: 0 },
+      { name: 'Anglais', type: 'language', detail: 'C1 - courant technique', order: 1 },
+      { name: 'Espagnol', type: 'language', detail: 'B1', order: 2 },
     ],
   })
 
   await prisma.interest.createMany({
     data: [
-      { label: 'CTF et sécurité offensive (HackTheBox, RootMe)', icon: '', order: 0 },
-      { label: 'Homelab et self-hosting', icon: '', order: 1 },
-      { label: 'Veille technologique et conférences sécurité', icon: '', order: 2 },
-      { label: 'Contribution open source', icon: '', order: 3 },
-      { label: 'Randonnée et trail', icon: '', order: 4 },
+      { label: 'CTF et sécurité offensive (HackTheBox, RootMe)', order: 0 },
+      { label: 'Homelab et self-hosting', order: 1 },
+      { label: 'Veille technologique et conférences sécurité', order: 2 },
+      { label: 'Contribution open source', order: 3 },
+      { label: 'Randonnée et trail', order: 4 },
     ],
   })
 

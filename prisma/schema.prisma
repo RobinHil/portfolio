@@ -50,13 +50,13 @@ model Experience {
 
 // type: "hard" | "soft" | "language" (pas d'enum en SQLite)
 // category: catégorie pour les hard skills (Système, Réseau, Sécurité, Dev…)
+//           - l'icône affichée est déduite de la catégorie côté front
 // detail: niveau pour les langues (ex: "Natif", "C2")
 model Skill {
   id       Int     @id @default(autoincrement())
   name     String
   type     String
   category String?
-  icon     String  @default("")
   detail   String?
   order    Int     @default(0)
 }
@@ -64,7 +64,6 @@ model Skill {
 model Interest {
   id    Int    @id @default(autoincrement())
   label String
-  icon  String @default("")
   order Int    @default(0)
 }
 

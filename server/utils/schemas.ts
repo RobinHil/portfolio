@@ -47,14 +47,12 @@ export const skillSchema = z.object({
   name: z.string().trim().min(1).max(100),
   type: z.enum(['hard', 'soft', 'language']),
   category: emptyToNull,
-  icon: z.string().trim().max(20).default(''),
   detail: emptyToNull,
   order: z.coerce.number().int().min(0).max(9999).default(0),
 })
 
 export const interestSchema = z.object({
   label: z.string().trim().min(1).max(150),
-  icon: z.string().trim().max(20).default(''),
   order: z.coerce.number().int().min(0).max(9999).default(0),
 })
 

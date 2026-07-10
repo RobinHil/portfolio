@@ -17,7 +17,10 @@ FROM node:22-bookworm-slim AS runtime
 ENV NODE_ENV=production
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
-RUN corepack enable
+# openssl : requis par le CLI Prisma (sinon warning au démarrage)
+RUN apt-get update -y && apt-get install -y --no-install-recommends openssl \
+  && rm -rf /var/lib/apt/lists/* \
+  && corepack enable
 WORKDIR /app
 
 # Serveur Nuxt/Nitro autonome
