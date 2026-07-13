@@ -12,8 +12,8 @@
     <section v-if="about?.profile" class="mt-12 sm:mt-16" aria-labelledby="intro-title">
       <SectionHeading id="intro-title" command="cat intro.txt" />
       <div class="grid gap-8 md:grid-cols-[auto,1fr] md:items-center">
-        <NuxtImg
-          src="/images/profile.jpg"
+        <ProjectImage
+          :src="about.profile.photoUrl"
           :alt="UI.about.photoAlt"
           width="160"
           height="160"

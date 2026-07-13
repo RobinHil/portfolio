@@ -74,6 +74,7 @@ export const profileSchema = z.object({
   linkedin: z.string().trim().url().max(300),
   github: z.string().trim().url().max(300),
   location: z.string().trim().max(150).default(''),
+  photoUrl: imagePath.default('/images/profile.jpg'),
 })
 
 export const contactMessageSchema = z.object({

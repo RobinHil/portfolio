@@ -89,4 +89,6 @@ model Profile {
   linkedin String
   github   String
   location String @default("")
+  // Photo de profil : URL https, chemin /images/… (statique) ou /uploads/… (upload admin)
+  photoUrl String @default("/images/profile.jpg")
 }

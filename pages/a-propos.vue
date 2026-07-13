@@ -12,8 +12,8 @@
         </a>
         <p class="mt-2 max-w-sm text-xs text-term-dim">{{ UI.about.downloadCvHint }}</p>
       </div>
-      <NuxtImg
-        src="/images/profile.jpg"
+      <ProjectImage
+        :src="about.profile?.photoUrl ?? '/images/profile.jpg'"
         :alt="UI.about.photoAlt"
         width="112"
         height="112"

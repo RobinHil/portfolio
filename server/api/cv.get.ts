@@ -1,6 +1,7 @@
 import PDFDocument from 'pdfkit'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
+import { getUploadsDir } from '../utils/uploads'
 
 /**
  * Génération du CV en PDF à la volée, à partir des données de la base.
@@ -36,11 +37,29 @@ async function loadData() {
   return { profile, education, experience, skills, interests }
 }
 
-async function loadPhoto(): Promise<Buffer | null> {
-  // dev : public/ à la racine du projet - prod : copié dans .output/public/
+async function loadPhoto(photoUrl: string): Promise<Buffer | null> {
+  if (/^https:\/\//.test(photoUrl)) {
+    try {
+      const res = await fetch(photoUrl)
+      if (res.ok) return Buffer.from(await res.arrayBuffer())
+    } catch {
+      // photo distante inaccessible : pas de photo dans le CV
+    }
+    return null
+  }
+
+  if (photoUrl.startsWith('/uploads/')) {
+    try {
+      return await readFile(join(getUploadsDir(), photoUrl.slice('/uploads/'.length)))
+    } catch {
+      return null
+    }
+  }
+
+  // /images/… : dev = public/ à la racine du projet - prod = copié dans .output/public/
   const candidates = [
-    join(process.cwd(), 'public/images/profile.jpg'),
-    join(process.cwd(), '.output/public/images/profile.jpg'),
+    join(process.cwd(), 'public', photoUrl),
+    join(process.cwd(), '.output/public', photoUrl),
   ]
   for (const path of candidates) {
     try {
@@ -188,7 +207,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 404, statusMessage: 'Profil non initialisé' })
   }
 
-  const photo = await loadPhoto()
+  const photo = await loadPhoto(data.profile.photoUrl)
 
   // Réduit l'échelle jusqu'à tenir sur une seule page A4
   const scales = [1, 0.94, 0.88, 0.82, 0.76, 0.7, 0.64, 0.58, 0.52, 0.46]
