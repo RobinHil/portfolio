@@ -89,7 +89,7 @@
               <Globe class="h-4 w-4 shrink-0 text-term-green/70" aria-hidden="true" />
               <span>{{ lang.name }}</span>
             </span>
-            <span class="rounded-sm border border-term-green/30 bg-term-green/10 px-2 py-0.5 text-xs text-term-green">{{ lang.detail }}</span>
+            <span class="rounded-sm border border-neutral-400/30 bg-neutral-400/10 px-2 py-0.5 text-xs text-neutral-300">{{ lang.detail }}</span>
           </li>
         </ul>
       </section>

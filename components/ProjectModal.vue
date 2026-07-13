@@ -101,7 +101,7 @@
                   <li
                     v-for="tag in project.tags"
                     :key="tag"
-                    class="rounded-sm border border-term-green/30 bg-term-green/10 px-2 py-0.5 text-xs text-term-green"
+                    class="rounded-sm border border-neutral-400/30 bg-neutral-400/10 px-2 py-0.5 text-xs text-neutral-300"
                   >
                     {{ tag }}
                   </li>

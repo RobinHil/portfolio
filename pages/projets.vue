@@ -33,7 +33,7 @@
             <li
               v-for="tag in project.tags.slice(0, 4)"
               :key="tag"
-              class="rounded-sm border border-term-green/30 bg-term-green/5 px-2 py-0.5 text-xs text-term-green"
+              class="rounded-sm border border-neutral-400/30 bg-neutral-400/5 px-2 py-0.5 text-xs text-neutral-300"
             >
               {{ tag }}
             </li>
