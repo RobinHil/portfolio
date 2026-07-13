@@ -16,6 +16,14 @@
             <span class="text-term-dim">→ </span>
             <a :href="line.href" target="_blank" rel="noopener" class="term-link">{{ line.text }}</a>
           </template>
+          <template v-else-if="line.segments">
+            <span
+              v-for="(seg, si) in line.segments"
+              :key="si"
+              class="whitespace-pre-wrap"
+              :class="lineClass(seg)"
+            >{{ seg.text }}</span>
+          </template>
           <template v-else>
             <span class="whitespace-pre-wrap">{{ line.text || ' ' }}</span>
           </template>
@@ -71,10 +79,16 @@
 </template>
 
 <script setup lang="ts">
+type Segment = {
+  kind: 'out' | 'ok' | 'err' | 'accent' | 'dim'
+  text: string
+}
+
 type Line = {
   kind: 'in' | 'out' | 'ok' | 'err' | 'accent' | 'dim' | 'link'
   text: string
   href?: string
+  segments?: Segment[]
 }
 
 type ProfileLike = {
@@ -114,7 +128,7 @@ watch(input, syncCursor)
 const prompt = 'visiteur@portfolio:~$'
 
 const SECTIONS = ['a-propos', 'projets', 'contact', 'competences'] as const
-const COMMANDS = ['help', 'ls', 'cd', 'cat', 'contact', 'whoami', 'clear', 'neofetch', 'date', 'echo', 'sudo']
+const COMMANDS = ['help', 'ls', 'cd', 'cat', 'contact', 'whoami', 'clear', 'fastfetch', 'date', 'echo', 'sudo']
 
 const slug = (props.profile?.fullName ?? 'visiteur').toLowerCase().replace(/\s+/g, '.')
 
@@ -196,7 +210,7 @@ function execute(cmdline: string) {
         { kind: 'out', text: '  cat about.txt     afficher ma présentation' },
         { kind: 'out', text: '  ls skills         lister mes compétences' },
         { kind: 'out', text: '  contact           afficher mes liens (email, LinkedIn, GitHub)' },
-        { kind: 'out', text: '  whoami · neofetch · clear' },
+        { kind: 'out', text: '  whoami · fastfetch · clear' },
         { kind: 'dim', text: 'Astuce : Tab pour compléter, ↑/↓ pour l\'historique.' },
       ])
       break
@@ -225,14 +239,40 @@ function execute(cmdline: string) {
       print({ kind: 'accent', text: `${slug} - ${props.profile?.title ?? ''}` })
       break
 
-    case 'neofetch':
+    case 'fastfetch':
       printAll([
-        { kind: 'accent', text: `        ▄▄▄        ${slug}` },
-        { kind: 'accent', text: '      ▄█▀▀▀█▄      ─────────────────────────' },
-        { kind: 'out', text: `      █ ▀▄▀ █      OS: Portfolio Linux v1.0` },
-        { kind: 'out', text: `      ▀█▄▄▄█▀      Rôle: ${props.profile?.title ?? 'sysadmin'}` },
-        { kind: 'out', text: `        ▀▀▀        Shell: visiteur-sh 5.2` },
-        { kind: 'out', text: `                   Uptime: toujours dispo pour un café` },
+        { kind: 'out', text: '' },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: '   _____      ____  ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'accent', text: slug },
+        ] },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: '  /\\/\\/\\/\\   | "o \\ ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'accent', text: '─────────────────────────' },
+        ] },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: '<|\\/\\/\\/\\/|_/ /___/ ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'out', text: 'OS: Portfolio Linux v1.0' },
+        ] },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: ' |___________/      ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'out', text: `Rôle: ${props.profile?.title ?? 'sysadmin'}` },
+        ] },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: ' |_|_|  /_/_/       ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'out', text: 'Shell: visiteur-sh 5.2' },
+        ] },
+        { kind: 'out', text: '', segments: [
+          { kind: 'out', text: '                    ' },
+          { kind: 'dim', text: '│ ' },
+          { kind: 'out', text: 'Uptime: toujours dispo pour un café' },
+        ] },
+        { kind: 'out', text: '' },
       ])
       break
 
