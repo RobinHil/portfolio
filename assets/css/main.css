@@ -9,8 +9,8 @@
 
   body {
     @apply bg-term-bg text-term-text font-mono antialiased;
-    /* Halo vert très discret en haut de page : donne de la profondeur au fond noir */
-    background-image: radial-gradient(1100px 600px at 50% -12%, #101c12 0%, #070b08 65%);
+    /* Halo gris très discret en haut de page : donne de la profondeur au fond noir */
+    background-image: radial-gradient(1100px 600px at 50% -12%, #161618 0%, #09090b 65%);
     background-attachment: fixed;
   }
 
@@ -111,7 +111,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, transparent 62%, rgba(0, 10, 2, 0.32) 100%);
+  background: radial-gradient(ellipse at center, transparent 62%, rgba(0, 0, 0, 0.32) 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

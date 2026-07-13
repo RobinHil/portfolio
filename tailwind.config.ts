@@ -6,13 +6,13 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         term: {
-          // Fond de page (le plus sombre, légèrement teinté de vert)
-          bg: '#070b08',
+          // Fond de page (le plus sombre, gris neutre)
+          bg: '#09090b',
           // Panneaux / fenêtres : nettement plus clairs que le fond pour détacher les blocs
-          panel: '#101a12',
+          panel: '#131316',
           // Barres de titre, éléments surélevés, hover
-          panel2: '#182619',
-          border: '#2a4030',
+          panel2: '#1c1c20',
+          border: '#2c2c32',
           // Accent "matrix"
           green: '#00ff41',
           greendark: '#00c433',
