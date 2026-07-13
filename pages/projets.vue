@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="mb-2 text-2xl font-bold text-term-green sm:text-3xl">
-      <span class="text-term-dim" aria-hidden="true">~/</span>{{ UI.projects.h1 }}
+    <h1 class="mb-2 text-2xl font-bold text-term-text sm:text-3xl">
+      <span class="text-term-green" aria-hidden="true">~/</span>{{ UI.projects.h1 }}
     </h1>
     <p class="mb-10 text-term-dim">$ ls -la ~/projets --details</p>
 
@@ -21,7 +21,7 @@
           class="h-44 w-full border-b border-term-border object-cover transition group-hover:opacity-90"
         />
         <div class="flex flex-1 flex-col p-5">
-          <h2 class="mb-2 font-bold text-term-green">
+          <h2 class="mb-2 font-bold text-term-text">
             <!-- Bouton "étiré" : toute la carte ouvre le détail, les liens restent cliquables au-dessus -->
             <button type="button" class="text-left after:absolute after:inset-0 after:content-['']" @click="selected = project">
               {{ project.title }}

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="mb-2 text-2xl font-bold text-term-green sm:text-3xl">
-      <span class="text-term-dim" aria-hidden="true">~/</span>{{ UI.contact.h1 }}
+    <h1 class="mb-2 text-2xl font-bold text-term-text sm:text-3xl">
+      <span class="text-term-green" aria-hidden="true">~/</span>{{ UI.contact.h1 }}
     </h1>
     <p class="mb-10 text-term-dim">$ ping -c 1 jean.dupont - réponse garantie sous 48 h</p>
 

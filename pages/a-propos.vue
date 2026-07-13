@@ -2,8 +2,8 @@
   <div v-if="about">
     <div class="mb-10 flex flex-col-reverse justify-between gap-6 sm:flex-row sm:items-start">
       <div>
-        <h1 class="mb-2 text-2xl font-bold text-term-green sm:text-3xl">
-          <span class="text-term-dim" aria-hidden="true">~/</span>{{ UI.about.h1 }}
+        <h1 class="mb-2 text-2xl font-bold text-term-text sm:text-3xl">
+          <span class="text-term-green" aria-hidden="true">~/</span>{{ UI.about.h1 }}
         </h1>
         <p class="mb-5 max-w-2xl text-term-dim">{{ about.profile?.title }}</p>
         <a href="/api/cv" class="term-btn" download>
@@ -55,8 +55,8 @@
       <SectionHeading id="competences-title" command="ls skills/" :comment="UI.about.hardSkills" />
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <TermWindow v-for="cat in skillCategories" :key="cat.name" :title="`skills/${cat.name.toLowerCase()}`">
-          <h3 class="mb-4 flex items-center gap-2.5 font-bold text-term-green">
-            <CategoryIcon :name="cat.name" class="h-5 w-5" />
+          <h3 class="mb-4 flex items-center gap-2.5 font-bold text-term-text">
+            <CategoryIcon :name="cat.name" class="h-5 w-5 text-term-green" />
             {{ cat.name }}
           </h3>
           <ul class="space-y-2.5">

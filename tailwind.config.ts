@@ -16,9 +16,9 @@ export default <Partial<Config>>{
           // Accent "matrix"
           green: '#00ff41',
           greendark: '#00c433',
-          // Texte courant et texte secondaire (contraste AA sur les panneaux)
-          text: '#e3f0e6',
-          dim: '#a9bfad',
+          // Texte courant et texte secondaire (gris neutres, sans teinte verte)
+          text: '#e8e8ea',
+          dim: '#9c9ca3',
           amber: '#ffb454',
           red: '#ff6b6b',
           cyan: '#67e8f9',

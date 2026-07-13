@@ -38,7 +38,7 @@
           class="term-card group p-5 transition hover:border-term-green/60 hover:bg-term-panel2"
         >
           <p class="mb-1 text-sm text-term-dim">$ cd {{ card.cmd }}</p>
-          <p class="flex items-center gap-1.5 font-bold text-term-green">
+          <p class="flex items-center gap-1.5 font-bold text-term-text">
             {{ card.title }}
             <ArrowRight class="h-4 w-4 transition group-hover:translate-x-1" aria-hidden="true" />
           </p>

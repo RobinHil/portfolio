@@ -87,7 +87,7 @@
             <div class="space-y-5 p-5 sm:p-6">
               <div>
                 <p class="mb-1 text-sm text-term-dim">$ cat titre.txt</p>
-                <h2 id="project-modal-title" class="text-lg font-bold text-term-green sm:text-xl">{{ project.title }}</h2>
+                <h2 id="project-modal-title" class="text-lg font-bold text-term-text sm:text-xl">{{ project.title }}</h2>
               </div>
 
               <div>
