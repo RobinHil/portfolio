@@ -3,7 +3,7 @@ services:
     build: .
     restart: unless-stopped
     environment:
-      NODE_ENV: production
+      NODE_ENV: development
       NITRO_HOST: 0.0.0.0
       NITRO_PORT: "3000"
       # Fichier SQLite et images uploadées persistés dans le volume ci-dessous
