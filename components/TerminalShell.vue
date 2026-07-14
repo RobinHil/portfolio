@@ -2,30 +2,32 @@
   <TermWindow :title="UI.home.terminalTitle" :padded="false">
     <div
       ref="scroller"
-      class="h-[340px] cursor-text overflow-y-auto p-4 leading-relaxed sm:h-[420px] sm:p-6"
+      class="h-[340px] cursor-text overflow-x-auto overflow-y-auto p-4 leading-relaxed sm:h-[420px] sm:p-6"
       @click="focusInput"
     >
       <!-- Sortie du terminal : annoncée progressivement aux lecteurs d'écran -->
-      <div role="log" aria-live="polite" class="space-y-0.5 break-words text-[11px] leading-relaxed sm:text-sm">
+      <div role="log" aria-live="polite" class="space-y-0.5 text-[11px] leading-relaxed sm:text-sm">
         <div v-for="(line, i) in lines" :key="i" :class="lineClass(line)">
           <template v-if="line.kind === 'in'">
             <span class="whitespace-pre text-term-green">{{ prompt + ' ' }}</span>
-            <span class="whitespace-pre-wrap text-term-text">{{ line.text }}</span>
+            <span class="whitespace-pre-wrap break-words text-term-text">{{ line.text }}</span>
           </template>
           <template v-else-if="line.kind === 'link'">
             <span class="text-term-dim">→ </span>
             <a :href="line.href" target="_blank" rel="noopener" class="term-link">{{ line.text }}</a>
           </template>
           <template v-else-if="line.segments">
+            <!-- Contenu à alignement fixe (art ASCII, colonnes) : ne se retourne jamais à la
+                 ligne, défile horizontalement au besoin plutôt que de casser l'alignement. -->
             <span
               v-for="(seg, si) in line.segments"
               :key="si"
-              class="whitespace-pre-wrap"
+              class="whitespace-pre"
               :class="lineClass(seg)"
             >{{ seg.text }}</span>
           </template>
           <template v-else>
-            <span class="whitespace-pre-wrap">{{ line.text || ' ' }}</span>
+            <span :class="line.noWrap ? 'whitespace-pre' : 'whitespace-pre-wrap break-words'">{{ line.text || ' ' }}</span>
           </template>
         </div>
       </div>
@@ -89,6 +91,8 @@ type Line = {
   text: string
   href?: string
   segments?: Segment[]
+  // Contenu à alignement fixe (colonnes) : ne se retourne jamais à la ligne
+  noWrap?: boolean
 }
 
 type ProfileLike = {
@@ -204,12 +208,12 @@ function execute(cmdline: string) {
     case 'help':
       printAll([
         { kind: 'accent', text: 'Commandes disponibles :' },
-        { kind: 'out', text: '  help              afficher cette aide' },
-        { kind: 'out', text: '  ls                lister les sections du site' },
-        { kind: 'out', text: '  cd <section>      naviguer - ex: cd projets, cd a-propos' },
-        { kind: 'out', text: '  cat about.txt     afficher ma présentation' },
-        { kind: 'out', text: '  ls skills         lister mes compétences' },
-        { kind: 'out', text: '  contact           afficher mes liens (email, LinkedIn, GitHub)' },
+        { kind: 'out', text: '  help              afficher cette aide', noWrap: true },
+        { kind: 'out', text: '  ls                lister les sections du site', noWrap: true },
+        { kind: 'out', text: '  cd <section>      naviguer - ex: cd projets, cd a-propos', noWrap: true },
+        { kind: 'out', text: '  cat about.txt     afficher ma présentation', noWrap: true },
+        { kind: 'out', text: '  ls skills         lister mes compétences', noWrap: true },
+        { kind: 'out', text: '  contact           afficher mes liens (email, LinkedIn, GitHub)', noWrap: true },
         { kind: 'out', text: '  whoami · fastfetch · clear' },
         { kind: 'dim', text: 'Astuce : Tab pour compléter, ↑/↓ pour l\'historique.' },
       ])
