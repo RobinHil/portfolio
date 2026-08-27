@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ----- Étape 1 : build de l'application -----
-FROM node:22-bookworm-slim AS build
+FROM node:24-bookworm-slim AS build
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
 RUN corepack enable
@@ -13,7 +13,7 @@ RUN pnpm exec prisma generate
 RUN pnpm build
 
 # ----- Étape 2 : image de production légère -----
-FROM node:22-bookworm-slim AS runtime
+FROM node:24-bookworm-slim AS runtime
 ENV NODE_ENV=production
 ENV PNPM_HOME=/pnpm
 ENV PATH=$PNPM_HOME:$PATH
