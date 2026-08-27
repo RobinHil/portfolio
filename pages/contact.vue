@@ -3,7 +3,7 @@
     <h1 class="mb-2 text-2xl font-bold text-term-text sm:text-3xl">
       <span class="text-term-green" aria-hidden="true">~/</span>{{ UI.contact.h1 }}
     </h1>
-    <p class="mb-10 text-term-dim">$ ping -c 1 jean.dupont - réponse garantie sous 48 h</p>
+    <p class="mb-10 text-term-dim">{{ UI.contact.subtitle }}</p>
 
     <div class="grid gap-8 lg:grid-cols-[1fr,1.4fr]">
       <!-- Liens directs -->

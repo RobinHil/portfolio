@@ -26,7 +26,7 @@ docker compose up -d --build
 - Site : **http://localhost:8080**
 - Admin : **http://localhost:8080/admin** - connexion par **mot de passe seul** (`NUXT_ADMIN_PASSWORD` du `.env`), il n'y a pas d'identifiant à saisir
 
-Le compte admin et le contenu placeholder sont créés automatiquement au premier démarrage si la base est vide. Le fichier SQLite est persisté dans le volume Docker `sqlite-data`.
+Le compte admin et le contenu du profil sont créés automatiquement au premier démarrage si la base est vide. Le fichier SQLite est persisté dans le volume Docker `sqlite-data`.
 
 ```bash
 docker compose logs -f app    # logs applicatifs
@@ -49,7 +49,7 @@ Commandes utiles :
 ```bash
 pnpm exec prisma studio               # explorer la base
 pnpm exec prisma migrate dev --name x # nouvelle migration après édition du schéma
-node scripts/generate-assets.mjs      # régénérer favicons / image OG / avatar placeholder
+node scripts/generate-assets.mjs      # régénérer favicons et image Open Graph
 pnpm build && node .output/server/index.mjs   # test du build de production
 ```
 
@@ -67,7 +67,7 @@ Voir [.env.example](.env.example) :
 
 Tout le contenu s'édite depuis **/admin** (profil & liens, projets, formation, expérience, compétences/langues, centres d'intérêt, messages reçus). Les sections des pages sont fixes, leur contenu est libre.
 
-- **Photo de profil** : remplacer `public/images/profile.jpg` (image placeholder générée).
+- **Photo de profil** : `public/images/profile.jpg`, versionnée. `generate-assets.mjs` ne la régénère pas.
 - **Textes de l'interface** (libellés fixes) : centralisés dans [utils/uiText.ts](utils/uiText.ts) pour préparer un futur bilingue FR/EN.
 - **CV PDF** : généré à la volée depuis les données admin - rien à maintenir à la main.
 

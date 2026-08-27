@@ -5,10 +5,10 @@ import { ensureUploadsDir } from '../utils/uploads'
 /**
  * Au démarrage du serveur :
  *  - crée le compte admin s'il n'existe aucun utilisateur (depuis les variables d'env)
- *  - insère le contenu de démonstration si la base est vide
+ *  - insère le contenu du profil si la base est vide
  *
- * ─── Personnaliser les images des projets de démo ───
- * Déposez vos fichiers (jpg/png/webp/gif/avif) dans `seed/images/` puis référencez
+ * ─── Images des projets ───
+ * Déposez les fichiers (jpg/png/webp/gif/avif) dans `seed/images/` puis référencez
  * leur nom dans SEED_PROJECTS ci-dessous (champs `image` et `gallery`), AVANT le
  * premier démarrage. Ils seront importés automatiquement dans le stockage d'uploads
  * (même mécanique que l'upload admin). Une URL https (ex: Unsplash) est aussi acceptée.
@@ -50,7 +50,7 @@ export default defineNitroPlugin(async () => {
     const profile = await prisma.profile.findUnique({ where: { id: 1 } })
     if (!profile) {
       await seedContent()
-      console.log('[seed] Contenu placeholder inséré.')
+      console.log('[seed] Contenu du profil inséré.')
     }
   } catch (err) {
     console.error('[seed] Échec de l\'initialisation de la base :', err)
@@ -61,46 +61,52 @@ async function seedContent() {
   await prisma.profile.create({
     data: {
       id: 1,
-      fullName: 'Jean Dupont',
-      title: 'Administrateur Systèmes & Réseaux - Cybersécurité',
+      fullName: 'Robin HILAIRE',
+      title: 'Ingénieur cybersécurité en alternance',
       intro:
-        "Administrateur systèmes passionné par la sécurité informatique, j'aime concevoir des infrastructures fiables, "
-        + "automatiser tout ce qui peut l'être et traquer ce qui cloche dans les logs. "
-        + "Mon terrain de jeu : Linux, les réseaux, la supervision et la sécurité défensive comme offensive.",
-      email: 'contact@example.com',
-      linkedin: 'https://www.linkedin.com/in/jean-dupont-placeholder',
-      github: 'https://github.com/jdupont-placeholder',
-      location: 'Lyon, France',
+        "Je construis des applications web de bout en bout, du schéma de base de données au reverse proxy qui les sert, "
+        + "et j'héberge la plupart moi-même. Ce qui m'intéresse dans la cybersécurité, c'est le concret : durcir ce qu'on "
+        + "vient d'écrire, comprendre par où ça casse, garder un déploiement reproductible. Diplômé d'un BUT Informatique, "
+        + "je poursuis en école d'ingénieur en alternance, majeure cybersécurité.",
+      email: 'hilairerob84@gmail.com',
+      linkedin: 'https://www.linkedin.com/in/hilaire-robin',
+      github: 'https://github.com/RobinHil',
+      location: 'Paris, France',
+      photoUrl: '/images/profile.jpg',
     },
   })
 
+  // TODO Robin : l'alternance en cours (depuis septembre 2025) manque ici - le nom
+  // de l'entreprise n'était sur aucun des documents fournis. À ajouter depuis /admin,
+  // ou ici avant le premier démarrage, avec order: 0 et un décalage des suivants.
   await prisma.experience.createMany({
     data: [
       {
-        role: 'Analyste SOC junior',
-        company: 'CyberGarde SAS',
-        period: '2024 - aujourd\'hui',
+        role: 'Alternant, service technique',
+        company: 'Aix-Marseille Université, Arles',
+        period: 'Octobre 2024 - Juillet 2025',
         description:
-          'Surveillance et qualification des alertes de sécurité (SIEM Wazuh/Elastic). Investigation des incidents, '
-          + 'rédaction de rapports, amélioration continue des règles de détection et participation aux exercices de crise.',
+          "Développement d'une solution de RAG destinée aux étudiants de l'université, alimentée par les cours des "
+          + "enseignants : déploiement d'Ollama et LocalAI sous Docker, indexation dans une base de données vectorielle "
+          + 'et chaîne de requêtes aux modèles construite avec LangChain.',
         order: 0,
       },
       {
-        role: 'Administrateur systèmes et réseaux',
-        company: 'InfraNova',
-        period: '2022 - 2024',
+        role: 'Stagiaire, service technique et médical',
+        company: 'OPALE, Paris 12e',
+        period: 'Avril - Juin 2024',
         description:
-          'Administration d\'un parc de 300 postes et 40 serveurs Linux/Windows. Migration de la virtualisation vers Proxmox, '
-          + 'mise en place de la supervision (Zabbix, Grafana), automatisation des déploiements avec Ansible et durcissement des configurations.',
+          "Mise en place et maintenance, matérielle et logicielle, d'un serveur d'imagerie médicale (PACS). "
+          + 'Conteneurisation Docker des services associés (SSO, journalisation), sécurisation de '
+          + "l'infrastructure par un SSO OpenID Connect, et R&D sur l'architecture déployée pour y intégrer "
+          + 'de nouvelles solutions.',
         order: 1,
       },
       {
-        role: 'Technicien support informatique (alternance)',
-        company: 'Mairie de Villebonne',
-        period: '2020 - 2022',
-        description:
-          'Support utilisateurs niveau 1/2, gestion Active Directory, déploiement de postes, '
-          + 'documentation des procédures et participation à la refonte du réseau (VLAN, Wi-Fi).',
+        role: 'Vacataire, cuisine centrale',
+        company: 'Mairie de Sorgues',
+        period: 'Août 2022 et 2023',
+        description: 'Renfort estival en cuisine centrale municipale, sur deux saisons.',
         order: 2,
       },
     ],
@@ -109,24 +115,24 @@ async function seedContent() {
   await prisma.education.createMany({
     data: [
       {
-        title: 'Master Cybersécurité et administration des systèmes',
-        institution: 'Université Claude Bernard - Lyon',
-        period: '2022 - 2024',
-        description: 'Sécurité des systèmes et réseaux, réponse à incident, cryptographie appliquée, projet de fin d\'études sur la détection d\'intrusion.',
+        title: "Diplôme d'ingénieur en informatique, majeure cybersécurité",
+        institution: 'EPITA',
+        period: '2025 - 2028 (en cours)',
+        description: 'Cycle ingénieur en alternance, spécialisation cybersécurité.',
         order: 0,
       },
       {
-        title: 'Licence professionnelle Administration de systèmes et réseaux',
-        institution: 'IUT de Grenoble',
-        period: '2021 - 2022',
-        description: 'Administration Linux/Windows, réseaux TCP/IP, virtualisation, scripting.',
+        title: 'BUT Informatique',
+        institution: "IUT d'Arles, Aix-Marseille Université",
+        period: '2022 - 2025',
+        description: "Parcours « réalisation d'applications : conception, développement, validation ».",
         order: 1,
       },
       {
-        title: 'BTS Services informatiques aux organisations (SISR)',
-        institution: 'Lycée Gustave Eiffel - Dijon',
-        period: '2019 - 2021',
-        description: null,
+        title: 'Baccalauréat général, mention bien',
+        institution: 'Lycée Frédéric Mistral, Avignon',
+        period: '2022',
+        description: 'Spécialités mathématiques et informatique, option européenne anglais.',
         order: 2,
       },
     ],
@@ -134,47 +140,57 @@ async function seedContent() {
 
   await prisma.skill.createMany({
     data: [
-      // Hard skills - Système
-      { name: 'Linux (Debian, RHEL)', type: 'hard', category: 'Système', order: 0 },
-      { name: 'Windows Server / AD', type: 'hard', category: 'Système', order: 1 },
-      { name: 'Bash / scripting', type: 'hard', category: 'Système', order: 2 },
-      { name: 'Ansible', type: 'hard', category: 'Système', order: 3 },
-      { name: 'Proxmox / KVM', type: 'hard', category: 'Système', order: 4 },
-      // Hard skills - Réseau
-      { name: 'TCP/IP, VLAN, routage', type: 'hard', category: 'Réseau', order: 0 },
-      { name: 'pfSense / OPNsense', type: 'hard', category: 'Réseau', order: 1 },
-      { name: 'VPN (WireGuard, OpenVPN)', type: 'hard', category: 'Réseau', order: 2 },
-      { name: 'DNS / DHCP / PKI', type: 'hard', category: 'Réseau', order: 3 },
+      // Hard skills - Langages
+      { name: 'C, C++', type: 'hard', category: 'Langages', order: 0 },
+      { name: 'Python', type: 'hard', category: 'Langages', order: 1 },
+      { name: 'JavaScript, TypeScript', type: 'hard', category: 'Langages', order: 2 },
+      { name: 'Java', type: 'hard', category: 'Langages', order: 3 },
+      { name: 'PHP', type: 'hard', category: 'Langages', order: 4 },
+      { name: 'SQL', type: 'hard', category: 'Langages', order: 5 },
+      { name: 'Bash', type: 'hard', category: 'Langages', order: 6 },
+      // Hard skills - Développement web
+      { name: 'Vue, Nuxt', type: 'hard', category: 'Développement web', order: 0 },
+      { name: 'React, Next.js', type: 'hard', category: 'Développement web', order: 1 },
+      { name: 'Angular, Ionic', type: 'hard', category: 'Développement web', order: 2 },
+      { name: 'Node.js, Express', type: 'hard', category: 'Développement web', order: 3 },
+      { name: 'Tailwind CSS, Sass', type: 'hard', category: 'Développement web', order: 4 },
+      { name: 'Three.js, WebGL', type: 'hard', category: 'Développement web', order: 5 },
+      { name: 'Prisma', type: 'hard', category: 'Développement web', order: 6 },
+      { name: 'PostgreSQL, MySQL, SQLite', type: 'hard', category: 'Développement web', order: 7 },
+      // Hard skills - Systèmes et réseau
+      { name: 'Linux (Debian, Ubuntu)', type: 'hard', category: 'Systèmes et réseau', order: 0 },
+      { name: 'Docker et Compose', type: 'hard', category: 'Systèmes et réseau', order: 1 },
+      { name: 'nginx, Caddy', type: 'hard', category: 'Systèmes et réseau', order: 2 },
+      { name: 'Administration de VPS', type: 'hard', category: 'Systèmes et réseau', order: 3 },
+      { name: 'Git, intégration continue', type: 'hard', category: 'Systèmes et réseau', order: 4 },
+      { name: 'Vite, Webpack', type: 'hard', category: 'Systèmes et réseau', order: 5 },
+      { name: 'Qt, PyQt', type: 'hard', category: 'Systèmes et réseau', order: 6 },
       // Hard skills - Sécurité
-      { name: 'SIEM (Wazuh, Elastic)', type: 'hard', category: 'Sécurité', order: 0 },
-      { name: 'Analyse réseau (Wireshark, Nmap)', type: 'hard', category: 'Sécurité', order: 1 },
-      { name: 'Pentest (Burp, Metasploit)', type: 'hard', category: 'Sécurité', order: 2 },
-      { name: 'Durcissement (CIS, ANSSI)', type: 'hard', category: 'Sécurité', order: 3 },
-      // Hard skills - Dev & Outils
-      { name: 'Python', type: 'hard', category: 'Dev & Outils', order: 0 },
-      { name: 'Docker / Compose', type: 'hard', category: 'Dev & Outils', order: 1 },
-      { name: 'Git / CI-CD', type: 'hard', category: 'Dev & Outils', order: 2 },
-      { name: 'Supervision (Zabbix, Grafana)', type: 'hard', category: 'Dev & Outils', order: 3 },
+      { name: 'Durcissement applicatif (CSP, CSRF, en-têtes)', type: 'hard', category: 'Sécurité', order: 0 },
+      { name: 'Authentification, sessions, hachage', type: 'hard', category: 'Sécurité', order: 1 },
+      { name: 'SSO et OpenID Connect', type: 'hard', category: 'Sécurité', order: 2 },
+      { name: 'Reverse proxy et TLS', type: 'hard', category: 'Sécurité', order: 3 },
+      { name: 'Limitation de débit et anti-abus', type: 'hard', category: 'Sécurité', order: 4 },
+      { name: 'Veille et gestion des vulnérabilités', type: 'hard', category: 'Sécurité', order: 5 },
       // Soft skills
-      { name: 'Rigueur et sens du détail', type: 'soft', order: 0 },
-      { name: 'Esprit d\'analyse', type: 'soft', order: 1 },
-      { name: 'Communication et vulgarisation', type: 'soft', order: 2 },
-      { name: 'Travail en équipe', type: 'soft', order: 3 },
-      { name: 'Sang-froid en gestion d\'incident', type: 'soft', order: 4 },
+      { name: 'Autonomie', type: 'soft', order: 0 },
+      { name: 'Curiosité', type: 'soft', order: 1 },
+      { name: 'Minutie', type: 'soft', order: 2 },
+      { name: 'Adaptabilité', type: 'soft', order: 3 },
+      { name: 'Travail en équipe', type: 'soft', order: 4 },
       // Langues
-      { name: 'Français', type: 'language', detail: 'Natif', order: 0 },
-      { name: 'Anglais', type: 'language', detail: 'C1 - courant technique', order: 1 },
-      { name: 'Espagnol', type: 'language', detail: 'B1', order: 2 },
+      { name: 'Français', type: 'language', detail: 'Langue maternelle', order: 0 },
+      { name: 'Anglais', type: 'language', detail: 'B2 - Cambridge Certificate', order: 1 },
     ],
   })
 
   await prisma.interest.createMany({
     data: [
-      { label: 'CTF et sécurité offensive (HackTheBox, RootMe)', order: 0 },
-      { label: 'Homelab et self-hosting', order: 1 },
-      { label: 'Veille technologique et conférences sécurité', order: 2 },
-      { label: 'Contribution open source', order: 3 },
-      { label: 'Randonnée et trail', order: 4 },
+      { label: 'Musique : basse, guitare, chant, composition', order: 0 },
+      { label: 'Cuisine', order: 1 },
+      { label: 'Photographie', order: 2 },
+      { label: 'Cinéma', order: 3 },
+      { label: 'Auto-hébergement et homelab', order: 4 },
     ],
   })
 
@@ -197,58 +213,107 @@ async function seedContent() {
 }
 
 /* ----------------------------------------------------------------
- * Projets de démonstration.
+ * Projets affichés sur /projets.
  * `image` / `gallery` : nom d'un fichier de `seed/images/` (recommandé)
  * ou URL https complète. `repoUrl` / `demoUrl` : URL ou null.
+ *
+ * Les `demoUrl` pointent vers les sous-domaines prévus au déploiement :
+ * ils ne répondront qu'une fois robinhi.fr enregistré et les applications
+ * mises en ligne.
  * ---------------------------------------------------------------- */
 const SEED_PROJECTS = [
   {
-    title: 'Homelab supervisé et auto-hébergé',
+    title: 'Records, une collection de disques au mur',
     description:
-      'Infrastructure personnelle complète sous Proxmox : services auto-hébergés (Nextcloud, Vaultwarden, Gitea) '
-      + 'derrière un reverse proxy, VLAN dédiés, sauvegardes chiffrées automatisées et supervision Zabbix/Grafana avec alerting.',
-    tags: ['Proxmox', 'Docker', 'Ansible', 'Zabbix', 'Grafana', 'WireGuard'],
-    repoUrl: 'https://github.com/jdupont-placeholder/homelab',
-    demoUrl: null,
-    image: 'homelab.jpg',
-    gallery: ['homelab-rack.jpg', 'homelab-grafana.jpg'],
+      "Une galerie pour une collection de vinyles et de CD. La collection elle-même vit sur Discogs ; l'application "
+      + "l'y synchronise vers sa propre base SQLite, puis ajoute ce que Discogs ne propose pas : un mur de pochettes, "
+      + 'un ordre manuel, des favoris et un filtrage instantané. Back-office protégé, synchronisation quotidienne '
+      + 'programmée, et suppression douce pour ne jamais perdre un disque retiré de la collection.',
+    tags: ['Next.js', 'TypeScript', 'Prisma', 'SQLite', 'Tailwind CSS', 'API Discogs', 'Docker'],
+    repoUrl: 'https://github.com/RobinHil/records',
+    demoUrl: 'https://records.robinhi.fr',
+    image: 'records-mur.jpg',
+    gallery: ['records-fiche.jpg'],
     order: 0,
   },
   {
-    title: 'NetProbe - scanner réseau en Python',
+    title: 'Ce portfolio',
     description:
-      'Outil en ligne de commande pour cartographier un réseau local : découverte d\'hôtes, scan de ports multi-threadé, '
-      + 'détection de services et export des résultats en JSON/HTML. Pensé pour les audits internes et les TP réseau.',
-    tags: ['Python', 'Scapy', 'CLI', 'Réseau'],
-    repoUrl: 'https://github.com/jdupont-placeholder/netprobe',
-    demoUrl: null,
-    image: 'netprobe.jpg',
-    gallery: [],
+      "Le site que vous lisez. Une façade terminal interactive (démarrage animé, navigation par commandes, "
+      + "autocomplétion, historique) doublée d'une navigation classique toujours visible, un back-office pour éditer "
+      + 'chaque section sans toucher au code, et un CV PDF compatible ATS généré à la volée depuis la base.',
+    tags: ['Nuxt', 'Vue', 'TypeScript', 'Prisma', 'SQLite', 'Tailwind CSS', 'Docker'],
+    repoUrl: 'https://github.com/RobinHil/portfolio',
+    demoUrl: 'https://portfolio.robinhi.fr',
+    image: 'portfolio-terminal.jpg',
+    gallery: ['portfolio-projets.jpg'],
     order: 1,
   },
   {
-    title: 'SOC maison avec Wazuh',
+    title: "Echo, sonification de textes et d'images",
     description:
-      'Déploiement d\'un mini-SOC : agents Wazuh sur l\'ensemble du homelab, règles de détection personnalisées, '
-      + 'tableaux de bord Kibana et playbooks de réponse aux incidents documentés. Simulation d\'attaques pour valider la détection.',
-    tags: ['Wazuh', 'Elastic', 'SIEM', 'Détection', 'Blue Team'],
-    repoUrl: 'https://github.com/jdupont-placeholder/soc-wazuh',
-    demoUrl: 'https://demo.example.com/soc',
-    image: 'soc.jpg',
-    gallery: ['soc-dashboard.jpg', 'soc-alertes.jpg'],
+      'Transforme un texte ou une image en pièce musicale, entièrement dans le navigateur. Aucune IA générative : '
+      + "un mapping déterministe entre les caractéristiques de l'entrée et des paramètres musicaux, rendu hors-ligne "
+      + 'par Tone.js, puis exporté en MP3, FLAC, WAV ou OGG via ffmpeg compilé en WebAssembly. Aucune donnée ne quitte '
+      + 'la machine, et le même contenu produit toujours exactement le même son.',
+    tags: ['React', 'TypeScript', 'Tone.js', 'Web Audio', 'ffmpeg.wasm', 'Vite'],
+    repoUrl: 'https://github.com/RobinHil/echo',
+    demoUrl: 'https://echo.robinhi.fr',
+    image: 'echo-lecteur.jpg',
+    gallery: ['echo-saisie.jpg'],
     order: 2,
   },
   {
-    title: 'Hardening automatisé de serveurs Debian',
+    title: 'LifeGlobe, le jeu de la vie sur un globe',
     description:
-      'Collection de rôles Ansible appliquant les recommandations ANSSI/CIS sur des serveurs Debian : SSH, pare-feu nftables, '
-      + 'auditd, fail2ban, mises à jour automatiques. Rapport de conformité généré après chaque exécution.',
-    tags: ['Ansible', 'Debian', 'ANSSI', 'nftables', 'Conformité'],
-    repoUrl: 'https://github.com/jdupont-placeholder/debian-hardening',
-    demoUrl: null,
-    image: 'hardening.jpg',
-    gallery: [],
+      'Le jeu de la vie de Conway projeté sur une Terre en 3D : les cellules ne vivent que sur les continents '
+      + 'émergés, les océans restent vides. Deux rendus, hologramme et satellite, une grille configurable jusqu\'à '
+      + '2880 × 1440 cellules, et un suivi de la population génération par génération.',
+    tags: ['React', 'TypeScript', 'Three.js', 'WebGL', 'Zustand', 'Vite'],
+    repoUrl: 'https://github.com/RobinHil/lifeglobe',
+    demoUrl: 'https://lifeglobe.robinhi.fr',
+    image: 'lifeglobe-hologramme.jpg',
+    gallery: ['lifeglobe-continents.jpg'],
     order: 3,
+  },
+  {
+    title: "Vélib' Paris, carte en temps réel",
+    description:
+      "Les quelque 1500 stations Vélib' de Paris sur une carte, avec les vélos et les places disponibles en direct "
+      + "depuis l'open data de la Ville de Paris. Regroupement en clusters qui se déplient au zoom, rafraîchissement "
+      + 'toutes les deux minutes trente sans reconstruire les marqueurs, et mode plein écran.',
+    tags: ['JavaScript', 'Leaflet', 'SCSS', 'Webpack', 'Open data'],
+    repoUrl: 'https://github.com/RobinHil/ve-lib-paris',
+    demoUrl: 'https://velib.robinhi.fr',
+    image: 'velib-carte.jpg',
+    gallery: [],
+    order: 4,
+  },
+  {
+    title: 'InfoCrypto, suivi des cryptomonnaies',
+    description:
+      'Les cent premières capitalisations, actualisées chaque minute depuis l\'API CoinGecko, avec une recherche '
+      + 'sur l\'index complet et une fiche par monnaie : prix courant, variation sur 24 heures, rang de '
+      + 'capitalisation, offre en circulation et deux graphiques de prix.',
+    tags: ['JavaScript', 'Chart.js', 'Bootstrap', 'Mustache', 'Webpack', 'API CoinGecko'],
+    repoUrl: 'https://github.com/RobinHil/info-crypto',
+    demoUrl: 'https://crypto.robinhi.fr',
+    image: 'infocrypto-grille.jpg',
+    gallery: ['infocrypto-fiche.jpg'],
+    order: 5,
+  },
+  {
+    title: 'React Slides, des présentations en composants',
+    description:
+      "Une bibliothèque pour écrire ses présentations en React : chaque diapositive est un composant assemblé à "
+      + "partir de primitives de mise en page et de contenu. Navigation au clavier, vue mosaïque, plein écran, "
+      + 'thème partagé, Markdown et coloration syntaxique.',
+    tags: ['React', 'Vite', 'Tailwind CSS', 'Markdown'],
+    repoUrl: 'https://github.com/RobinHil/react-slides',
+    demoUrl: 'https://slides.robinhi.fr',
+    image: 'react-slides-titre.jpg',
+    gallery: ['react-slides-code.jpg'],
+    order: 6,
   },
 ]
 

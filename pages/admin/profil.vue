@@ -41,7 +41,7 @@
       </div>
       <div>
         <label for="p-location" class="adm-label">Localisation</label>
-        <input id="p-location" v-model="form.location" type="text" placeholder="ex: Lyon, France" class="adm-input">
+        <input id="p-location" v-model="form.location" type="text" placeholder="ex: Paris, France" class="adm-input">
       </div>
       <div>
         <label for="p-email" class="adm-label">Email de contact *</label>

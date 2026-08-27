@@ -1,6 +1,6 @@
-# Images des projets de démonstration
+# Images des projets
 
-Déposez ici les images de **vos** projets (formats : `jpg`, `jpeg`, `png`, `webp`, `gif`, `avif`),
+Déposez ici les images des projets (formats : `jpg`, `jpeg`, `png`, `webp`, `gif`, `avif`),
 puis référencez leurs noms de fichiers dans `server/plugins/seed.ts` (constante `SEED_PROJECTS`,
 champs `image` pour la couverture et `gallery` pour le carrousel) - **avant le premier démarrage**.
 
@@ -14,5 +14,5 @@ Notes :
 - Une URL `https://` complète (ex. Unsplash) reste acceptée à la place d'un nom de fichier.
 - Si un fichier référencé est manquant, le seed continue : couverture de secours pour l'image
   principale, entrée ignorée pour la galerie (un avertissement est loggé).
-- Les fichiers `*.jpg` fournis par défaut sont des placeholders générés - remplacez-les librement
-  (vous pouvez aussi changer les noms, tant que `seed.ts` est mis à jour en conséquence).
+- Les fichiers présents sont des captures réelles des applications. Vous pouvez les remplacer
+  ou les renommer librement, tant que `seed.ts` est mis à jour en conséquence.

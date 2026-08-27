@@ -4,10 +4,10 @@
  */
 export const UI = {
   site: {
-    name: 'jd@portfolio',
-    title: 'Jean Dupont - Administrateur Systèmes & Cybersécurité',
+    name: 'rh@portfolio',
+    title: 'Robin HILAIRE - Ingénieur cybersécurité en alternance',
     description:
-      'Portfolio de Jean Dupont, administrateur systèmes et réseaux spécialisé en cybersécurité : projets, compétences, parcours et contact.',
+      'Portfolio de Robin HILAIRE, élève ingénieur en cybersécurité : projets web et sécurité, compétences, parcours et contact.',
   },
   nav: {
     home: 'accueil',
@@ -20,16 +20,16 @@ export const UI = {
     mainNavLabel: 'Navigation principale',
   },
   home: {
-    metaTitle: 'Jean Dupont - Administrateur Systèmes & Cybersécurité',
+    metaTitle: 'Robin HILAIRE - Ingénieur cybersécurité en alternance',
     metaDescription:
-      'Portfolio interactif façon terminal : découvrez mon parcours d\'administrateur systèmes et réseaux orienté cybersécurité, mes projets et mes compétences.',
+      'Portfolio interactif façon terminal : mon parcours d\'élève ingénieur en cybersécurité, mes projets web et mes compétences.',
     terminalTitle: 'visiteur@portfolio: ~',
     hint: 'Tapez une commande (ex: help) ou utilisez le menu de navigation en haut de page.',
   },
   about: {
     metaTitle: 'À propos - parcours, formation et compétences',
     metaDescription:
-      'Formation, expérience professionnelle, compétences techniques (système, réseau, sécurité, dev), soft skills et langues de Jean Dupont.',
+      'Formation, expérience professionnelle, compétences techniques (langages, développement web, systèmes, sécurité), soft skills et langues de Robin HILAIRE.',
     h1: 'À propos',
     education: 'Formation',
     experience: 'Expérience professionnelle',
@@ -39,12 +39,12 @@ export const UI = {
     interests: 'Centres d\'intérêt',
     downloadCv: 'Télécharger mon CV (PDF)',
     downloadCvHint: 'PDF généré à partir des données de cette page - format sobre, compatible ATS.',
-    photoAlt: 'Photo de profil de Jean Dupont',
+    photoAlt: 'Photo de profil de Robin HILAIRE',
   },
   projects: {
-    metaTitle: 'Projets - infrastructures, outils et sécurité',
+    metaTitle: 'Projets - applications web, données et sécurité',
     metaDescription:
-      'Sélection de projets : homelab supervisé, outils réseau en Python, SOC Wazuh, hardening automatisé de serveurs Debian.',
+      'Sélection de projets : galerie de disques synchronisée depuis Discogs, sonification de textes et d\'images, jeu de la vie sur un globe 3D, carte Vélib\' en temps réel.',
     h1: 'Projets',
     repo: 'Code source',
     demo: 'Démo',
@@ -55,8 +55,9 @@ export const UI = {
   contact: {
     metaTitle: 'Contact - me joindre',
     metaDescription:
-      'Contactez Jean Dupont : formulaire de contact, email, LinkedIn et GitHub.',
+      'Contactez Robin HILAIRE : formulaire de contact, email, LinkedIn et GitHub.',
     h1: 'Contact',
+    subtitle: '$ ping -c 1 robin.hilaire - réponse sous 48 h',
     formTitle: './envoyer-un-message.sh',
     linksTitle: 'cat liens.txt',
     name: 'Nom',
