@@ -31,6 +31,7 @@ logs
 # Base de données SQLite locale
 prisma/*.db
 prisma/*.db-journal
+prisma/*.backup-*
 
 # Images uploadées en dev (en prod : volume Docker)
 /data

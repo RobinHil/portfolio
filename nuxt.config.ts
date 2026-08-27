@@ -32,8 +32,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Surchargées par NUXT_ADMIN_EMAIL / NUXT_ADMIN_PASSWORD / NUXT_ADMIN_NAME
-    adminEmail: '',
+    // Surchargées par NUXT_ADMIN_EMAIL / NUXT_ADMIN_PASSWORD / NUXT_ADMIN_NAME.
+    // La connexion se fait au mot de passe seul : adminEmail n'est qu'un
+    // libellé de compte, seul adminPassword est un secret.
+    adminEmail: 'admin@local',
     adminPassword: '',
     adminName: 'Admin',
     public: {

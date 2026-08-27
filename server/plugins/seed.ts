@@ -13,17 +13,29 @@ import { ensureUploadsDir } from '../utils/uploads'
  * premier démarrage. Ils seront importés automatiquement dans le stockage d'uploads
  * (même mécanique que l'upload admin). Une URL https (ex: Unsplash) est aussi acceptée.
  */
+// L'authentification repose sur ce seul secret : on alerte s'il est trop court.
+const MIN_ADMIN_PASSWORD_LENGTH = 12
+
 export default defineNitroPlugin(async () => {
   const config = useRuntimeConfig()
 
   try {
     const userCount = await prisma.user.count()
     if (userCount === 0) {
-      const email = config.adminEmail
       const password = config.adminPassword
-      if (!email || !password) {
-        console.warn('[seed] NUXT_ADMIN_EMAIL / NUXT_ADMIN_PASSWORD non définis - aucun compte admin créé.')
+      // La connexion se fait au mot de passe seul : l'email n'est plus un
+      // identifiant, seulement un libellé affiché dans l'admin.
+      const email = config.adminEmail || 'admin@local'
+
+      if (!password) {
+        console.warn('[seed] NUXT_ADMIN_PASSWORD non défini - aucun compte admin créé.')
       } else {
+        if (password.length < MIN_ADMIN_PASSWORD_LENGTH) {
+          console.warn(
+            `[seed] ATTENTION : NUXT_ADMIN_PASSWORD fait moins de ${MIN_ADMIN_PASSWORD_LENGTH} caractères. `
+            + 'L\'accès admin ne tient qu\'à ce seul secret - choisissez-en un long.',
+          )
+        }
         await prisma.user.create({
           data: {
             email,
@@ -31,7 +43,7 @@ export default defineNitroPlugin(async () => {
             name: config.adminName || 'Admin',
           },
         })
-        console.log(`[seed] Compte admin créé : ${email}`)
+        console.log('[seed] Compte admin créé (connexion par mot de passe seul).')
       }
     }
 

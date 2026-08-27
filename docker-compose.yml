@@ -3,15 +3,17 @@ services:
     build: .
     restart: unless-stopped
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
       NITRO_HOST: 0.0.0.0
       NITRO_PORT: "3000"
       # Fichier SQLite et images uploadées persistés dans le volume ci-dessous
       DATABASE_URL: file:/data/portfolio.db
       NUXT_UPLOADS_DIR: /data/uploads
       NUXT_SESSION_PASSWORD: ${NUXT_SESSION_PASSWORD:?Définissez NUXT_SESSION_PASSWORD dans .env (32 caractères minimum)}
-      NUXT_ADMIN_EMAIL: ${NUXT_ADMIN_EMAIL:-admin@example.com}
-      NUXT_ADMIN_PASSWORD: ${NUXT_ADMIN_PASSWORD:-ChangeMe!42}
+      NUXT_ADMIN_EMAIL: ${NUXT_ADMIN_EMAIL:-admin@local}
+      # Seul secret protégeant l'admin (connexion par mot de passe seul) :
+      # plus de valeur par défaut, il doit être fourni explicitement.
+      NUXT_ADMIN_PASSWORD: ${NUXT_ADMIN_PASSWORD:?Définissez NUXT_ADMIN_PASSWORD dans .env (20 caractères minimum recommandés)}
       NUXT_ADMIN_NAME: ${NUXT_ADMIN_NAME:-Admin}
       NUXT_PUBLIC_SITE_URL: ${NUXT_PUBLIC_SITE_URL:-http://localhost:8080}
     volumes:

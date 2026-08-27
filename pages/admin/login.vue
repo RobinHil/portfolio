@@ -6,16 +6,20 @@
           <Lock class="h-5 w-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
           Administration
         </h1>
-        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Connectez-vous pour gérer le contenu du portfolio.</p>
+        <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Saisissez le mot de passe d'administration pour gérer le contenu du portfolio.</p>
       </div>
 
       <div>
-        <label for="login-email" class="adm-label">Email</label>
-        <input id="login-email" v-model="email" type="email" required autocomplete="username" class="adm-input">
-      </div>
-      <div>
         <label for="login-password" class="adm-label">Mot de passe</label>
-        <input id="login-password" v-model="password" type="password" required autocomplete="current-password" class="adm-input">
+        <input
+          id="login-password"
+          ref="passwordInput"
+          v-model="password"
+          type="password"
+          required
+          autocomplete="current-password"
+          class="adm-input"
+        >
       </div>
 
       <p v-if="error" class="text-sm text-red-600 dark:text-red-400" role="alert">{{ error }}</p>
@@ -45,22 +49,28 @@ watchEffect(() => {
   if (loggedIn.value) navigateTo('/admin')
 })
 
-const email = ref('')
 const password = ref('')
 const loading = ref(false)
 const error = ref('')
+const passwordInput = ref<HTMLInputElement | null>(null)
+
+// Champ unique : on y place le curseur d'emblée.
+onMounted(() => passwordInput.value?.focus())
 
 async function login() {
   loading.value = true
   error.value = ''
   try {
-    await $csrfFetch('/api/auth/login', { method: 'POST', body: { email: email.value, password: password.value } })
+    await $csrfFetch('/api/auth/login', { method: 'POST', body: { password: password.value } })
     await refreshSession()
     await navigateTo('/admin')
   } catch (err: any) {
     error.value = err?.statusCode === 429
-      ? 'Trop de tentatives - réessayez dans une minute.'
-      : 'Identifiants invalides.'
+      ? 'Trop de tentatives - réessayez dans quelques minutes.'
+      : 'Mot de passe invalide.'
+    // Le champ est vidé pour éviter qu'une saisie erronée reste affichée.
+    password.value = ''
+    passwordInput.value?.focus()
   } finally {
     loading.value = false
   }

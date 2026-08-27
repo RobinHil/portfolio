@@ -9,8 +9,9 @@ const emptyToNull = z
   .nullable()
   .transform(v => (v ? v : null))
 
+// Un seul administrateur : la connexion se fait au mot de passe seul,
+// sans identifiant à saisir.
 export const loginSchema = z.object({
-  email: z.string().trim().email().max(200),
   password: z.string().min(1).max(200),
 })
 

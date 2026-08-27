@@ -8,7 +8,7 @@
           Administration
         </NuxtLink>
         <div class="flex items-center gap-3 text-sm">
-          <span v-if="user" class="hidden text-slate-500 dark:text-slate-400 sm:inline">{{ user.email }}</span>
+          <span v-if="user" class="hidden text-slate-500 dark:text-slate-400 sm:inline">{{ user.name || user.email }}</span>
           <NuxtLink to="/" class="adm-btn">
             <ExternalLink class="h-4 w-4" aria-hidden="true" />
             Voir le site

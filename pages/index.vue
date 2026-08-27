@@ -13,7 +13,7 @@
       <SectionHeading id="intro-title" command="cat intro.txt" />
       <div class="grid gap-8 md:grid-cols-[auto,1fr] md:items-center">
         <ProjectImage
-          :src="about.profile.photoUrl"
+          :src="about.profile?.photoUrl"
           :alt="UI.about.photoAlt"
           width="160"
           height="160"

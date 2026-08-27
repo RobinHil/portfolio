@@ -37,7 +37,10 @@ async function loadData() {
   return { profile, education, experience, skills, interests }
 }
 
-async function loadPhoto(photoUrl: string): Promise<Buffer | null> {
+async function loadPhoto(photoUrl: string | null | undefined): Promise<Buffer | null> {
+  // Profil sans photo : le CV se génère sans image plutôt que de renvoyer un 500.
+  if (!photoUrl) return null
+
   if (/^https:\/\//.test(photoUrl)) {
     try {
       const res = await fetch(photoUrl)
