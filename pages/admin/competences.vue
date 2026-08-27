@@ -38,7 +38,7 @@ const fields: CrudField[] = [
     key: 'category',
     label: 'Catégorie',
     type: 'text',
-    placeholder: 'ex: Langages, Développement web, Systèmes et réseau, Sécurité',
+    placeholder: 'ex: Langages, Développement, Systèmes et réseau, Sécurité',
     hint: 'Uniquement pour les compétences techniques - les compétences de même catégorie sont regroupées, avec une icône de catégorie automatique.',
     showIf: form => form.type === 'hard',
   },

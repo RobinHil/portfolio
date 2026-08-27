@@ -5,9 +5,9 @@
 export const UI = {
   site: {
     name: 'rh@portfolio',
-    title: 'Robin HILAIRE - Ingénieur cybersécurité en alternance',
+    title: 'Robin HILAIRE - Apprenti ingénieur système et cybersécurité',
     description:
-      'Portfolio de Robin HILAIRE, élève ingénieur en cybersécurité : projets web et sécurité, compétences, parcours et contact.',
+      'Portfolio de Robin HILAIRE, apprenti ingénieur en administration système et cybersécurité : projets, compétences, parcours et contact.',
   },
   nav: {
     home: 'accueil',
@@ -20,16 +20,16 @@ export const UI = {
     mainNavLabel: 'Navigation principale',
   },
   home: {
-    metaTitle: 'Robin HILAIRE - Ingénieur cybersécurité en alternance',
+    metaTitle: 'Robin HILAIRE - Apprenti ingénieur système et cybersécurité',
     metaDescription:
-      'Portfolio interactif façon terminal : mon parcours d\'élève ingénieur en cybersécurité, mes projets web et mes compétences.',
+      'Portfolio interactif façon terminal : mon parcours d\'apprenti ingénieur en administration système et cybersécurité, mes projets et mes compétences.',
     terminalTitle: 'visiteur@portfolio: ~',
     hint: 'Tapez une commande (ex: help) ou utilisez le menu de navigation en haut de page.',
   },
   about: {
     metaTitle: 'À propos - parcours, formation et compétences',
     metaDescription:
-      'Formation, expérience professionnelle, compétences techniques (langages, développement web, systèmes, sécurité), soft skills et langues de Robin HILAIRE.',
+      'Formation, certifications, expérience professionnelle, compétences techniques (langages, développement, systèmes et réseau, sécurité), soft skills et langues de Robin HILAIRE.',
     h1: 'À propos',
     education: 'Formation',
     experience: 'Expérience professionnelle',

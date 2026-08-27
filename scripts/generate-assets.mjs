@@ -35,8 +35,8 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
   <circle cx="178" cy="117" r="9" fill="#00ff41"/>
   <text x="130" y="230" font-family="monospace" font-size="34" fill="#94ab98">visiteur@portfolio:~$ whoami</text>
   <text x="130" y="310" font-family="monospace" font-size="52" font-weight="bold" fill="#00ff41">Robin HILAIRE</text>
-  <text x="130" y="375" font-family="monospace" font-size="32" fill="#d7e6d9">Ingénieur cybersécurité</text>
-  <text x="130" y="425" font-family="monospace" font-size="32" fill="#d7e6d9">en alternance</text>
+  <text x="130" y="375" font-family="monospace" font-size="32" fill="#d7e6d9">Apprenti ingénieur</text>
+  <text x="130" y="425" font-family="monospace" font-size="32" fill="#d7e6d9">Système &amp; cybersécurité</text>
   <text x="130" y="495" font-family="monospace" font-size="26" fill="#94ab98">projets · compétences · contact</text>
   <rect x="620" y="470" width="26" height="38" fill="#00ff41"/>
 </svg>`
@@ -50,7 +50,7 @@ await sharp(Buffer.from(ogSvg)).png().toFile(pub('images/og.png'))
 await writeFile(pub('site.webmanifest'), JSON.stringify({
   name: 'Portfolio - Robin HILAIRE',
   short_name: 'rh@portfolio',
-  description: 'Portfolio de Robin HILAIRE, élève ingénieur en cybersécurité.',
+  description: 'Portfolio de Robin HILAIRE, apprenti ingénieur système et cybersécurité.',
   lang: 'fr',
   start_url: '/',
   display: 'browser',

@@ -62,12 +62,13 @@ async function seedContent() {
     data: {
       id: 1,
       fullName: 'Robin HILAIRE',
-      title: 'Ingénieur cybersécurité en alternance',
+      title: 'Apprenti ingénieur en administration système et cybersécurité',
       intro:
-        "Je construis des applications web de bout en bout, du schéma de base de données au reverse proxy qui les sert, "
-        + "et j'héberge la plupart moi-même. Ce qui m'intéresse dans la cybersécurité, c'est le concret : durcir ce qu'on "
-        + "vient d'écrire, comprendre par où ça casse, garder un déploiement reproductible. Diplômé d'un BUT Informatique, "
-        + "je poursuis en école d'ingénieur en alternance, majeure cybersécurité.",
+        "En alternance chez OPALE informatique, sur l'administration système et réseau d'une infrastructure "
+        + "d'imagerie médicale, et en cycle ingénieur à l'EPITA, majeure cybersécurité et administration système. "
+        + "Je construis aussi des applications web de bout en bout, du schéma de base de données au reverse proxy "
+        + "qui les sert, et j'héberge la plupart moi-même. Ce qui m'intéresse dans la sécurité, c'est le concret : "
+        + "durcir ce qu'on vient d'écrire, comprendre par où ça casse, garder un déploiement reproductible.",
       email: 'hilairerob84@gmail.com',
       linkedin: 'https://www.linkedin.com/in/hilaire-robin',
       github: 'https://github.com/RobinHil',
@@ -76,37 +77,38 @@ async function seedContent() {
     },
   })
 
-  // TODO Robin : l'alternance en cours (depuis septembre 2025) manque ici - le nom
-  // de l'entreprise n'était sur aucun des documents fournis. À ajouter depuis /admin,
-  // ou ici avant le premier démarrage, avec order: 0 et un décalage des suivants.
   await prisma.experience.createMany({
     data: [
       {
-        role: 'Alternant, service technique',
-        company: 'Aix-Marseille Université, Arles',
-        period: 'Octobre 2024 - Juillet 2025',
+        role: 'Apprenti ingénieur en administration système et cybersécurité',
+        company: 'OPALE informatique, Paris',
+        period: 'Septembre 2025 - aujourd\'hui',
         description:
-          "Développement d'une solution de RAG destinée aux étudiants de l'université, alimentée par les cours des "
-          + "enseignants : déploiement d'Ollama et LocalAI sous Docker, indexation dans une base de données vectorielle "
-          + 'et chaîne de requêtes aux modèles construite avec LangChain.',
+          "Alternance sur l'infrastructure d'imagerie médicale de l'entreprise : administration des systèmes "
+          + 'et du réseau, et travaux autour de la norme DICOM.',
         order: 0,
       },
       {
-        role: 'Stagiaire, service technique et médical',
-        company: 'OPALE, Paris 12e',
-        period: 'Avril - Juin 2024',
+        role: 'Apprenti développeur logiciel IA',
+        company: 'Aix-Marseille Université, Arles',
+        period: 'Octobre 2024 - Juillet 2025',
         description:
-          "Mise en place et maintenance, matérielle et logicielle, d'un serveur d'imagerie médicale (PACS). "
-          + 'Conteneurisation Docker des services associés (SSO, journalisation), sécurisation de '
-          + "l'infrastructure par un SSO OpenID Connect, et R&D sur l'architecture déployée pour y intégrer "
-          + 'de nouvelles solutions.',
+          "Expérimentation et développement d'un prototype de solution RAG (Retrieval Augmented Generation) "
+          + "donnant aux étudiants de l'université un LLM dont les sources d'information sont vérifiées par les "
+          + "enseignants : des réponses fiables, et une autre manière de consommer les cours. Déploiement d'Ollama "
+          + 'et LocalAI sous Docker, indexation dans une base de données vectorielle, chaîne de requêtes aux modèles '
+          + 'construite avec LangChain.',
         order: 1,
       },
       {
-        role: 'Vacataire, cuisine centrale',
-        company: 'Mairie de Sorgues',
-        period: 'Août 2022 et 2023',
-        description: 'Renfort estival en cuisine centrale municipale, sur deux saisons.',
+        role: 'Stagiaire en administration système',
+        company: 'OPALE informatique, Paris',
+        period: 'Avril - Juin 2024',
+        description:
+          "Mise en place et maintenance, matérielle et logicielle, d'un serveur d'imagerie médicale (PACS, norme "
+          + 'DICOM). Conteneurisation Docker des services associés (SSO, journalisation), sécurisation de '
+          + "l'infrastructure par un SSO OpenID Connect, et R&D sur l'architecture déployée pour y intégrer de "
+          + 'nouvelles solutions.',
         order: 2,
       },
     ],
@@ -115,16 +117,16 @@ async function seedContent() {
   await prisma.education.createMany({
     data: [
       {
-        title: "Diplôme d'ingénieur en informatique, majeure cybersécurité",
-        institution: 'EPITA',
-        period: '2025 - 2028 (en cours)',
-        description: 'Cycle ingénieur en alternance, spécialisation cybersécurité.',
+        title: "Diplôme d'ingénieur en informatique, cybersécurité et administration système",
+        institution: "EPITA, École d'ingénieurs en informatique",
+        period: 'Septembre 2025 - Août 2028 (en cours)',
+        description: "Cycle ingénieur en alternance, fin d'études prévue en 2028.",
         order: 0,
       },
       {
-        title: 'BUT Informatique',
-        institution: "IUT d'Arles, Aix-Marseille Université",
-        period: '2022 - 2025',
+        title: 'BUT Informatique, développement full-stack et administration système',
+        institution: "IUT d'Aix-Marseille, campus d'Arles",
+        period: 'Septembre 2022 - Juin 2025',
         description: "Parcours « réalisation d'applications : conception, développement, validation ».",
         order: 1,
       },
@@ -134,6 +136,22 @@ async function seedContent() {
         period: '2022',
         description: 'Spécialités mathématiques et informatique, option européenne anglais.',
         order: 2,
+      },
+      // Certifications : le profil LinkedIn en annonce 8, seules ces deux-ci
+      // étaient lisibles dans la page fournie. Les six autres restent à ajouter.
+      {
+        title: 'Fortinet NSE 4 Certified in FortiOS',
+        institution: 'Fortinet',
+        period: 'Juillet 2026 - Juillet 2028',
+        description: 'Certification pare-feu FortiGate : politiques de filtrage, VPN, inspection du trafic.',
+        order: 3,
+      },
+      {
+        title: 'Fortinet NSE 3 Certified in Cybersecurity',
+        institution: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
+        description: null,
+        order: 4,
       },
     ],
   })
@@ -148,23 +166,25 @@ async function seedContent() {
       { name: 'PHP', type: 'hard', category: 'Langages', order: 4 },
       { name: 'SQL', type: 'hard', category: 'Langages', order: 5 },
       { name: 'Bash', type: 'hard', category: 'Langages', order: 6 },
-      // Hard skills - Développement web
-      { name: 'Vue, Nuxt', type: 'hard', category: 'Développement web', order: 0 },
-      { name: 'React, Next.js', type: 'hard', category: 'Développement web', order: 1 },
-      { name: 'Angular, Ionic', type: 'hard', category: 'Développement web', order: 2 },
-      { name: 'Node.js, Express', type: 'hard', category: 'Développement web', order: 3 },
-      { name: 'Tailwind CSS, Sass', type: 'hard', category: 'Développement web', order: 4 },
-      { name: 'Three.js, WebGL', type: 'hard', category: 'Développement web', order: 5 },
-      { name: 'Prisma', type: 'hard', category: 'Développement web', order: 6 },
-      { name: 'PostgreSQL, MySQL, SQLite', type: 'hard', category: 'Développement web', order: 7 },
+      // Hard skills - Développement
+      { name: 'Vue, Nuxt', type: 'hard', category: 'Développement', order: 0 },
+      { name: 'React, Next.js', type: 'hard', category: 'Développement', order: 1 },
+      { name: 'Angular, Ionic', type: 'hard', category: 'Développement', order: 2 },
+      { name: 'Node.js, Express', type: 'hard', category: 'Développement', order: 3 },
+      { name: 'Tailwind CSS, Sass', type: 'hard', category: 'Développement', order: 4 },
+      { name: 'Three.js, WebGL', type: 'hard', category: 'Développement', order: 5 },
+      { name: 'Qt, PyQt', type: 'hard', category: 'Développement', order: 6 },
+      { name: 'Prisma', type: 'hard', category: 'Développement', order: 7 },
+      { name: 'PostgreSQL, MySQL, SQLite', type: 'hard', category: 'Développement', order: 8 },
+      { name: 'Vite, Webpack', type: 'hard', category: 'Développement', order: 9 },
       // Hard skills - Systèmes et réseau
-      { name: 'Linux (Debian, Ubuntu)', type: 'hard', category: 'Systèmes et réseau', order: 0 },
-      { name: 'Docker et Compose', type: 'hard', category: 'Systèmes et réseau', order: 1 },
-      { name: 'nginx, Caddy', type: 'hard', category: 'Systèmes et réseau', order: 2 },
-      { name: 'Administration de VPS', type: 'hard', category: 'Systèmes et réseau', order: 3 },
-      { name: 'Git, intégration continue', type: 'hard', category: 'Systèmes et réseau', order: 4 },
-      { name: 'Vite, Webpack', type: 'hard', category: 'Systèmes et réseau', order: 5 },
-      { name: 'Qt, PyQt', type: 'hard', category: 'Systèmes et réseau', order: 6 },
+      { name: 'Administration système Linux', type: 'hard', category: 'Systèmes et réseau', order: 0 },
+      { name: 'Administration réseau', type: 'hard', category: 'Systèmes et réseau', order: 1 },
+      { name: 'Pare-feux (Fortinet FortiOS)', type: 'hard', category: 'Systèmes et réseau', order: 2 },
+      { name: 'Docker et Compose', type: 'hard', category: 'Systèmes et réseau', order: 3 },
+      { name: 'nginx, Caddy', type: 'hard', category: 'Systèmes et réseau', order: 4 },
+      { name: 'Administration de VPS, auto-hébergement', type: 'hard', category: 'Systèmes et réseau', order: 5 },
+      { name: 'Git, intégration continue', type: 'hard', category: 'Systèmes et réseau', order: 6 },
       // Hard skills - Sécurité
       { name: 'Durcissement applicatif (CSP, CSRF, en-têtes)', type: 'hard', category: 'Sécurité', order: 0 },
       { name: 'Authentification, sessions, hachage', type: 'hard', category: 'Sécurité', order: 1 },
