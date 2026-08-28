@@ -45,9 +45,9 @@
                 :src="images[imageIndex] ?? project.imageUrl"
                 :alt="`${project.title} - photo ${imageIndex + 1} sur ${images.length}`"
                 width="800"
-                height="420"
+                height="500"
                 sizes="100vw sm:672px"
-                class="h-48 w-full object-cover sm:h-56"
+                class="aspect-[16/10] w-full object-cover"
               />
               <template v-if="images.length > 1">
                 <button

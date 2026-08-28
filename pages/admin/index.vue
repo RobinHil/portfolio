@@ -45,6 +45,7 @@ const unread = computed(() => (messages.value ?? []).filter(m => !m.read).length
 const stats = computed(() => [
   { to: '/admin/projets', count: projects.value?.length ?? 0, label: 'Projets' },
   { to: '/admin/formation', count: about.value?.education?.length ?? 0, label: 'Entrées de formation' },
+  { to: '/admin/certifications', count: about.value?.certifications?.length ?? 0, label: 'Certifications' },
   { to: '/admin/experience', count: about.value?.experience?.length ?? 0, label: 'Expériences' },
   { to: '/admin/messages', count: unread.value, label: 'Messages non lus' },
 ])

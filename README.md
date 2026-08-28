@@ -65,7 +65,7 @@ Voir [.env.example](.env.example) :
 
 ## Personnalisation du contenu
 
-Tout le contenu s'édite depuis **/admin** (profil & liens, projets, formation, expérience, compétences/langues, centres d'intérêt, messages reçus). Les sections des pages sont fixes, leur contenu est libre.
+Tout le contenu s'édite depuis **/admin** (profil & liens, projets, formation, certifications, expérience, compétences/langues, centres d'intérêt, messages reçus). Les sections des pages sont fixes, leur contenu est libre.
 
 - **Photo de profil** : remplacer `public/images/profile.jpg` (image placeholder générée).
 - **Textes de l'interface** (libellés fixes) : centralisés dans [utils/uiText.ts](utils/uiText.ts) pour préparer un futur bilingue FR/EN.

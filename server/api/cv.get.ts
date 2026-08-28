@@ -21,20 +21,22 @@ import { getUploadsDir } from '../utils/uploads'
 type CvData = {
   profile: NonNullable<Awaited<ReturnType<typeof loadData>>['profile']>
   education: Awaited<ReturnType<typeof loadData>>['education']
+  certifications: Awaited<ReturnType<typeof loadData>>['certifications']
   experience: Awaited<ReturnType<typeof loadData>>['experience']
   skills: Awaited<ReturnType<typeof loadData>>['skills']
   interests: Awaited<ReturnType<typeof loadData>>['interests']
 }
 
 async function loadData() {
-  const [profile, education, experience, skills, interests] = await Promise.all([
+  const [profile, education, certifications, experience, skills, interests] = await Promise.all([
     prisma.profile.findUnique({ where: { id: 1 } }),
     prisma.education.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
+    prisma.certification.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
     prisma.experience.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
     prisma.skill.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
     prisma.interest.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
   ])
-  return { profile, education, experience, skills, interests }
+  return { profile, education, certifications, experience, skills, interests }
 }
 
 async function loadPhoto(photoUrl: string | null | undefined): Promise<Buffer | null> {
@@ -75,7 +77,7 @@ async function loadPhoto(photoUrl: string | null | undefined): Promise<Buffer | 
 }
 
 function renderCv(data: CvData, photo: Buffer | null, scale: number): Promise<{ pdf: Buffer, pages: number }> {
-  const { profile, education, experience, skills, interests } = data
+  const { profile, education, certifications, experience, skills, interests } = data
 
   const doc = new PDFDocument({
     size: 'A4',
@@ -167,6 +169,20 @@ function renderCv(data: CvData, photo: Buffer | null, scale: number): Promise<{ 
     }
   })
 
+  // --- Certifications ---
+  if (certifications.length > 0) {
+    sectionTitle('Certifications')
+    certifications.forEach((cert, i) => {
+      if (i > 0) doc.moveDown(gap(0.45))
+      doc.font('Helvetica-Bold').fontSize(s(10.5)).fillColor(BLACK).text(`${cert.title} - ${cert.issuer}`)
+      doc.font('Helvetica-Oblique').fontSize(s(9)).fillColor(GRAY).text(cert.period)
+      if (cert.description) {
+        doc.moveDown(gap(0.12))
+        doc.font('Helvetica').fontSize(s(9.5)).fillColor(BLACK).text(cert.description, { lineGap: gap(1.3) })
+      }
+    })
+  }
+
   // --- Compétences ---
   sectionTitle('Compétences')
   const hard = skills.filter(sk => sk.type === 'hard')
@@ -212,12 +228,36 @@ export default defineEventHandler(async (event) => {
 
   const photo = await loadPhoto(data.profile.photoUrl)
 
-  // Réduit l'échelle jusqu'à tenir sur une seule page A4
-  const scales = [1, 0.94, 0.88, 0.82, 0.76, 0.7, 0.64, 0.58, 0.52, 0.46]
-  let result = await renderCv(data as CvData, photo, scales[0]!)
-  for (const scale of scales.slice(1)) {
-    if (result.pages === 1) break
-    result = await renderCv(data as CvData, photo, scale)
+  // Cherche par dichotomie la plus grande échelle qui tienne sur une seule page.
+  //
+  // L'ancienne version descendait par paliers de 6 % et s'arrêtait au premier
+  // qui passait : elle pouvait retenir 0,70 alors que 0,76 débordait de deux
+  // lignes seulement, et laissait un tiers de page blanche. Ici on encadre la
+  // valeur limite, ce qui donne le texte le plus grand possible - donc le plus
+  // lisible, à l'écran comme pour les outils de lecture automatique.
+  const SCALE_MIN = 0.55
+  const PASSES = 8
+
+  let result = await renderCv(data as CvData, photo, 1)
+  if (result.pages > 1) {
+    let lo = SCALE_MIN // borne basse, supposée tenir
+    let hi = 1 // borne haute, connue pour déborder
+    let best: typeof result | null = null
+
+    for (let i = 0; i < PASSES; i++) {
+      const mid = (lo + hi) / 2
+      const attempt = await renderCv(data as CvData, photo, mid)
+      if (attempt.pages === 1) {
+        best = attempt
+        lo = mid
+      } else {
+        hi = mid
+      }
+    }
+
+    // Même à l'échelle minimale le contenu déborde : on rend quand même, en
+    // deux pages, plutôt que de renvoyer un CV illisible.
+    result = best ?? await renderCv(data as CvData, photo, SCALE_MIN)
   }
 
   const safeName = data.profile.fullName.normalize('NFD').replace(/[̀-ͯ]/g, '')

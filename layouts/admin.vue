@@ -41,19 +41,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  Briefcase,
-  ExternalLink,
-  FolderGit2,
-  GraduationCap,
-  Heart,
-  LayoutDashboard,
-  LogOut,
-  Mail,
-  Settings,
-  User,
-  Wrench,
-} from 'lucide-vue-next'
+import { BadgeCheck, Briefcase, ExternalLink, FolderGit2, GraduationCap, Heart, LayoutDashboard, LogOut, Mail, Settings, User, Wrench } from 'lucide-vue-next'
 
 const { user, fetch: refreshSession } = useUserSession()
 const { $csrfFetch } = useNuxtApp()
@@ -63,6 +51,7 @@ const links = [
   { to: '/admin/profil', label: 'Profil & liens', icon: User },
   { to: '/admin/projets', label: 'Projets', icon: FolderGit2 },
   { to: '/admin/formation', label: 'Formation', icon: GraduationCap },
+  { to: '/admin/certifications', label: 'Certifications', icon: BadgeCheck },
   { to: '/admin/experience', label: 'Expérience', icon: Briefcase },
   { to: '/admin/competences', label: 'Compétences', icon: Wrench },
   { to: '/admin/interets', label: 'Centres d\'intérêt', icon: Heart },
