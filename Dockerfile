@@ -39,5 +39,12 @@ RUN npm install --no-package-lock prisma@^7 dotenv@^17 \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+# Le conteneur ne tourne pas en root. /data porte la base SQLite et les
+# images téléversées : il doit appartenir à l'utilisateur avant le USER,
+# sinon un volume monté dessus hériterait de root et l'application ne
+# pourrait plus y écrire.
+RUN mkdir -p /data && chown -R node:node /app /data
+USER node
+
 EXPOSE 3000
 ENTRYPOINT ["docker-entrypoint.sh"]
