@@ -184,6 +184,25 @@ async function seedContent() {
     ],
   })
 
+  await prisma.certification.createMany({
+    data: [
+      {
+        title: 'Certification placeholder - analyse de risques',
+        issuer: 'Organisme émetteur',
+        period: 'Mars 2024',
+        description: 'Remplacez ces entrées depuis /admin/certifications.',
+        order: 0,
+      },
+      {
+        title: 'Certification placeholder - sécurité réseau',
+        issuer: 'Organisme émetteur',
+        period: 'Janvier 2023 - Janvier 2026',
+        description: null,
+        order: 1,
+      },
+    ],
+  })
+
   await prisma.skill.createMany({
     data: [
       // Hard skills - Langages

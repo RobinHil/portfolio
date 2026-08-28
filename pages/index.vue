@@ -62,7 +62,7 @@ usePageSeo({
 
 const cards = [
   { to: '/a-propos', cmd: 'a-propos', title: 'À propos', text: 'Parcours, formation, compétences techniques et CV téléchargeable.' },
-  { to: '/projets', cmd: 'projets', title: 'Projets', text: 'Homelab, outils réseau, SOC, hardening : mes réalisations.' },
+  { to: '/projets', cmd: 'projets', title: 'Projets', text: 'Ce que j\'ai construit, du code au déploiement.' },
   { to: '/contact', cmd: 'contact', title: 'Contact', text: 'Formulaire de contact et liens directs (email, LinkedIn, GitHub).' },
 ]
 </script>

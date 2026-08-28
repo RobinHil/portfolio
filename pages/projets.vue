@@ -14,11 +14,11 @@
         <ProjectImage
           :src="project.imageUrl"
           :alt="UI.projects.screenshotAlt(project.title)"
-          width="600"
-          height="340"
-          sizes="100vw md:50vw xl:400px"
+          width="640"
+          height="400"
+          sizes="100vw md:50vw xl:420px"
           loading="lazy"
-          class="h-44 w-full border-b border-term-border object-cover transition group-hover:opacity-90"
+          class="aspect-[16/10] w-full border-b border-term-border object-cover transition group-hover:opacity-90"
         />
         <div class="flex flex-1 flex-col p-5">
           <h2 class="mb-2 font-bold text-term-text">

@@ -46,6 +46,14 @@ export const educationSchema = z.object({
   order: z.coerce.number().int().min(0).max(9999).default(0),
 })
 
+export const certificationSchema = z.object({
+  title: z.string().trim().min(1).max(200),
+  issuer: z.string().trim().min(1).max(200),
+  period: z.string().trim().min(1).max(100),
+  description: emptyToNull,
+  order: z.coerce.number().int().min(0).max(9999).default(0),
+})
+
 export const experienceSchema = z.object({
   role: z.string().trim().min(1).max(200),
   company: z.string().trim().min(1).max(200),

@@ -42,6 +42,17 @@ model Education {
   order       Int     @default(0)
 }
 
+// Certifications et attestations, séparées des diplômes : même forme, mais
+// leur propre section pour ne pas noyer la formation initiale.
+model Certification {
+  id          Int     @id @default(autoincrement())
+  title       String
+  issuer      String
+  period      String
+  description String?
+  order       Int     @default(0)
+}
+
 model Experience {
   id          Int    @id @default(autoincrement())
   role        String

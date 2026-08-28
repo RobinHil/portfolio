@@ -32,6 +32,7 @@ export const UI = {
       'Formation, certifications, expérience professionnelle, compétences techniques (langages, développement, systèmes et réseau, sécurité), soft skills et langues de Robin HILAIRE.',
     h1: 'À propos',
     education: 'Formation',
+    certifications: 'Certifications',
     experience: 'Expérience professionnelle',
     hardSkills: 'Compétences techniques',
     softSkills: 'Soft skills',

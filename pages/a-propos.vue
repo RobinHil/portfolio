@@ -36,6 +36,19 @@
       </ol>
     </section>
 
+    <!-- Certifications -->
+    <section v-if="about.certifications?.length" id="certifications" aria-labelledby="certifications-title" class="mb-14">
+      <SectionHeading id="certifications-title" command="ls certifications/" :comment="UI.about.certifications" />
+      <ul class="grid gap-4 sm:grid-cols-2">
+        <li v-for="cert in about.certifications" :key="cert.id" class="term-card p-4">
+          <p class="text-sm text-term-amber">{{ cert.period }}</p>
+          <h3 class="mt-0.5 font-bold text-term-text">{{ cert.title }}</h3>
+          <p class="text-sm text-term-green/90">{{ cert.issuer }}</p>
+          <p v-if="cert.description" class="mt-1.5 text-sm leading-relaxed text-term-dim">{{ cert.description }}</p>
+        </li>
+      </ul>
+    </section>
+
     <!-- Expérience -->
     <section id="experience" aria-labelledby="experience-title" class="mb-14">
       <SectionHeading id="experience-title" command="cat experience.log" :comment="UI.about.experience" />
