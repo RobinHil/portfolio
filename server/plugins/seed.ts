@@ -111,6 +111,20 @@ async function seedContent() {
           + 'nouvelles solutions.',
         order: 2,
       },
+      {
+        role: 'Vacataire, cuisine centrale',
+        company: 'Mairie de Sorgues',
+        period: 'Août 2023',
+        description: 'Renfort estival en cuisine centrale municipale.',
+        order: 3,
+      },
+      {
+        role: 'Vacataire, service technique',
+        company: 'Mairie de Sorgues',
+        period: 'Août 2022',
+        description: 'Renfort estival au service technique de la commune.',
+        order: 4,
+      },
     ],
   })
 
@@ -137,8 +151,8 @@ async function seedContent() {
         description: 'Spécialités mathématiques et informatique, option européenne anglais.',
         order: 2,
       },
-      // Certifications : le profil LinkedIn en annonce 8, seules ces deux-ci
-      // étaient lisibles dans la page fournie. Les six autres restent à ajouter.
+      // Certifications. Le profil LinkedIn en annonce 8 : voici les quatre
+      // Fortinet, les autres restent à ajouter depuis /admin.
       {
         title: 'Fortinet NSE 4 Certified in FortiOS',
         institution: 'Fortinet',
@@ -152,6 +166,20 @@ async function seedContent() {
         period: 'Février 2026 - Février 2028',
         description: null,
         order: 4,
+      },
+      {
+        title: 'Fortinet NSE 2 Certified in Cybersecurity',
+        institution: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
+        description: null,
+        order: 5,
+      },
+      {
+        title: 'Fortinet NSE 1 Certified in Cybersecurity',
+        institution: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
+        description: null,
+        order: 6,
       },
     ],
   })
