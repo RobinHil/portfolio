@@ -64,11 +64,11 @@ async function seedContent() {
       fullName: 'Robin HILAIRE',
       title: 'Apprenti ingénieur en administration système et cybersécurité',
       intro:
-        "En alternance chez OPALE informatique, sur l'administration système et réseau d'une infrastructure "
-        + "d'imagerie médicale, et en cycle ingénieur à l'EPITA, majeure cybersécurité et administration système. "
-        + "Je construis aussi des applications web de bout en bout, du schéma de base de données au reverse proxy "
-        + "qui les sert, et j'héberge la plupart moi-même. Ce qui m'intéresse dans la sécurité, c'est le concret : "
-        + "durcir ce qu'on vient d'écrire, comprendre par où ça casse, garder un déploiement reproductible.",
+        "En alternance chez OPALE informatique, sur l'administration système et réseau d'infrastructures client, "
+        + "et en cycle ingénieur à l'EPITA, majeure cybersécurité et administration système. Je construis aussi "
+        + 'des applications web de bout en bout, du schéma de base de données au reverse proxy qui les sert, et '
+        + "j'administre le serveur qui les héberge. Ce qui m'intéresse dans la sécurité, c'est le concret : "
+        + "comprendre par où ça casse, et garder un déploiement reproductible.",
       email: 'hilairerob84@gmail.com',
       linkedin: 'https://www.linkedin.com/in/hilaire-robin',
       github: 'https://github.com/RobinHil',
@@ -84,7 +84,7 @@ async function seedContent() {
         company: 'OPALE informatique, Paris',
         period: 'Septembre 2025 - aujourd\'hui',
         description:
-          "Alternance sur l'infrastructure d'imagerie médicale de l'entreprise : administration des systèmes "
+          "Alternance sur les infrastructures gérées par l'entreprise : administration des systèmes "
           + 'et du réseau, et travaux autour de la norme DICOM.',
         order: 0,
       },
@@ -107,7 +107,7 @@ async function seedContent() {
         description:
           "Mise en place et maintenance, matérielle et logicielle, d'un serveur d'imagerie médicale (PACS, norme "
           + 'DICOM). Conteneurisation Docker des services associés (SSO, journalisation), sécurisation de '
-          + "l'infrastructure par un SSO OpenID Connect, et R&D sur l'architecture déployée pour y intégrer de "
+          + "l'infrastructure par un SSO, et R&D sur l'architecture déployée pour y intégrer de "
           + 'nouvelles solutions.',
         order: 2,
       },
@@ -151,54 +151,47 @@ async function seedContent() {
         description: 'Spécialités mathématiques et informatique, option européenne anglais.',
         order: 2,
       },
-      // Certifications. Le profil LinkedIn en annonce 8 : voici les quatre
-      // Fortinet, les autres restent à ajouter depuis /admin.
-      {
-        title: 'Fortinet NSE 4 Certified in FortiOS',
-        institution: 'Fortinet',
-        period: 'Juillet 2026 - Juillet 2028',
-        description: 'Certification pare-feu FortiGate : politiques de filtrage, VPN, inspection du trafic.',
-        order: 3,
-      },
-      {
-        title: 'Fortinet NSE 3 Certified in Cybersecurity',
-        institution: 'Fortinet',
-        period: 'Février 2026 - Février 2028',
-        description: null,
-        order: 4,
-      },
-      {
-        title: 'Fortinet NSE 2 Certified in Cybersecurity',
-        institution: 'Fortinet',
-        period: 'Février 2026 - Février 2028',
-        description: null,
-        order: 5,
-      },
-      {
-        title: 'Fortinet NSE 1 Certified in Cybersecurity',
-        institution: 'Fortinet',
-        period: 'Février 2026 - Février 2028',
-        description: null,
-        order: 6,
-      },
     ],
   })
 
   await prisma.certification.createMany({
     data: [
       {
-        title: 'Certification placeholder - analyse de risques',
-        issuer: 'Organisme émetteur',
-        period: 'Mars 2024',
-        description: 'Remplacez ces entrées depuis /admin/certifications.',
+        title: 'Fortinet NSE 4 Certified in FortiOS',
+        issuer: 'Fortinet',
+        period: 'Juillet 2026 - Juillet 2028',
+        description: 'Pare-feu FortiGate : politiques de filtrage, VPN, inspection du trafic.',
         order: 0,
       },
       {
-        title: 'Certification placeholder - sécurité réseau',
-        issuer: 'Organisme émetteur',
-        period: 'Janvier 2023 - Janvier 2026',
+        title: 'Fortinet NSE 3 Certified in Cybersecurity',
+        issuer: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
         description: null,
         order: 1,
+      },
+      {
+        title: 'Fortinet NSE 2 Certified in Cybersecurity',
+        issuer: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
+        description: null,
+        order: 2,
+      },
+      {
+        title: 'Fortinet NSE 1 Certified in Cybersecurity',
+        issuer: 'Fortinet',
+        period: 'Février 2026 - Février 2028',
+        description: null,
+        order: 3,
+      },
+      {
+        title: 'MOOC EBIOS Risk Manager',
+        issuer: "Club EBIOS, validé par l'ANSSI",
+        period: 'Octobre 2025',
+        description:
+          "Fondamentaux de la méthode d'analyse de risques EBIOS Risk Manager, conçue par l'ANSSI. "
+          + 'Formation en ligne bâtie avec le Club EBIOS, certification validée par l\'ANSSI.',
+        order: 4,
       },
     ],
   })
@@ -218,8 +211,8 @@ async function seedContent() {
       { name: 'React, Next.js', type: 'hard', category: 'Développement', order: 1 },
       { name: 'Angular, Ionic', type: 'hard', category: 'Développement', order: 2 },
       { name: 'Node.js, Express', type: 'hard', category: 'Développement', order: 3 },
-      { name: 'Tailwind CSS, Sass', type: 'hard', category: 'Développement', order: 4 },
-      { name: 'Three.js, WebGL', type: 'hard', category: 'Développement', order: 5 },
+      { name: 'Tailwind CSS', type: 'hard', category: 'Développement', order: 4 },
+      { name: 'Three.js', type: 'hard', category: 'Développement', order: 5 },
       { name: 'Qt, PyQt', type: 'hard', category: 'Développement', order: 6 },
       { name: 'Prisma', type: 'hard', category: 'Développement', order: 7 },
       { name: 'PostgreSQL, MySQL, SQLite', type: 'hard', category: 'Développement', order: 8 },
@@ -230,15 +223,13 @@ async function seedContent() {
       { name: 'Pare-feux (Fortinet FortiOS)', type: 'hard', category: 'Systèmes et réseau', order: 2 },
       { name: 'Docker et Compose', type: 'hard', category: 'Systèmes et réseau', order: 3 },
       { name: 'nginx, Caddy', type: 'hard', category: 'Systèmes et réseau', order: 4 },
-      { name: 'Administration de VPS, auto-hébergement', type: 'hard', category: 'Systèmes et réseau', order: 5 },
+      { name: 'Administration de VPS', type: 'hard', category: 'Systèmes et réseau', order: 5 },
       { name: 'Git, intégration continue', type: 'hard', category: 'Systèmes et réseau', order: 6 },
       // Hard skills - Sécurité
-      { name: 'Durcissement applicatif (CSP, CSRF, en-têtes)', type: 'hard', category: 'Sécurité', order: 0 },
-      { name: 'Authentification, sessions, hachage', type: 'hard', category: 'Sécurité', order: 1 },
-      { name: 'SSO et OpenID Connect', type: 'hard', category: 'Sécurité', order: 2 },
-      { name: 'Reverse proxy et TLS', type: 'hard', category: 'Sécurité', order: 3 },
-      { name: 'Limitation de débit et anti-abus', type: 'hard', category: 'Sécurité', order: 4 },
-      { name: 'Veille et gestion des vulnérabilités', type: 'hard', category: 'Sécurité', order: 5 },
+      { name: 'Authentification, sessions, hachage', type: 'hard', category: 'Sécurité', order: 0 },
+      { name: 'SSO', type: 'hard', category: 'Sécurité', order: 1 },
+      { name: 'Reverse proxy et TLS', type: 'hard', category: 'Sécurité', order: 2 },
+      { name: 'Limitation de débit et anti-abus', type: 'hard', category: 'Sécurité', order: 3 },
       // Soft skills
       { name: 'Autonomie', type: 'soft', order: 0 },
       { name: 'Curiosité', type: 'soft', order: 1 },
