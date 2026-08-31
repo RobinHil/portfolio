@@ -1,4 +1,5 @@
 import PDFDocument from 'pdfkit'
+import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { getUploadsDir } from '../utils/uploads'
@@ -220,10 +221,52 @@ function renderCv(data: CvData, photo: Buffer | null, scale: number): Promise<{ 
   return done.then(pdf => ({ pdf, pages }))
 }
 
+/**
+ * Cache du PDF rendu, en mémoire du processus.
+ *
+ * La route est publique, sans authentification, et chaque appel déclenchait
+ * jusqu'à neuf constructions PDFKit complètes (voir la dichotomie plus bas).
+ * Sur un VPS partagé avec records, Caddy et cinq sites statiques, une simple
+ * boucle sur cette URL suffisait à saturer le CPU.
+ *
+ * La clé est une empreinte des données du CV : une modification depuis l'admin
+ * l'invalide toute seule, sans avoir à câbler d'invalidation explicite dans les
+ * dix routes qui peuvent toucher au contenu. Les requêtes SQLite restent à
+ * chaque appel - six SELECT sur des tables minuscules, sans commune mesure avec
+ * les rendus qu'elles permettent d'éviter.
+ */
+let cachePdf: { empreinte: string, pdf: Buffer } | null = null
+
 export default defineEventHandler(async (event) => {
   const data = await loadData()
   if (!data.profile) {
     throw createError({ statusCode: 404, statusMessage: 'Profil non initialisé' })
+  }
+
+  const safeName = data.profile.fullName.normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase()
+  const empreinte = createHash('sha1').update(JSON.stringify(data)).digest('hex')
+  const etag = `"${empreinte}"`
+
+  const enTetes = () => {
+    setHeader(event, 'Content-Type', 'application/pdf')
+    setHeader(event, 'Content-Disposition', `attachment; filename="cv-${safeName}.pdf"`)
+    setHeader(event, 'ETag', etag)
+    // Le CV ne change que sur une modification depuis l'admin : quelques
+    // minutes de fraîcheur suffisent, et permettent à Cloudflare d'absorber
+    // les rafales sans jamais atteindre l'origine.
+    setHeader(event, 'Cache-Control', 'public, max-age=300')
+  }
+
+  if (getHeader(event, 'if-none-match') === etag) {
+    enTetes()
+    setResponseStatus(event, 304)
+    return null
+  }
+
+  if (cachePdf?.empreinte === empreinte) {
+    enTetes()
+    return cachePdf.pdf
   }
 
   const photo = await loadPhoto(data.profile.photoUrl)
@@ -260,9 +303,7 @@ export default defineEventHandler(async (event) => {
     result = best ?? await renderCv(data as CvData, photo, SCALE_MIN)
   }
 
-  const safeName = data.profile.fullName.normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase()
-  setHeader(event, 'Content-Type', 'application/pdf')
-  setHeader(event, 'Content-Disposition', `attachment; filename="cv-${safeName}.pdf"`)
+  cachePdf = { empreinte, pdf: result.pdf }
+  enTetes()
   return result.pdf
 })

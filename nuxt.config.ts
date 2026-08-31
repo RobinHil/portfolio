@@ -87,6 +87,16 @@ export default defineNuxtConfig({
         rateLimiter: { tokensPerInterval: 3, interval: 60000, throwError: true },
       },
     },
+    '/api/cv': {
+      security: {
+        // La génération du PDF fait jusqu'à neuf rendus PDFKit (dichotomie sur
+        // l'échelle typographique). Le résultat est désormais mis en cache
+        // dans cv.get.ts, mais un cache froid reste coûteux : on borne aussi
+        // le débit pour qu'une boucle sur cette URL ne puisse pas saturer le
+        // CPU du VPS, partagé avec le reste de la stack.
+        rateLimiter: { tokensPerInterval: 10, interval: 60000, throwError: true },
+      },
+    },
     '/api/uploads': {
       security: {
         // Upload d'images admin : autorise des corps multipart jusqu'à ~40 Mo
