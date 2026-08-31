@@ -73,7 +73,7 @@ Tout le contenu s'édite depuis **/admin** (profil & liens, projets, formation, 
 
 ## Sécurité (points vérifiables)
 
-- Rate limiting : 5 tentatives/min par IP sur `/api/auth/login`, 3/min sur `/api/contact` (429 au-delà) - `routeRules` dans [nuxt.config.ts](nuxt.config.ts) ; s'y ajoute un plafond global de 60 échecs par fenêtre de 15 min, indépendant de l'IP ([server/utils/loginThrottle.ts](server/utils/loginThrottle.ts))
+- Rate limiting : 5 tentatives/min par IP sur `/api/auth/login`, 3/min sur `/api/contact`, 10/min sur `/api/cv` (429 au-delà) - `routeRules` dans [nuxt.config.ts](nuxt.config.ts) ; s'y ajoute un plafond global de 60 échecs par fenêtre de 15 min, indépendant de l'IP ([server/utils/loginThrottle.ts](server/utils/loginThrottle.ts))
 - CSRF : toutes les mutations (POST/PUT/PATCH/DELETE) exigent un token `nuxt-csurf` (403 sinon)
 - Headers : CSP avec nonces, `X-Frame-Options: DENY`, `X-Content-Type-Options`, `Referrer-Policy`, HSTS
 - Sessions : cookies scellés/chiffrés (`nuxt-auth-utils`), mot de passe hashé en base (scrypt)
