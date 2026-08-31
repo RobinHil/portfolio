@@ -78,3 +78,12 @@ Tout le contenu s'édite depuis **/admin** (profil & liens, projets, formation, 
 - Headers : CSP avec nonces, `X-Frame-Options: DENY`, `X-Content-Type-Options`, `Referrer-Policy`, HSTS
 - Sessions : cookies scellés/chiffrés (`nuxt-auth-utils`), mot de passe hashé en base (scrypt)
 - Validation : schémas zod sur toutes les entrées API, whitelist de champs (pas de mass assignment)
+
+## Licence
+
+Le code est sous [licence MIT](LICENSE).
+
+Le **contenu personnel n'est pas couvert** : textes de profil et de CV, photo
+(`public/images/profile.jpg`), captures de projets (`seed/images/`) et données
+saisies depuis `/admin` restent la propriété de leur auteur. Reprenez le code,
+pas l'identité.
