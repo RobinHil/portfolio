@@ -276,7 +276,7 @@ async function seedContent() {
  * ou URL https complète. `repoUrl` / `demoUrl` : URL ou null.
  *
  * Les `demoUrl` pointent vers les sous-domaines prévus au déploiement :
- * ils ne répondront qu'une fois robinhi.fr enregistré et les applications
+ * ils ne répondront qu'une fois robinhilaire.fr enregistré et les applications
  * mises en ligne.
  * ---------------------------------------------------------------- */
 const SEED_PROJECTS = [
@@ -289,7 +289,7 @@ const SEED_PROJECTS = [
       + 'programmée, et suppression douce pour ne jamais perdre un disque retiré de la collection.',
     tags: ['Next.js', 'TypeScript', 'Prisma', 'SQLite', 'Tailwind CSS', 'API Discogs', 'Docker'],
     repoUrl: 'https://github.com/RobinHil/records',
-    demoUrl: 'https://records.robinhi.fr',
+    demoUrl: 'https://records.robinhilaire.fr',
     image: 'records-mur.jpg',
     gallery: ['records-fiche.jpg'],
     order: 0,
@@ -302,7 +302,7 @@ const SEED_PROJECTS = [
       + 'chaque section sans toucher au code, et un CV PDF compatible ATS généré à la volée depuis la base.',
     tags: ['Nuxt', 'Vue', 'TypeScript', 'Prisma', 'SQLite', 'Tailwind CSS', 'Docker'],
     repoUrl: 'https://github.com/RobinHil/portfolio',
-    demoUrl: 'https://portfolio.robinhi.fr',
+    demoUrl: 'https://portfolio.robinhilaire.fr',
     image: 'portfolio-terminal.jpg',
     gallery: ['portfolio-projets.jpg'],
     order: 1,
@@ -316,7 +316,7 @@ const SEED_PROJECTS = [
       + 'la machine, et le même contenu produit toujours exactement le même son.',
     tags: ['React', 'TypeScript', 'Tone.js', 'Web Audio', 'ffmpeg.wasm', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/echo',
-    demoUrl: 'https://echo.robinhi.fr',
+    demoUrl: 'https://echo.robinhilaire.fr',
     image: 'echo-lecteur.jpg',
     gallery: ['echo-saisie.jpg'],
     order: 2,
@@ -329,7 +329,7 @@ const SEED_PROJECTS = [
       + '2880 × 1440 cellules, et un suivi de la population génération par génération.',
     tags: ['React', 'TypeScript', 'Three.js', 'WebGL', 'Zustand', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/lifeglobe',
-    demoUrl: 'https://lifeglobe.robinhi.fr',
+    demoUrl: 'https://lifeglobe.robinhilaire.fr',
     image: 'lifeglobe-hologramme.jpg',
     gallery: ['lifeglobe-continents.jpg'],
     order: 3,
@@ -342,7 +342,7 @@ const SEED_PROJECTS = [
       + 'toutes les deux minutes trente sans reconstruire les marqueurs, et mode plein écran.',
     tags: ['JavaScript', 'Leaflet', 'SCSS', 'Webpack', 'Open data'],
     repoUrl: 'https://github.com/RobinHil/ve-lib-paris',
-    demoUrl: 'https://velib.robinhi.fr',
+    demoUrl: 'https://velib.robinhilaire.fr',
     image: 'velib-carte.jpg',
     gallery: [],
     order: 4,
@@ -355,7 +355,7 @@ const SEED_PROJECTS = [
       + 'capitalisation, offre en circulation et deux graphiques de prix.',
     tags: ['JavaScript', 'Chart.js', 'Bootstrap', 'Mustache', 'Webpack', 'API CoinGecko'],
     repoUrl: 'https://github.com/RobinHil/info-crypto',
-    demoUrl: 'https://crypto.robinhi.fr',
+    demoUrl: 'https://crypto.robinhilaire.fr',
     image: 'infocrypto-grille.jpg',
     gallery: ['infocrypto-fiche.jpg'],
     order: 5,
@@ -368,7 +368,7 @@ const SEED_PROJECTS = [
       + 'thème partagé, Markdown et coloration syntaxique.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Markdown'],
     repoUrl: 'https://github.com/RobinHil/react-slides',
-    demoUrl: 'https://slides.robinhi.fr',
+    demoUrl: 'https://slides.robinhilaire.fr',
     image: 'react-slides-titre.jpg',
     gallery: ['react-slides-code.jpg'],
     order: 6,
