@@ -163,26 +163,17 @@ async function seedContent() {
         description: 'Pare-feu FortiGate : politiques de filtrage, VPN, inspection du trafic.',
         order: 0,
       },
+      // Les trois premiers niveaux sont regroupés : mêmes dates, même niveau
+      // d'introduction, et aucun n'a de description propre. Trois lignes
+      // distinctes occupaient la place sans rien apprendre de plus.
       {
-        title: 'Fortinet NSE 3 Certified in Cybersecurity',
+        title: 'Fortinet NSE 1 à 3 Certified in Cybersecurity',
         issuer: 'Fortinet',
         period: 'Février 2026 - Février 2028',
-        description: null,
+        description:
+          'Les trois niveaux introductifs du cursus Fortinet : panorama des menaces, produits de '
+          + 'sécurité réseau et notions fondamentales, préalables au NSE 4.',
         order: 1,
-      },
-      {
-        title: 'Fortinet NSE 2 Certified in Cybersecurity',
-        issuer: 'Fortinet',
-        period: 'Février 2026 - Février 2028',
-        description: null,
-        order: 2,
-      },
-      {
-        title: 'Fortinet NSE 1 Certified in Cybersecurity',
-        issuer: 'Fortinet',
-        period: 'Février 2026 - Février 2028',
-        description: null,
-        order: 3,
       },
       {
         title: 'MOOC EBIOS Risk Manager',
@@ -191,7 +182,7 @@ async function seedContent() {
         description:
           "Fondamentaux de la méthode d'analyse de risques EBIOS Risk Manager, conçue par l'ANSSI. "
           + 'Formation en ligne bâtie avec le Club EBIOS, certification validée par l\'ANSSI.',
-        order: 4,
+        order: 2,
       },
     ],
   })
@@ -304,35 +295,63 @@ const SEED_PROJECTS = [
     repoUrl: 'https://github.com/RobinHil/portfolio',
     demoUrl: 'https://portfolio.robinhilaire.fr',
     image: 'portfolio-terminal.jpg',
-    gallery: ['portfolio-projets.jpg'],
+    gallery: ['portfolio-projets.jpg', 'portfolio-apropos.jpg'],
     order: 1,
+  },
+  {
+    title: 'Infra, un serveur web déployé en une commande',
+    description:
+      'Un playbook Ansible qui met en ligne sept applications web sur un VPS Oracle ARM, derrière Cloudflare. '
+      + "Les sites statiques n'ont pas de conteneur : leur image est construite, son contenu web extrait, et Caddy "
+      + 'le sert directement. Aucun conteneur ne tourne en root, les ports 80 et 443 '
+      + "n'acceptent que les plages Cloudflare, et les bases SQLite sont sauvegardées chaque nuit. Un manuel jumeau "
+      + 'rejoue chaque rôle à la main, commande par commande.',
+    tags: ['Ansible', 'Docker', 'Caddy', 'Ubuntu', 'Cloudflare', 'fail2ban', 'Grafana'],
+    // Ni dépôt ni démo, et les deux pour de bonnes raisons : le dépôt est privé
+    // (il décrit l'infrastructure et sa surface d'attaque), et un playbook n'est
+    // pas une application web. Un lien vers un dépôt privé afficherait une 404 à
+    // tous les visiteurs. L'interface masque la barre de liens quand les deux
+    // sont nuls, bordure comprise.
+    repoUrl: null,
+    demoUrl: null,
+    // Photographie Unsplash plutôt qu'une capture : un playbook n'a pas
+    // d'interface à montrer. Le domaine images.unsplash.com est autorisé à la
+    // fois par la CSP et par `image.domains` dans nuxt.config.ts.
+    //
+    // Galerie vide, à dessein : l'image est une pure illustration, un carrousel
+    // de photos décoratives n'apprendrait rien. La modale compose sa liste avec
+    // [imageUrl, ...gallery] et n'affiche flèches, pastilles et compteur que
+    // si elle contient plus d'une entrée : il ne restera que l'image seule.
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1440&h=900&fit=crop&q=80&fm=jpg',
+    gallery: [],
+    order: 2,
   },
   {
     title: "Echo, sonification de textes et d'images",
     description:
-      'Transforme un texte ou une image en pièce musicale, entièrement dans le navigateur. Aucune IA générative : '
-      + "un mapping déterministe entre les caractéristiques de l'entrée et des paramètres musicaux, rendu hors-ligne "
-      + 'par Tone.js, puis exporté en MP3, FLAC, WAV ou OGG via ffmpeg compilé en WebAssembly. Aucune donnée ne quitte '
-      + 'la machine, et le même contenu produit toujours exactement le même son.',
-    tags: ['React', 'TypeScript', 'Tone.js', 'Web Audio', 'ffmpeg.wasm', 'Vite'],
+      "Transforme un texte ou une image en pièce musicale, entièrement dans le navigateur. Aucune IA générative : "
+      + "l'analyse de l'entrée en dégage une intention musicale, traduite en motifs Strudel puis jouée hors ligne, "
+      + 'et le résultat se télécharge en MP3, FLAC, WAV ou OGG. Aucune donnée ne quitte la machine, et le même '
+      + 'contenu produit toujours exactement le même son. Projet entièrement vibe codé.',
+    tags: ['React', 'TypeScript', 'Strudel', 'Tone.js', 'Web Audio', 'ffmpeg.wasm', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/echo',
     demoUrl: 'https://echo.robinhilaire.fr',
-    image: 'echo-lecteur.jpg',
-    gallery: ['echo-saisie.jpg'],
-    order: 2,
+    image: 'echo-saisie.jpg',
+    gallery: ['echo-resultat.jpg', 'echo-historique.jpg'],
+    order: 3,
   },
   {
     title: 'LifeGlobe, le jeu de la vie sur un globe',
     description:
       'Le jeu de la vie de Conway projeté sur une Terre en 3D : les cellules ne vivent que sur les continents '
-      + 'émergés, les océans restent vides. Deux rendus, hologramme et satellite, une grille configurable jusqu\'à '
+      + 'émergés, les océans restent vides. Deux rendus, hologramme et réaliste, une grille configurable jusqu\'à '
       + '2880 × 1440 cellules, et un suivi de la population génération par génération.',
     tags: ['React', 'TypeScript', 'Three.js', 'WebGL', 'Zustand', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/lifeglobe',
     demoUrl: 'https://lifeglobe.robinhilaire.fr',
     image: 'lifeglobe-hologramme.jpg',
-    gallery: ['lifeglobe-continents.jpg'],
-    order: 3,
+    gallery: ['lifeglobe-replie.jpg', 'lifeglobe-realiste.jpg', 'lifeglobe-dense.jpg'],
+    order: 4,
   },
   {
     title: "Vélib' Paris, carte en temps réel",
@@ -344,8 +363,8 @@ const SEED_PROJECTS = [
     repoUrl: 'https://github.com/RobinHil/ve-lib-paris',
     demoUrl: 'https://velib.robinhilaire.fr',
     image: 'velib-carte.jpg',
-    gallery: [],
-    order: 4,
+    gallery: ['velib-station.jpg', 'velib-zoom.jpg'],
+    order: 5,
   },
   {
     title: 'InfoCrypto, suivi des cryptomonnaies',
@@ -358,7 +377,7 @@ const SEED_PROJECTS = [
     demoUrl: 'https://crypto.robinhilaire.fr',
     image: 'infocrypto-grille.jpg',
     gallery: ['infocrypto-fiche.jpg'],
-    order: 5,
+    order: 6,
   },
   {
     title: 'React Slides, des présentations en composants',
@@ -370,8 +389,61 @@ const SEED_PROJECTS = [
     repoUrl: 'https://github.com/RobinHil/react-slides',
     demoUrl: 'https://slides.robinhilaire.fr',
     image: 'react-slides-titre.jpg',
-    gallery: ['react-slides-code.jpg'],
-    order: 6,
+    gallery: [
+      'react-slides-code.jpg',
+      'react-slides-markdown.jpg',
+      'react-slides-tables.jpg',
+      'react-slides-couleurs.jpg',
+    ],
+    order: 7,
+  },
+  {
+    title: 'APOD Wallpaper, le ciel du jour en fond d\'écran',
+    description:
+      "Une application de bureau qui récupère chaque jour l'image astronomique du jour publiée par la NASA et la "
+      + 'pose en fond d\'écran. Elle vit dans la barre des menus, sans fenêtre le reste du temps. Trois modes : '
+      + 'image du jour, date au hasard dans les archives depuis 1995, ou date choisie. Les images plus petites que '
+      + 'l\'écran sont posées sur un flou d\'elles-mêmes plutôt que déformées, et les entrées vidéo sont ramenées à '
+      + 'une image fixe. Écrite en Rust avec Tauri, le panneau de réglages en React. Publiée pour macOS dans un '
+      + 'premier temps, les autres plateformes étant l\'objectif.',
+    tags: ['Rust', 'Tauri 2', 'React', 'TypeScript', 'Multiplateforme', 'API NASA'],
+    // Depot prive pour l'instant, et pas de demo : une application de bureau ne
+    // se visite pas. Une page de presentation viendra avec l'ouverture du depot.
+    repoUrl: null,
+    demoUrl: null,
+    // Fonds d'ecran reellement produits par l'application, recuperes dans son
+    // stockage. Le premier est celui du jour. Les deux suivants sont des images
+    // NASA du domaine public, choisies pour cela : les APOD signees par un
+    // photographe restent la propriete de leur auteur.
+    image: 'apod-aujourdhui.jpg',
+    gallery: ['apod-interface.jpg', 'apod-webb.jpg', 'apod-horsehead.jpg'],
+    order: 8,
+  },
+  {
+    title: 'WLKOM, un rootkit Linux pédagogique',
+    description:
+      "Un rootkit Linux écrit en module kernel, avec deux objectifs : apprendre la logique interne de Linux, "
+      + 'de son kernel et de ses modules, et comprendre par où un système se fait prendre. '
+      + 'Chargé sur une machine victime, il rappelle de lui-même la machine de contrôle et attend des ordres, se '
+      + "reconnecte s'il perd le lien et survit au redémarrage. Il se retire des listes de modules, masque des "
+      + 'lignes dans les fichiers en détournant un appel système de lecture, et obfusque ses échanges. En face, '
+      + "un programme d'administration en terminal reçoit la connexion, authentifie le module et lui passe des "
+      + 'commandes. Le tout se déroule entre deux machines virtuelles isolées, jamais sur une machine réelle.',
+    tags: ['C', 'Module kernel Linux', 'Hook syscall', 'Python', 'Sockets TCP', 'QEMU', 'Argon2'],
+    // Depot prive tant qu'il n'a pas ete nettoye de ses references d'origine.
+    // Pas de demo non plus, et c'est heureux.
+    repoUrl: null,
+    demoUrl: null,
+    // Le rootkit vise un Linux x86_64 et ne peut pas tourner ici : le serveur
+    // du programme attaquant utilise des options de socket propres a Linux.
+    //
+    // La console est donc le rendu de sa propre fonction d'affichage, appelee
+    // avec les formats de messages qu'il produit reellement. Les ecrans de
+    // configuration et de connexion, eux, sont du Python portable : cette
+    // seconde capture est leur sortie authentique, obtenue en les executant.
+    image: 'rootkit-tui.jpg',
+    gallery: ['rootkit-login.jpg'],
+    order: 9,
   },
 ]
 
