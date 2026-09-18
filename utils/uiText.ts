@@ -14,7 +14,6 @@ export const UI = {
     about: 'à-propos',
     projects: 'projets',
     contact: 'contact',
-    admin: 'admin',
     openMenu: 'Ouvrir le menu de navigation',
     closeMenu: 'Fermer le menu de navigation',
     mainNavLabel: 'Navigation principale',
@@ -56,19 +55,19 @@ export const UI = {
   contact: {
     metaTitle: 'Contact - me joindre',
     metaDescription:
-      'Contactez Robin HILAIRE : formulaire de contact, email, LinkedIn et GitHub.',
+      'Contactez Robin HILAIRE : email, LinkedIn et GitHub.',
     h1: 'Contact',
     subtitle: '$ ping -c 1 robin.hilaire - réponse sous 48 h',
-    formTitle: './envoyer-un-message.sh',
+    mailTitle: './ecrire-un-message.sh',
     linksTitle: 'cat liens.txt',
-    name: 'Nom',
-    email: 'Email',
-    message: 'Message',
-    send: 'Envoyer le message',
-    sending: 'Envoi en cours…',
-    success: 'Message envoyé - je vous répondrai rapidement.',
-    error: 'Échec de l\'envoi. Vérifiez les champs et réessayez.',
-    rateLimited: 'Trop de messages envoyés en peu de temps. Réessayez dans une minute.',
+    // Le site est statique : il n'y a plus de serveur pour recevoir un
+    // formulaire, donc plus de formulaire. Le lien mailto ouvre le client de
+    // messagerie du visiteur avec l'objet deja rempli.
+    mailSubject: 'Prise de contact depuis le portfolio',
+    mailCta: 'Écrire un message',
+    mailHint:
+      'Le bouton ouvre votre client de messagerie. Si rien ne se passe, '
+      + "l'adresse est juste à côté, à copier.",
   },
   notFound: {
     title: 'Page introuvable',

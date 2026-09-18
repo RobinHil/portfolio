@@ -17,7 +17,6 @@
           :alt="UI.about.photoAlt"
           width="160"
           height="160"
-          sizes="128px md:160px"
           class="mx-auto h-32 w-32 rounded-md border border-term-border object-cover md:h-40 md:w-40"
         />
         <div>
@@ -52,7 +51,8 @@
 <script setup lang="ts">
 import { ArrowRight } from 'lucide-vue-next'
 
-const { data: about } = await useFetch('/api/about')
+// Le contenu est un module du depot, plus une requete : le site est statique.
+const about = ABOUT
 
 usePageSeo({
   title: UI.home.metaTitle,

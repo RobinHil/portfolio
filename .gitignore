@@ -24,14 +24,3 @@ logs
 # Local env files
 .env
 .env.*
-!.env.example
-
-/generated/prisma
-
-# Base de données SQLite locale
-prisma/*.db
-prisma/*.db-journal
-prisma/*.backup-*
-
-# Images uploadées en dev (en prod : volume Docker)
-/data

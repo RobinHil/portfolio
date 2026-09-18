@@ -46,7 +46,6 @@
                 :alt="`${project.title} - photo ${imageIndex + 1} sur ${images.length}`"
                 width="800"
                 height="500"
-                sizes="100vw sm:672px"
                 class="aspect-[16/10] w-full object-cover"
               />
               <template v-if="images.length > 1">

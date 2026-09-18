@@ -8,7 +8,7 @@ import { Server, Network, ShieldCheck, Code, Terminal } from 'lucide-vue-next'
 
 const props = defineProps<{ name: string }>()
 
-// Icône déduite du nom de catégorie (champ libre côté admin) - fallback : Terminal
+// Icône déduite du nom de catégorie (champ libre dans utils/content.ts) - fallback : Terminal
 const icon = computed(() => {
   const n = props.name.toLowerCase()
   if (/(syst|serveur|server|os)/.test(n)) return Server

@@ -16,7 +16,6 @@
           :alt="UI.projects.screenshotAlt(project.title)"
           width="640"
           height="400"
-          sizes="100vw md:50vw xl:420px"
           loading="lazy"
           class="aspect-[16/10] w-full border-b border-term-border object-cover transition group-hover:opacity-90"
         />
@@ -67,7 +66,8 @@
 <script setup lang="ts">
 import { ArrowRight, ExternalLink, Github } from 'lucide-vue-next'
 
-const { data: projects } = await useFetch('/api/projects', { default: () => [] })
+// Le contenu est un module du depot, plus une requete : le site est statique.
+const projects = PROJECTS
 
 usePageSeo({
   title: UI.projects.metaTitle,
@@ -75,5 +75,5 @@ usePageSeo({
   path: '/projets',
 })
 
-const selected = ref<(typeof projects.value)[number] | null>(null)
+const selected = ref<Project | null>(null)
 </script>

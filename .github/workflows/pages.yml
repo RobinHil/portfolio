@@ -1,0 +1,221 @@
+name: Pages
+
+# Le portfolio est un site statique : `nuxt generate` prerend les quatre pages,
+# le CV en PDF et le robots.txt, et la sortie se sert comme des fichiers. Il n'y
+# a ni base, ni session, ni API a heberger.
+#
+# Pages doit etre regle sur "GitHub Actions" dans Settings > Pages. L'etape
+# configure-pages lit cette configuration au lieu de deviner une adresse, ce
+# qui fait qu'un domaine personnalise fonctionne sans toucher a ce fichier.
+#
+# Une reserve a connaitre : nuxt-security posait la CSP et les en-tetes de
+# securite du site. Pages ne pose aucun en-tete personnalise, le site publie
+# ici n'en a donc plus.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Construit le site et prouve qu'il vaut d'etre publie. Une pull request
+  # s'arrete ici : rien n'est publie depuis une branche.
+  build:
+    name: Build and check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      # pnpm avant setup-node, qui a besoin de le trouver dans le PATH pour
+      # mettre en cache son store. La version vient de `packageManager` dans
+      # package.json, les deux ne peuvent donc pas diverger.
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - uses: actions/configure-pages@v6
+        id: pages
+
+      # Les trois adresses que le site a besoin de connaitre, demandees a Pages
+      # plutot qu'ecrites en dur : la reponse est juste pour un site de projet,
+      # un site utilisateur et un domaine personnalise. Elles ne sont pas
+      # interchangeables, le detail est commente en tete de nuxt.config.ts.
+      #
+      # base_path vaut "/portfolio" ou "" (site utilisateur), jamais "/", d'ou
+      # la normalisation vers une valeur terminee par un slash.
+      - name: Generate the static site
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          NUXT_SITE_URL: ${{ steps.pages.outputs.origin }}
+        run: |
+          set -euo pipefail
+          export NUXT_APP_BASE_URL="${BASE_PATH%/}/"
+          echo "base: $NUXT_APP_BASE_URL"
+          echo "site: $NUXT_PUBLIC_SITE_URL"
+          pnpm generate
+
+      # Ce que le prerendu est cense avoir produit, verifie plutot que suppose.
+      # Trois de ces controles ont deja rattrape quelque chose pendant la
+      # migration vers le statique : les favicons de app.head ne portaient pas
+      # le chemin de base, le manifeste pointait des icones a la racine du
+      # domaine, et le sitemap doublait le sous-chemin dans chaque <loc>.
+      - name: Assert the build is complete
+        env:
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          SITE: ${{ steps.pages.outputs.base_url }}
+        run: |
+          set -euo pipefail
+          cd .output/public
+          base="${BASE_PATH%/}/"
+
+          for file in index.html a-propos/index.html projets/index.html \
+                      contact/index.html 404.html cv.pdf robots.txt \
+                      sitemap.xml site.webmanifest images/profile.jpg; do
+            test -f "$file" || { echo "missing: $file"; exit 1; }
+          done
+
+          # Les pages portent leur texte, pas un point de montage vide.
+          grep -q "Robin HILAIRE" index.html
+          grep -q "Fortinet" a-propos/index.html
+          grep -q "LifeGlobe" projets/index.html
+
+          # Tout href/src interne resolu par le site porte le chemin de base.
+          # Les favicons et le manifeste sont le piege : Nuxt ne prefixe pas les
+          # liens ecrits dans app.head, c'est nuxt.config.ts qui le fait.
+          for ref in favicon.svg favicon-32x32.png apple-touch-icon.png site.webmanifest cv.pdf; do
+            grep -q "\"${base}${ref}\"" index.html \
+              || { echo "reference sans chemin de base : $ref"; exit 1; }
+          done
+
+          # Le manifeste designe ses icones en relatif : un chemin absolu y
+          # serait faux sous un sous-chemin, et il n'a aucun moyen de le
+          # connaitre puisqu'il est servi tel quel depuis public/.
+          if grep -oE '"(src|start_url)": *"/' site.webmanifest; then
+            echo "chemin absolu dans site.webmanifest"
+            exit 1
+          fi
+
+          # Chaque asset nomme par la page d'accueil existe bien.
+          for asset in $(grep -oE "(src|href)=\"[^\"]*_nuxt/[^\"]*\"" index.html | cut -d'"' -f2); do
+            relative=".${asset#"${base%/}"}"
+            test -f "$relative" || { echo "dangling asset: $asset"; exit 1; }
+          done
+
+          # Le sitemap annonce les quatre pages, chacune une fois, sous
+          # l'adresse publique complete et sans sous-chemin double.
+          # `route` et non `path` : sous zsh, `path` est la variable liee a PATH,
+          # et l'affecter casse le shell. Le runner est en bash, mais ces
+          # lignes se recopient pour un essai en local.
+          for route in "" /a-propos /projets /contact; do
+            count=$(grep -c "<loc>${SITE%/}${route}</loc>" sitemap.xml || true)
+            test "$count" = "1" || { echo "sitemap: ${SITE%/}${route} vu $count fois"; exit 1; }
+          done
+          grep -q "Sitemap: ${SITE%/}/sitemap.xml" robots.txt
+
+          # Le CV : un PDF d'une seule page, avec du texte reel. Le rendu
+          # cherche par dichotomie la plus grande echelle qui tienne sur une
+          # page ; s'il en produit deux, c'est que le contenu a trop grossi.
+          head -c 5 cv.pdf | grep -q "%PDF-"
+          # L'arbre des pages porte son propre compte : pas besoin de poppler
+          # sur le runner, et c'est moins fragile que de compter les objets.
+          pages=$(grep -aoE "/Count [0-9]+" cv.pdf | head -1 | grep -oE "[0-9]+")
+          test "$pages" = "1" || { echo "cv.pdf fait $pages pages, attendu 1"; exit 1; }
+          grep -aq "Robin HILAIRE" cv.pdf
+
+          echo "output is complete:"
+          du -sh .
+
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: .output/public
+
+  # Publie ce que le build a verifie. Pages exige ces permissions et cet
+  # environnement ; le groupe de concurrence est celui que partagent les
+  # deploiements Pages, et il n'annule pas un deploiement en cours.
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
+
+  # Repose les memes questions au site publie, par le reseau : un deploiement
+  # qui se declare reussi puis sert autre chose, ca arrive. C'est aussi la
+  # seule etape qui exerce le vrai chemin de base.
+  verify:
+    name: Verify what is published
+    if: github.event_name != 'pull_request'
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch the published site
+        env:
+          SITE: ${{ needs.deploy.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          site="${SITE%/}"
+          echo "site: $site"
+
+          # Pages sert la nouvelle version en quelques secondes d'ordinaire,
+          # mais pas toujours instantanement.
+          for attempt in 1 2 3 4 5; do
+            if curl -fsS "$site/" -o /tmp/index.html; then break; fi
+            echo "attempt $attempt failed, waiting"
+            sleep 10
+          done
+
+          curl -fsS "$site/a-propos" -o /tmp/about.html
+          curl -fsS "$site/projets" -o /tmp/projects.html
+          curl -fsS "$site/contact" -o /dev/null
+          curl -fsS "$site/robots.txt" -o /tmp/robots.txt
+          curl -fsS "$site/sitemap.xml" -o /tmp/sitemap.xml
+          curl -fsS "$site/site.webmanifest" -o /dev/null
+          curl -fsS "$site/favicon.svg" -o /dev/null
+
+          grep -q "Robin HILAIRE" /tmp/index.html
+          grep -q "rel=\"canonical\" href=\"$site/a-propos\"" /tmp/about.html
+          grep -q "images/projects/lifeglobe-hologramme.jpg" /tmp/projects.html
+          grep -q "$site/sitemap.xml" /tmp/robots.txt
+          grep -q "<loc>$site/projets</loc>" /tmp/sitemap.xml
+
+          # Une capture de projet et le CV, les deux fichiers dont le chemin est
+          # construit a l'execution : c'est ici qu'une base mal resolue se voit.
+          curl -fsS -o /dev/null "$site/images/projects/lifeglobe-hologramme.jpg"
+          curl -fsS "$site/cv.pdf" -o /tmp/cv.pdf
+          head -c 5 /tmp/cv.pdf | grep -q "%PDF-"
+
+          # Une adresse qui n'existe pas recoit la page 404 du site, qui
+          # n'existe que parce que le prerendu en ecrit une.
+          curl -sS "$site/rien-ici" | grep -qi "introuvable\|404"
+
+          echo "verified $site"

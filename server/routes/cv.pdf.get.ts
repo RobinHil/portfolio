@@ -1,11 +1,16 @@
 import PDFDocument from 'pdfkit'
-import { createHash } from 'node:crypto'
 import { readFile } from 'node:fs/promises'
 import { join } from 'node:path'
-import { getUploadsDir } from '../utils/uploads'
+import { ABOUT } from '../../utils/content'
 
 /**
- * Génération du CV en PDF à la volée, à partir des données de la base.
+ * Génération du CV en PDF, à partir du contenu du site.
+ *
+ * Cette route est prérendue : `nitro.prerender.routes` la liste, elle est donc
+ * exécutée une fois pendant `nuxt generate` et son résultat écrit dans
+ * dist/cv.pdf. Rien ne l'exécute en production, il n'y a pas de serveur - d'où
+ * la disparition du cache mémoire et de l'ETag qu'elle portait : un fichier
+ * statique est déjà mis en cache et validé par l'hébergeur.
  *
  * Contraintes ATS respectées :
  *  - texte réel et sélectionnable (aucune rasterisation) ; la photo est un objet
@@ -19,24 +24,13 @@ import { getUploadsDir } from '../utils/uploads'
  * jusqu'à ce que tout le contenu tienne sur une page A4.
  */
 
-type CvData = {
-  profile: NonNullable<Awaited<ReturnType<typeof loadData>>['profile']>
-  education: Awaited<ReturnType<typeof loadData>>['education']
-  certifications: Awaited<ReturnType<typeof loadData>>['certifications']
-  experience: Awaited<ReturnType<typeof loadData>>['experience']
-  skills: Awaited<ReturnType<typeof loadData>>['skills']
-  interests: Awaited<ReturnType<typeof loadData>>['interests']
-}
+type CvData = ReturnType<typeof loadData>
 
-async function loadData() {
-  const [profile, education, certifications, experience, skills, interests] = await Promise.all([
-    prisma.profile.findUnique({ where: { id: 1 } }),
-    prisma.education.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
-    prisma.certification.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
-    prisma.experience.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
-    prisma.skill.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
-    prisma.interest.findMany({ orderBy: [{ order: 'asc' }, { id: 'asc' }] }),
-  ])
+function loadData() {
+  const { profile, education, certifications, experience, interests } = ABOUT
+  // renderCv filtre lui-même par `type` : on lui redonne la liste à plat, comme
+  // le faisait la table skills.
+  const skills = [...ABOUT.hardSkills, ...ABOUT.softSkills, ...ABOUT.languages]
   return { profile, education, certifications, experience, skills, interests }
 }
 
@@ -54,18 +48,13 @@ async function loadPhoto(photoUrl: string | null | undefined): Promise<Buffer | 
     return null
   }
 
-  if (photoUrl.startsWith('/uploads/')) {
-    try {
-      return await readFile(join(getUploadsDir(), photoUrl.slice('/uploads/'.length)))
-    } catch {
-      return null
-    }
-  }
-
-  // /images/… : dev = public/ à la racine du projet - prod = copié dans .output/public/
+  // /images/… : un fichier de public/. Le prérendu tourne depuis la racine du
+  // projet, mais la sortie est aussi consultée au cas où le rendu ait lieu
+  // après la copie des assets.
   const candidates = [
     join(process.cwd(), 'public', photoUrl),
     join(process.cwd(), '.output/public', photoUrl),
+    join(process.cwd(), 'dist', photoUrl),
   ]
   for (const path of candidates) {
     try {
@@ -221,53 +210,14 @@ function renderCv(data: CvData, photo: Buffer | null, scale: number): Promise<{ 
   return done.then(pdf => ({ pdf, pages }))
 }
 
-/**
- * Cache du PDF rendu, en mémoire du processus.
- *
- * La route est publique, sans authentification, et chaque appel déclenchait
- * jusqu'à neuf constructions PDFKit complètes (voir la dichotomie plus bas).
- * Sur un VPS partagé avec records, Caddy et cinq sites statiques, une simple
- * boucle sur cette URL suffisait à saturer le CPU.
- *
- * La clé est une empreinte des données du CV : une modification depuis l'admin
- * l'invalide toute seule, sans avoir à câbler d'invalidation explicite dans les
- * dix routes qui peuvent toucher au contenu. Les requêtes SQLite restent à
- * chaque appel - six SELECT sur des tables minuscules, sans commune mesure avec
- * les rendus qu'elles permettent d'éviter.
- */
-let cachePdf: { empreinte: string, pdf: Buffer } | null = null
-
 export default defineEventHandler(async (event) => {
-  const data = await loadData()
-  if (!data.profile) {
-    throw createError({ statusCode: 404, statusMessage: 'Profil non initialisé' })
-  }
+  const data = loadData()
 
-  const safeName = data.profile.fullName.normalize('NFD').replace(/[̀-ͯ]/g, '')
+  const safeName = data.profile.fullName.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-|-$/g, '').toLowerCase()
-  const empreinte = createHash('sha1').update(JSON.stringify(data)).digest('hex')
-  const etag = `"${empreinte}"`
 
-  const enTetes = () => {
-    setHeader(event, 'Content-Type', 'application/pdf')
-    setHeader(event, 'Content-Disposition', `attachment; filename="cv-${safeName}.pdf"`)
-    setHeader(event, 'ETag', etag)
-    // Le CV ne change que sur une modification depuis l'admin : quelques
-    // minutes de fraîcheur suffisent, et permettent à Cloudflare d'absorber
-    // les rafales sans jamais atteindre l'origine.
-    setHeader(event, 'Cache-Control', 'public, max-age=300')
-  }
-
-  if (getHeader(event, 'if-none-match') === etag) {
-    enTetes()
-    setResponseStatus(event, 304)
-    return null
-  }
-
-  if (cachePdf?.empreinte === empreinte) {
-    enTetes()
-    return cachePdf.pdf
-  }
+  setHeader(event, 'Content-Type', 'application/pdf')
+  setHeader(event, 'Content-Disposition', `attachment; filename="cv-${safeName}.pdf"`)
 
   const photo = await loadPhoto(data.profile.photoUrl)
 
@@ -281,7 +231,7 @@ export default defineEventHandler(async (event) => {
   const SCALE_MIN = 0.55
   const PASSES = 8
 
-  let result = await renderCv(data as CvData, photo, 1)
+  let result = await renderCv(data, photo, 1)
   if (result.pages > 1) {
     let lo = SCALE_MIN // borne basse, supposée tenir
     let hi = 1 // borne haute, connue pour déborder
@@ -289,7 +239,7 @@ export default defineEventHandler(async (event) => {
 
     for (let i = 0; i < PASSES; i++) {
       const mid = (lo + hi) / 2
-      const attempt = await renderCv(data as CvData, photo, mid)
+      const attempt = await renderCv(data, photo, mid)
       if (attempt.pages === 1) {
         best = attempt
         lo = mid
@@ -300,10 +250,8 @@ export default defineEventHandler(async (event) => {
 
     // Même à l'échelle minimale le contenu déborde : on rend quand même, en
     // deux pages, plutôt que de renvoyer un CV illisible.
-    result = best ?? await renderCv(data as CvData, photo, SCALE_MIN)
+    result = best ?? await renderCv(data, photo, SCALE_MIN)
   }
 
-  cachePdf = { empreinte, pdf: result.pdf }
-  enTetes()
   return result.pdf
 })

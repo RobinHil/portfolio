@@ -6,7 +6,7 @@
           <span class="text-term-green" aria-hidden="true">~/</span>{{ UI.about.h1 }}
         </h1>
         <p class="mb-5 max-w-2xl text-term-dim">{{ about.profile?.title }}</p>
-        <a href="/api/cv" class="term-btn" download>
+        <a :href="cvUrl" class="term-btn" download>
           <Download class="h-4 w-4" aria-hidden="true" />
           {{ UI.about.downloadCv }}
         </a>
@@ -17,7 +17,6 @@
         :alt="UI.about.photoAlt"
         width="112"
         height="112"
-        sizes="112px"
         class="h-24 w-24 shrink-0 rounded-full border-2 border-term-green/40 object-cover shadow-[0_0_24px_rgba(0,255,65,0.12)] sm:h-28 sm:w-28"
       />
     </div>
@@ -123,7 +122,11 @@
 <script setup lang="ts">
 import { Check, ChevronRight, Download, Globe } from 'lucide-vue-next'
 
-const { data: about } = await useFetch('/api/about')
+// Le contenu est un module du depot, plus une requete : le site est statique.
+const about = ABOUT
+
+// Le CV est prerendu dans dist/cv.pdf par server/routes/cv.pdf.get.ts.
+const cvUrl = usePublicPath()('/cv.pdf')
 
 usePageSeo({
   title: UI.about.metaTitle,
@@ -133,8 +136,8 @@ usePageSeo({
 
 // Regroupe les hard skills par catégorie en conservant l'ordre
 const skillCategories = computed(() => {
-  const map = new Map<string, NonNullable<typeof about.value>['hardSkills']>()
-  for (const skill of about.value?.hardSkills ?? []) {
+  const map = new Map<string, typeof about['hardSkills']>()
+  for (const skill of about.hardSkills) {
     const cat = skill.category ?? 'Autres'
     if (!map.has(cat)) map.set(cat, [])
     map.get(cat)!.push(skill)

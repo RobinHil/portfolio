@@ -17,7 +17,7 @@
           </NuxtLink>
         </li>
         <li>
-          <a href="/api/cv" class="ml-2 inline-flex items-center gap-1.5 rounded-sm border border-term-green/50 px-3 py-2 text-sm text-term-green transition hover:bg-term-green/15">
+          <a :href="cvUrl" class="ml-2 inline-flex items-center gap-1.5 rounded-sm border border-term-green/50 px-3 py-2 text-sm text-term-green transition hover:bg-term-green/15">
             <Download class="h-4 w-4" aria-hidden="true" />
             cv.pdf
           </a>
@@ -52,7 +52,7 @@
           </NuxtLink>
         </li>
         <li>
-          <a href="/api/cv" class="flex items-center gap-2 rounded-sm border border-term-green/50 px-3 py-3 text-term-green" @click="menuOpen = false">
+          <a :href="cvUrl" class="flex items-center gap-2 rounded-sm border border-term-green/50 px-3 py-3 text-term-green" @click="menuOpen = false">
             <Download class="h-4 w-4" aria-hidden="true" />
             cv.pdf <span class="text-term-dim">- télécharger mon CV</span>
           </a>
@@ -63,6 +63,9 @@
 </template>
 
 <script setup lang="ts">
+// Le CV est prerendu dans dist/cv.pdf par server/routes/cv.pdf.get.ts.
+const cvUrl = usePublicPath()('/cv.pdf')
+
 import { Download, Menu, X } from 'lucide-vue-next'
 
 const menuOpen = ref(false)
