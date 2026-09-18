@@ -206,35 +206,36 @@ jobs:
           echo "site: $site"
 
           # Pages sert la nouvelle version en quelques secondes d'ordinaire,
-          # mais pas toujours instantanement.
-          for attempt in 1 2 3 4 5; do
-            if curl -fsS "$site/" -o /tmp/index.html; then break; fi
+          # mais pas toujours instantanement : tant que le CDN bascule, il peut
+          # encore repondre avec l'ancienne version.
+          # Une capture de projet et le CV, les deux fichiers dont le chemin est
+          # construit a l'execution : c'est ici qu'une base mal resolue se voit.
+          # Une adresse qui n'existe pas recoit la page 404 du site, qui
+          # n'existe que parce que le prerendu en ecrit une.
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl -fsS "$site/" -o /tmp/index.html \
+              && curl -fsS "$site/a-propos" -o /tmp/about.html \
+              && curl -fsS "$site/projets" -o /tmp/projects.html \
+              && curl -fsS "$site/contact" -o /dev/null \
+              && curl -fsS "$site/robots.txt" -o /tmp/robots.txt \
+              && curl -fsS "$site/sitemap.xml" -o /tmp/sitemap.xml \
+              && curl -fsS "$site/site.webmanifest" -o /dev/null \
+              && curl -fsS "$site/favicon.svg" -o /dev/null \
+              && grep -q "Robin HILAIRE" /tmp/index.html \
+              && grep -q "rel=\"canonical\" href=\"$site/a-propos\"" /tmp/about.html \
+              && grep -q "images/projects/lifeglobe-hologramme.jpg" /tmp/projects.html \
+              && grep -q "$site/sitemap.xml" /tmp/robots.txt \
+              && grep -qE "<loc>$site/projets/?</loc>" /tmp/sitemap.xml \
+              && curl -fsS -o /dev/null "$site/images/projects/lifeglobe-hologramme.jpg" \
+              && curl -fsS "$site/cv.pdf" -o /tmp/cv.pdf \
+              && head -c 5 /tmp/cv.pdf | grep -q "%PDF-" \
+              && curl -sS "$site/rien-ici" | grep -qi "introuvable\|404"; then
+              echo "verified $site"
+              exit 0
+            fi
             echo "attempt $attempt failed, waiting"
             sleep 10
           done
 
-          curl -fsS "$site/a-propos" -o /tmp/about.html
-          curl -fsS "$site/projets" -o /tmp/projects.html
-          curl -fsS "$site/contact" -o /dev/null
-          curl -fsS "$site/robots.txt" -o /tmp/robots.txt
-          curl -fsS "$site/sitemap.xml" -o /tmp/sitemap.xml
-          curl -fsS "$site/site.webmanifest" -o /dev/null
-          curl -fsS "$site/favicon.svg" -o /dev/null
-
-          grep -q "Robin HILAIRE" /tmp/index.html
-          grep -q "rel=\"canonical\" href=\"$site/a-propos\"" /tmp/about.html
-          grep -q "images/projects/lifeglobe-hologramme.jpg" /tmp/projects.html
-          grep -q "$site/sitemap.xml" /tmp/robots.txt
-          grep -qE "<loc>$site/projets/?</loc>" /tmp/sitemap.xml
-
-          # Une capture de projet et le CV, les deux fichiers dont le chemin est
-          # construit a l'execution : c'est ici qu'une base mal resolue se voit.
-          curl -fsS -o /dev/null "$site/images/projects/lifeglobe-hologramme.jpg"
-          curl -fsS "$site/cv.pdf" -o /tmp/cv.pdf
-          head -c 5 /tmp/cv.pdf | grep -q "%PDF-"
-
-          # Une adresse qui n'existe pas recoit la page 404 du site, qui
-          # n'existe que parce que le prerendu en ecrit une.
-          curl -sS "$site/rien-ici" | grep -qi "introuvable\|404"
-
-          echo "verified $site"
+          echo "verification failed for $site after retries"
+          exit 1
