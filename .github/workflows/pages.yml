@@ -207,19 +207,22 @@ jobs:
 
           # Pages sert la nouvelle version en quelques secondes d'ordinaire,
           # mais pas toujours instantanement.
+          # -L : Pages redirige /a-propos vers /a-propos/, et sans suivre la
+          # redirection on recupere son corps vide au lieu de la page. Les
+          # verifications de contenu plus bas echouaient alors en silence.
           for attempt in 1 2 3 4 5; do
-            if curl -fsS "$site/" -o /tmp/index.html; then break; fi
+            if curl -fsSL "$site/" -o /tmp/index.html; then break; fi
             echo "attempt $attempt failed, waiting"
             sleep 10
           done
 
-          curl -fsS "$site/a-propos" -o /tmp/about.html
-          curl -fsS "$site/projets" -o /tmp/projects.html
-          curl -fsS "$site/contact" -o /dev/null
-          curl -fsS "$site/robots.txt" -o /tmp/robots.txt
-          curl -fsS "$site/sitemap.xml" -o /tmp/sitemap.xml
-          curl -fsS "$site/site.webmanifest" -o /dev/null
-          curl -fsS "$site/favicon.svg" -o /dev/null
+          curl -fsSL "$site/a-propos" -o /tmp/about.html
+          curl -fsSL "$site/projets" -o /tmp/projects.html
+          curl -fsSL "$site/contact" -o /dev/null
+          curl -fsSL "$site/robots.txt" -o /tmp/robots.txt
+          curl -fsSL "$site/sitemap.xml" -o /tmp/sitemap.xml
+          curl -fsSL "$site/site.webmanifest" -o /dev/null
+          curl -fsSL "$site/favicon.svg" -o /dev/null
 
           grep -q "Robin HILAIRE" /tmp/index.html
           grep -q "rel=\"canonical\" href=\"$site/a-propos\"" /tmp/about.html
@@ -229,12 +232,23 @@ jobs:
 
           # Une capture de projet et le CV, les deux fichiers dont le chemin est
           # construit a l'execution : c'est ici qu'une base mal resolue se voit.
-          curl -fsS -o /dev/null "$site/images/projects/lifeglobe-hologramme.jpg"
-          curl -fsS "$site/cv.pdf" -o /tmp/cv.pdf
+          curl -fsSL -o /dev/null "$site/images/projects/lifeglobe-hologramme.jpg"
+          curl -fsSL "$site/cv.pdf" -o /tmp/cv.pdf
           head -c 5 /tmp/cv.pdf | grep -q "%PDF-"
 
-          # Une adresse qui n'existe pas recoit la page 404 du site, qui
-          # n'existe que parce que le prerendu en ecrit une.
-          curl -sS "$site/rien-ici" | grep -qi "introuvable\|404"
+          # Une adresse qui n'existe pas doit recevoir un vrai 404, et la
+          # coquille de l'application, qui affiche ensuite la page d'erreur.
+          #
+          # Rien d'autre n'est verifiable ici : le 404.html que Nuxt ecrit est
+          # un repli sans aucun texte prerendu - error.vue est rendu cote
+          # client. Chercher un mot dedans, comme le faisait cette ligne, ne
+          # pouvait qu'echouer. Ce qui se verifie, c'est le code de reponse et
+          # que ses assets portent le chemin de base, sans quoi la page
+          # d'erreur ne demarrerait pas.
+          code=$(curl -sSL -o /tmp/404.html -w '%{http_code}' "$site/rien-ici")
+          test "$code" = "404" || { echo "adresse inconnue : HTTP $code, attendu 404"; exit 1; }
+          base_path=$(printf '%s' "$site" | sed -E 's#^https?://[^/]+##')
+          grep -q "\"${base_path}/_nuxt/" /tmp/404.html \
+            || { echo "la page 404 ne reference pas les assets sous $base_path"; exit 1; }
 
           echo "verified $site"
