@@ -1,5 +1,7 @@
 # Portfolio "Terminal"
 
+En ligne : <https://robinhil.github.io/portfolio/>
+
 Portfolio personnel avec une expérience **terminal interactive** (boot animé, navigation par commandes, autocomplétion, historique) doublée d'une navigation classique toujours visible pour les visiteurs non-tech.
 
 Le site est **entièrement statique** : `nuxt generate` prérend les quatre pages, le CV et le `robots.txt`, et la sortie se sert comme des fichiers. Aucun serveur ne tourne en production, il n'y a ni base de données, ni session, ni API.

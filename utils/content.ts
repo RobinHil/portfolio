@@ -246,6 +246,10 @@ const INTERESTS = withIds<Omit<Interest, 'id'>>([
  *
  * `repoUrl` / `demoUrl` : une URL, ou null. L'interface masque la barre de
  * liens, bordure comprise, quand les deux sont nuls.
+ *
+ * Les `demoUrl` pointent vers les sites publies par GitHub Pages, un par
+ * depot. Le jour ou robinhilaire.fr sert ces applications, ce sont ces sept
+ * lignes a changer, et rien d'autre.
  */
 export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
   {
@@ -257,7 +261,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'programmée, et suppression douce pour ne jamais perdre un disque retiré de la collection.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'API Discogs', 'GitHub Actions'],
     repoUrl: 'https://github.com/RobinHil/records',
-    demoUrl: 'https://records.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/records/',
     imageUrl: '/images/projects/records-mur.jpg',
     gallery: ['/images/projects/records-fiche.jpg'],
   },
@@ -270,7 +274,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'le contenu est un module du dépôt, le site se construit une fois et se sert comme des fichiers.',
     tags: ['Nuxt', 'Vue', 'TypeScript', 'Tailwind CSS', 'PDFKit', 'GitHub Actions'],
     repoUrl: 'https://github.com/RobinHil/portfolio',
-    demoUrl: 'https://portfolio.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/portfolio/',
     imageUrl: '/images/projects/portfolio-terminal.jpg',
     gallery: ['/images/projects/portfolio-projets.jpg', '/images/projects/portfolio-apropos.jpg'],
   },
@@ -308,7 +312,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'contenu produit toujours exactement le même son. Projet entièrement vibe codé.',
     tags: ['React', 'TypeScript', 'Strudel', 'Tone.js', 'Web Audio', 'ffmpeg.wasm', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/echo',
-    demoUrl: 'https://echo.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/echo/',
     imageUrl: '/images/projects/echo-saisie.jpg',
     gallery: ['/images/projects/echo-resultat.jpg', '/images/projects/echo-historique.jpg'],
   },
@@ -320,7 +324,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + '2880 × 1440 cellules, et un suivi de la population génération par génération.',
     tags: ['React', 'TypeScript', 'Three.js', 'WebGL', 'Zustand', 'Vite'],
     repoUrl: 'https://github.com/RobinHil/lifeglobe',
-    demoUrl: 'https://lifeglobe.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/lifeglobe/',
     imageUrl: '/images/projects/lifeglobe-hologramme.jpg',
     gallery: [
       '/images/projects/lifeglobe-replie.jpg',
@@ -336,7 +340,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'toutes les deux minutes trente sans reconstruire les marqueurs, et mode plein écran.',
     tags: ['JavaScript', 'Leaflet', 'SCSS', 'Webpack', 'Open data'],
     repoUrl: 'https://github.com/RobinHil/ve-lib-paris',
-    demoUrl: 'https://velib.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/ve-lib-paris/',
     imageUrl: '/images/projects/velib-carte.jpg',
     gallery: ['/images/projects/velib-station.jpg', '/images/projects/velib-zoom.jpg'],
   },
@@ -348,7 +352,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'capitalisation, offre en circulation et deux graphiques de prix.',
     tags: ['JavaScript', 'Chart.js', 'Bootstrap', 'Mustache', 'Webpack', 'API CoinGecko'],
     repoUrl: 'https://github.com/RobinHil/info-crypto',
-    demoUrl: 'https://crypto.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/info-crypto/',
     imageUrl: '/images/projects/infocrypto-grille.jpg',
     gallery: ['/images/projects/infocrypto-fiche.jpg'],
   },
@@ -360,7 +364,7 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + 'thème partagé, Markdown et coloration syntaxique.',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Markdown'],
     repoUrl: 'https://github.com/RobinHil/react-slides',
-    demoUrl: 'https://slides.robinhilaire.fr',
+    demoUrl: 'https://robinhil.github.io/react-slides/',
     imageUrl: '/images/projects/react-slides-titre.jpg',
     gallery: [
       '/images/projects/react-slides-code.jpg',

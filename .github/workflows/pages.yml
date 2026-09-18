@@ -118,12 +118,23 @@ jobs:
 
           # Le sitemap annonce les quatre pages, chacune une fois, sous
           # l'adresse publique complete et sans sous-chemin double.
+          #
+          # Le slash final est normalise des deux cotes : une page d'accueil
+          # s'ecrit legitimement avec ou sans, et une assertion sur la chaine
+          # exacte a deja fait echouer un deploiement pour cette seule raison.
+          # Le sitemap est affiche, pour qu'un echec soit lisible sans avoir a
+          # rejouer le build.
+          #
           # `route` et non `path` : sous zsh, `path` est la variable liee a PATH,
           # et l'affecter casse le shell. Le runner est en bash, mais ces
           # lignes se recopient pour un essai en local.
+          locs=$(grep -oE "<loc>[^<]*</loc>" sitemap.xml | sed -E 's#</?loc>##g; s#/$##')
+          echo "sitemap :"
+          printf '  %s\n' $locs
           for route in "" /a-propos /projets /contact; do
-            count=$(grep -c "<loc>${SITE%/}${route}</loc>" sitemap.xml || true)
-            test "$count" = "1" || { echo "sitemap: ${SITE%/}${route} vu $count fois"; exit 1; }
+            want="${SITE%/}${route}"
+            count=$(printf '%s\n' $locs | grep -cxF "$want" || true)
+            test "$count" = "1" || { echo "sitemap: $want vu $count fois"; exit 1; }
           done
           grep -q "Sitemap: ${SITE%/}/sitemap.xml" robots.txt
 
@@ -206,7 +217,7 @@ jobs:
           grep -q "rel=\"canonical\" href=\"$site/a-propos\"" /tmp/about.html
           grep -q "images/projects/lifeglobe-hologramme.jpg" /tmp/projects.html
           grep -q "$site/sitemap.xml" /tmp/robots.txt
-          grep -q "<loc>$site/projets</loc>" /tmp/sitemap.xml
+          grep -qE "<loc>$site/projets/?</loc>" /tmp/sitemap.xml
 
           # Une capture de projet et le CV, les deux fichiers dont le chemin est
           # construit a l'execution : c'est ici qu'une base mal resolue se voit.
