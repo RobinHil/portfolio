@@ -25,16 +25,21 @@
  *    reste passe par usePublicPath().
  *  - SITE_URL, l'adresse publique complete, sous-chemin compris. Elle sert aux
  *    URL canoniques, aux cartes Open Graph et a la ligne Sitemap du robots.txt.
- *  - SITE_ORIGIN, le schema et l'hote seuls. C'est ce qu'attend @nuxtjs/sitemap,
- *    qui compose lui-meme chaque <loc> avec le chemin de la route - lequel
+ *  - l'origine, schema et hote seuls. C'est ce qu'attend @nuxtjs/sitemap, qui
+ *    compose lui-meme chaque <loc> avec le chemin de la route - lequel
  *    contient deja BASE_URL. Lui donner SITE_URL doublait le sous-chemin.
  *
- * Le workflow de deploiement les demande a l'action configure-pages plutot que
- * de les ecrire en dur. Les valeurs de repli decrivent un developpement local.
+ * NUXT_SITE_URL doit etre posee explicitement en deploiement, et pas seulement
+ * calculee ici : nuxt-site-config devine l'adresse depuis l'environnement, et
+ * sur GitHub Actions il la devine comme https://<compte>.github.io/<depot> -
+ * c'est-a-dire avec le sous-chemin. Cette detection prime sur la cle `site`
+ * ci-dessous, et le sitemap sortait avec chaque adresse doublee. La variable
+ * d'environnement, elle, prime sur la detection. La valeur calculee ci-dessous
+ * ne sert donc qu'au developpement local.
  */
 const BASE_URL = process.env.NUXT_APP_BASE_URL || '/'
 const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-const SITE_ORIGIN = process.env.NUXT_SITE_URL || SITE_URL
+const SITE_ORIGIN = new URL(SITE_URL).origin
 
 // Prefixe un chemin de public/ pour les href de app.head, que Nuxt ne touche pas.
 const asset = (path: string) => `${BASE_URL.replace(/\/$/, '')}/${path}`
@@ -86,10 +91,9 @@ export default defineNuxtConfig({
        *
        * Le crawler suit les <a> du HTML rendu, or ceux-ci portent deja le
        * chemin de base : sous /portfolio/, il decouvrait "/portfolio/projets"
-       * et le traitait comme une route a part entiere. Les pages etaient alors
-       * rendues deux fois, et surtout @nuxtjs/sitemap y voyait une page de
-       * plus, publiant un <loc> .../portfolio/portfolio qui ne menait nulle
-       * part. Quatre pages et deux fichiers se listent tres bien a la main.
+       * et le traitait comme une route a part entiere, rendant chaque page
+       * deux fois et ajoutant une entree de trop au sitemap. Quatre pages et
+       * deux fichiers se listent tres bien a la main.
        */
       crawlLinks: false,
       routes: ['/', '/a-propos', '/projets', '/contact', '/robots.txt', '/cv.pdf'],

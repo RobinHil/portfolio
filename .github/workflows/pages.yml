@@ -50,23 +50,31 @@ jobs:
       - uses: actions/configure-pages@v6
         id: pages
 
-      # Les trois adresses que le site a besoin de connaitre, demandees a Pages
+      # Les deux adresses que le site a besoin de connaitre, demandees a Pages
       # plutot qu'ecrites en dur : la reponse est juste pour un site de projet,
-      # un site utilisateur et un domaine personnalise. Elles ne sont pas
-      # interchangeables, le detail est commente en tete de nuxt.config.ts.
+      # un site utilisateur et un domaine personnalise.
       #
       # base_path vaut "/portfolio" ou "" (site utilisateur), jamais "/", d'ou
       # la normalisation vers une valeur terminee par un slash.
+      #
+      # NUXT_SITE_URL, l'origine seule, est calculee a partir de base_url plutot
+      # que lue dans la sortie `origin` de l'action : cette sortie existe mais
+      # arrive vide, et le sitemap sortait alors avec le sous-chemin deux fois
+      # dans chaque adresse. Elle doit etre posee, et pas seulement deduite
+      # dans nuxt.config.ts : nuxt-site-config devine sinon l'adresse depuis
+      # l'environnement GitHub Actions, sous-chemin compris.
       - name: Generate the static site
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NUXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
-          NUXT_SITE_URL: ${{ steps.pages.outputs.origin }}
         run: |
           set -euo pipefail
+          test -n "$NUXT_PUBLIC_SITE_URL" || { echo "base_url vide"; exit 1; }
           export NUXT_APP_BASE_URL="${BASE_PATH%/}/"
-          echo "base: $NUXT_APP_BASE_URL"
-          echo "site: $NUXT_PUBLIC_SITE_URL"
+          export NUXT_SITE_URL="${NUXT_PUBLIC_SITE_URL%"$BASE_PATH"}"
+          echo "base   : $NUXT_APP_BASE_URL"
+          echo "site   : $NUXT_PUBLIC_SITE_URL"
+          echo "origine: $NUXT_SITE_URL"
           pnpm generate
 
       # Ce que le prerendu est cense avoir produit, verifie plutot que suppose.
