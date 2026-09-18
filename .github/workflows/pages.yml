@@ -57,12 +57,12 @@ jobs:
       # base_path vaut "/portfolio" ou "" (site utilisateur), jamais "/", d'ou
       # la normalisation vers une valeur terminee par un slash.
       #
-      # NUXT_SITE_URL, l'origine seule, est calculee a partir de base_url plutot
-      # que lue dans la sortie `origin` de l'action : cette sortie existe mais
-      # arrive vide, et le sitemap sortait alors avec le sous-chemin deux fois
-      # dans chaque adresse. Elle doit etre posee, et pas seulement deduite
-      # dans nuxt.config.ts : nuxt-site-config devine sinon l'adresse depuis
-      # l'environnement GitHub Actions, sous-chemin compris.
+      # NUXT_SITE_URL, l'origine seule, est calculee a partir de base_url et non
+      # lue dans la sortie `origin` de l'action : cette sortie existe mais
+      # arrive vide. Elle donne sa valeur a `site.url`, ce qui est juste, mais
+      # le sitemap n'en depend plus - il recoit ses adresses finies, parce que
+      # nuxt-site-config devine sinon l'adresse depuis l'environnement GitHub
+      # Actions, sous-chemin compris, et la composition le doublait.
       - name: Generate the static site
         env:
           BASE_PATH: ${{ steps.pages.outputs.base_path }}

@@ -41,6 +41,11 @@ const BASE_URL = process.env.NUXT_APP_BASE_URL || '/'
 const SITE_URL = process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 const SITE_ORIGIN = new URL(SITE_URL).origin
 
+// Les quatre pages publiques, listees une seule fois : le prerendu et le
+// sitemap les reprennent tous les deux, et rien ne garantirait sinon qu'ils
+// restent d'accord.
+const PAGES = ['/', '/a-propos', '/projets', '/contact']
+
 // Prefixe un chemin de public/ pour les href de app.head, que Nuxt ne touche pas.
 const asset = (path: string) => `${BASE_URL.replace(/\/$/, '')}/${path}`
 
@@ -84,6 +89,20 @@ export default defineNuxtConfig({
     name: 'Portfolio - Administrateur Systèmes & Cybersécurité',
   },
 
+  sitemap: {
+    /*
+     * URL absolues, et decouverte automatique coupee.
+     *
+     * Laisse a lui-meme, le module compose chaque <loc> avec l'adresse du site
+     * et le chemin de la route. Or ce chemin contient deja le sous-chemin du
+     * deploiement, et l'adresse qu'il devine sur GitHub Actions le contient
+     * aussi : le sous-chemin sortait donc deux fois. Lui donner les adresses
+     * finies supprime la composition, donc le probleme, quoi qu'il devine.
+     */
+    urls: PAGES.map(page => `${SITE_URL}${page}`),
+    excludeAppSources: true,
+  },
+
   nitro: {
     prerender: {
       /*
@@ -96,7 +115,7 @@ export default defineNuxtConfig({
        * deux fichiers se listent tres bien a la main.
        */
       crawlLinks: false,
-      routes: ['/', '/a-propos', '/projets', '/contact', '/robots.txt', '/cv.pdf'],
+      routes: [...PAGES, '/robots.txt', '/cv.pdf'],
       // Une page qui casse doit casser le build, pas partir en production avec
       // un trou.
       failOnError: true,
