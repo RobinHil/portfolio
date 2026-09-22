@@ -287,12 +287,9 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
     description:
       'Une interface terminal pour Docker : la consommation processeur, mémoire et réseau de chaque conteneur en '
       + 'direct, et tout ce que le démon gère - conteneurs, piles Compose, images, volumes, réseaux, disque - '
-      + "parcouru au clavier. L'API Docker ne sait pas simuler une purge : elle supprime d'abord et rend des comptes "
-      + "ensuite. hublot en reconstruit l'aperçu, applique les mêmes filtres que le démon et nomme ce qui va "
-      + 'disparaître avant que rien ne le soit, les objets appartenant à une pile Compose en tête. Ces piles, '
-      + 'justement, sont recomposées depuis les étiquettes que Compose laisse sur des objets ordinaires, et '
-      + "l'écart avec le YAML sur le disque est signalé. Elle ne parle qu'à la socket locale, par choix, et se livre "
-      + 'en paquets Debian, RPM, Arch et AppImage.',
+      + "parcouru au clavier. Elle prévisualise les purges, que l'API Docker ne sait pas simuler, et recompose les "
+      + 'piles Compose depuis les étiquettes laissées sur les objets. Livrée en paquets Debian, RPM, Arch et '
+      + 'AppImage.',
     tags: ['Go', 'Bubble Tea', 'API Docker Engine', 'Compose', 'Linux', 'macOS', 'Empaquetage'],
     repoUrl: 'https://github.com/RobinHil/hublot',
     demoUrl: 'https://robinhil.github.io/hublot/',
