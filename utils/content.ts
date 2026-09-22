@@ -187,6 +187,8 @@ const CERTIFICATIONS = withIds<Omit<Certification, 'id'>>([
 const SKILLS = withIds<Omit<Skill, 'id' | 'category' | 'detail'> & { category?: string, detail?: string }>([
   // Hard skills - Langages
   { name: 'C, C++', type: 'hard', category: 'Langages' },
+  { name: 'Go', type: 'hard', category: 'Langages' },
+  { name: 'Rust', type: 'hard', category: 'Langages' },
   { name: 'Python', type: 'hard', category: 'Langages' },
   { name: 'JavaScript, TypeScript', type: 'hard', category: 'Langages' },
   { name: 'Java', type: 'hard', category: 'Langages' },
@@ -248,8 +250,10 @@ const INTERESTS = withIds<Omit<Interest, 'id'>>([
  * liens, bordure comprise, quand les deux sont nuls.
  *
  * Les `demoUrl` pointent vers les sites publies par GitHub Pages, un par
- * depot. Le jour ou robinhilaire.fr sert ces applications, ce sont ces sept
- * lignes a changer, et rien d'autre.
+ * depot : l'application elle-meme quand elle tourne dans un navigateur, sa
+ * page de presentation quand c'est un programme qui s'installe. Le jour ou
+ * robinhilaire.fr sert ces applications, ce sont ces lignes a changer, et rien
+ * d'autre.
  */
 export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
   {
@@ -279,29 +283,29 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
     gallery: ['/images/projects/portfolio-projets.jpg', '/images/projects/portfolio-apropos.jpg'],
   },
   {
-    title: 'Infra, un serveur web déployé en une commande',
+    title: 'hublot, Docker en plein écran dans le terminal',
     description:
-      'Un playbook Ansible qui met en ligne sept applications web sur un VPS Oracle ARM, derrière Cloudflare. '
-      + "Les sites statiques n'ont pas de conteneur : leur image est construite, son contenu web extrait, et Caddy "
-      + 'le sert directement. Aucun conteneur ne tourne en root, les ports 80 et 443 '
-      + "n'acceptent que les plages Cloudflare, et les bases SQLite sont sauvegardées chaque nuit. Un manuel jumeau "
-      + 'rejoue chaque rôle à la main, commande par commande.',
-    tags: ['Ansible', 'Docker', 'Caddy', 'Ubuntu', 'Cloudflare', 'fail2ban', 'Grafana'],
-    // Ni dépôt ni démo, et les deux pour de bonnes raisons : le dépôt est privé
-    // (il décrit l'infrastructure et sa surface d'attaque), et un playbook n'est
-    // pas une application web. Un lien vers un dépôt privé afficherait une 404 à
-    // tous les visiteurs.
-    repoUrl: null,
-    demoUrl: null,
-    // Photographie Unsplash plutôt qu'une capture : un playbook n'a pas
-    // d'interface à montrer.
-    //
-    // Galerie vide, à dessein : l'image est une pure illustration, un carrousel
-    // de photos décoratives n'apprendrait rien. La modale compose sa liste avec
-    // [imageUrl, ...gallery] et n'affiche flèches, pastilles et compteur que
-    // si elle contient plus d'une entrée : il ne restera que l'image seule.
-    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1440&h=900&fit=crop&q=80&fm=jpg',
-    gallery: [],
+      'Une interface terminal pour Docker : la consommation processeur, mémoire et réseau de chaque conteneur en '
+      + 'direct, et tout ce que le démon gère - conteneurs, piles Compose, images, volumes, réseaux, disque - '
+      + "parcouru au clavier. L'API Docker ne sait pas simuler une purge : elle supprime d'abord et rend des comptes "
+      + "ensuite. hublot en reconstruit l'aperçu, applique les mêmes filtres que le démon et nomme ce qui va "
+      + 'disparaître avant que rien ne le soit, les objets appartenant à une pile Compose en tête. Ces piles, '
+      + 'justement, sont recomposées depuis les étiquettes que Compose laisse sur des objets ordinaires, et '
+      + "l'écart avec le YAML sur le disque est signalé. Elle ne parle qu'à la socket locale, par choix, et se livre "
+      + 'en paquets Debian, RPM, Arch et AppImage.',
+    tags: ['Go', 'Bubble Tea', 'API Docker Engine', 'Compose', 'Linux', 'macOS', 'Empaquetage'],
+    repoUrl: 'https://github.com/RobinHil/hublot',
+    demoUrl: 'https://robinhil.github.io/hublot/',
+    // Captures reelles, prises dans un pty contre un vrai demon puis rendues
+    // depuis les runs colores que l'ecran contenait : le texte reste net, et
+    // aucun chiffre n'est invente.
+    imageUrl: '/images/projects/hublot-conteneurs.jpg',
+    gallery: [
+      '/images/projects/hublot-compose.jpg',
+      '/images/projects/hublot-disque.jpg',
+      '/images/projects/hublot-prune.jpg',
+      '/images/projects/hublot-logs.jpg',
+    ],
   },
   {
     title: "Echo, sonification de textes et d'images",
@@ -377,16 +381,15 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
     title: 'APOD Wallpaper, le ciel du jour en fond d\'écran',
     description:
       "Une application de bureau qui récupère chaque jour l'image astronomique du jour publiée par la NASA et la "
-      + 'pose en fond d\'écran. Elle vit dans la barre des menus, sans fenêtre le reste du temps. Trois modes : '
+      + 'pose en fond d\'écran. Elle vit dans la zone de notification, sans fenêtre le reste du temps. Trois modes : '
       + 'image du jour, date au hasard dans les archives depuis 1995, ou date choisie. Les images plus petites que '
       + 'l\'écran sont posées sur un flou d\'elles-mêmes plutôt que déformées, et les entrées vidéo sont ramenées à '
-      + 'une image fixe. Écrite en Rust avec Tauri, le panneau de réglages en React. Publiée pour macOS dans un '
-      + 'premier temps, les autres plateformes étant l\'objectif.',
-    tags: ['Rust', 'Tauri 2', 'React', 'TypeScript', 'Multiplateforme', 'API NASA'],
-    // Depot prive pour l'instant, et pas de demo : une application de bureau ne
-    // se visite pas. Une page de presentation viendra avec l'ouverture du depot.
-    repoUrl: null,
-    demoUrl: null,
+      + 'une image fixe. Écrite en Rust avec Tauri, le panneau de réglages en React. Publiée pour macOS et pour '
+      + 'GNOME - paquets Debian, RPM, Arch et AppImage - avec Windows pour objectif restant : seules quatre choses '
+      + 'sont propres à un système, tout le reste est partagé.',
+    tags: ['Rust', 'Tauri 2', 'React', 'TypeScript', 'macOS', 'Linux GNOME', 'API NASA'],
+    repoUrl: 'https://github.com/RobinHil/apod-wallpaper',
+    demoUrl: 'https://robinhil.github.io/apod-wallpaper/',
     // Fonds d'ecran reellement produits par l'application, recuperes dans son
     // stockage. Le premier est celui du jour. Les deux suivants sont des images
     // NASA du domaine public, choisies pour cela : les APOD signees par un
@@ -409,9 +412,10 @@ export const PROJECTS: Project[] = withIds<Omit<Project, 'id'>>([
       + "un programme d'administration en terminal reçoit la connexion, authentifie le module et lui passe des "
       + 'commandes. Le tout se déroule entre deux machines virtuelles isolées, jamais sur une machine réelle.',
     tags: ['C', 'Module kernel Linux', 'Hook syscall', 'Python', 'Sockets TCP', 'QEMU', 'Argon2'],
-    // Depot prive tant qu'il n'a pas ete nettoye de ses references d'origine.
-    // Pas de demo non plus, et c'est heureux.
-    repoUrl: null,
+    // Pas de demo, et c'est heureux : le module ne se charge que dans une VM
+    // jetable. Le depot, lui, est public depuis qu'il a ete nettoye de ses
+    // references d'origine.
+    repoUrl: 'https://github.com/RobinHil/wlkom-rootkit',
     demoUrl: null,
     // Le rootkit vise un Linux x86_64 et ne peut pas tourner ici : le serveur
     // du programme attaquant utilise des options de socket propres a Linux.
